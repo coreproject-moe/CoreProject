@@ -4,7 +4,9 @@ import struct
 from coreproject_tracker.enums import IP
 
 
-def convert_str_to_ip_object(ip: str) -> bool:
+def convert_str_to_ip_object(
+    ip: str,
+) -> bool | (ipaddress.IPv4Address | ipaddress.IPv6Address):
     try:
         # Try to create an IP address object (this works for both IPv4 and IPv6)
         ip = ip.strip("[]")
@@ -13,7 +15,7 @@ def convert_str_to_ip_object(ip: str) -> bool:
         return False
 
 
-def addr_to_ip_port(addr: list[str]) -> tuple[str, int]:
+async def addr_to_ip_port(addr: list[str]) -> tuple[str, int]:
     """Convert address in the format [IP]:[PORT] to a tuple (IP, PORT)."""
     if not isinstance(addr, str):
         raise ValueError("Address must be a string in the format [IP]:[PORT]")
@@ -22,17 +24,17 @@ def addr_to_ip_port(addr: list[str]) -> tuple[str, int]:
         raise ValueError("Invalid address format, expecting: [IP]:[PORT]")
     ip = parts[0]
     port = int(parts[1])
-    return ip, port
+    return (ip, port)
 
 
-def addrs_to_compact(addrs: str | list[str]) -> bytes:
+async def addrs_to_compact(addrs: str | list[str]) -> bytes:
     """Convert a list of addresses to compact format."""
     if isinstance(addrs, str):
         addrs = [addrs]
 
     compact = bytearray()
     for addr in addrs:
-        ip, port = addr_to_ip_port(addr)
+        ip, port = await addr_to_ip_port(addr)
         ip_obj = ipaddress.ip_address(ip)  # Parse the IP address
         ip_bytes = ip_obj.packed  # Convert to byte representation
         port_bytes = struct.pack("!H", port)  # Convert port to 2-byte big-endian
@@ -41,7 +43,7 @@ def addrs_to_compact(addrs: str | list[str]) -> bytes:
     return bytes(compact)
 
 
-def convert_ipv4_coded_ipv6_to_ipv4(ip) -> bool | str:
+def convert_ipv4_coded_ipv6_to_ipv4(ip: str) -> bool | str:
     if not (ip_obj := convert_str_to_ip_object(ip)):
         return False
 
@@ -50,7 +52,7 @@ def convert_ipv4_coded_ipv6_to_ipv4(ip) -> bool | str:
         return str(ip_obj.ipv4_mapped)
 
 
-def check_ip_type(ip) -> bool | IP:
+async def check_ip_type(ip: str) -> bool | IP:
     if not (ip_obj := convert_str_to_ip_object(ip)):
         return False
 

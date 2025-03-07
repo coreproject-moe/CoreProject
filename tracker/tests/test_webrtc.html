@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WebRTC check</title>
+    </head>
+    <body>
+        <h1>WebRTC support check</h1>
+        <button id="seed-btn">Seed File</button>
+        <button id="download-btn">Download File</button>
+        <div id="status"></div>
+        <!-- magnet:?xt=urn:btih:59a42642ac8d10810fe62a039479aebc7a9c54c3&dn=2025-01-07_07-30-34.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337 -->
+        <script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script>
+        <script>
+            // const trackerURLs = ['ws://localhost:8080'];
+            const trackerURLs = ['ws://127.0.0.1:5000'];
+            const client = new WebTorrent();
+
+            const status = document.getElementById('status');
+
+            // SEED FILE
+            document
+                .getElementById('seed-btn')
+                .addEventListener('click', () => {
+                    const file = new File(
+                        ['Hello Torrent!'],
+                        'test-torrent.txt'
+                    );
+                    client.seed(file, { announce: trackerURLs }, (torrent) => {
+                        status.innerHTML = `<p>Seeding: ${torrent.magnetURI}</p>`;
+                        console.log('Seeding:', torrent.infoHash);
+                        console.log('Magnet URI:', torrent.magnetURI);
+                        navigator.clipboard.writeText(torrent.magnetURI);
+
+                        torrent.on('upload', (bytes) => {
+                            console.log(`Uploaded: ${bytes} bytes`);
+                        });
+
+                        torrent.on('wire', (wire) => {
+                            console.log(
+                                'Connected to peer:',
+                                wire.remoteAddress
+                            );
+                        });
+                    });
+                });
+
+            // DOWNLOAD FILE
+            document
+                .getElementById('download-btn')
+                .addEventListener('click', () => {
+                    const magnetURI = prompt('Enter the Magnet URI:');
+                    if (!magnetURI) return;
+
+                    const existingTorrent = client.get(magnetURI);
+                    if (existingTorrent) {
+                        console.log('Torrent already exists!');
+                        return;
+                    }
+
+                    client.add(
+                        magnetURI,
+                        { announce: trackerURLs },
+                        (torrent) => {
+                            console.log('Downloading:', torrent.infoHash);
+
+                            torrent.files.forEach((file) => {
+                                file.getBlobURL((err, url) => {
+                                    if (err) return console.error(err);
+                                    const link = document.createElement('a');
+                                    link.href = url;
+                                    link.download = file.name;
+                                    link.textContent = `Download ${file.name}`;
+                                    document.body.appendChild(link);
+                                });
+                            });
+
+                            torrent.on('done', () => {
+                                status.innerHTML = '<p>Download complete!</p>';
+                                console.log('Download complete!');
+                            });
+                        }
+                    );
+                });
+        </script>
+    </body>
+</html>

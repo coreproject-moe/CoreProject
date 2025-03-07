@@ -1,199 +1,154 @@
-import contextlib
+import asyncio
 import json
+from typing import cast
 
-from autobahn.exception import Disconnected
-from autobahn.twisted.websocket import WebSocketServerProtocol
-from twisted.internet import reactor, threads
+from quart import Blueprint, Websocket, copy_current_websocket_context, websocket
 
-from coreproject_tracker.constants import (
-    DEFAULT_ANNOUNCE_PEERS,
-    MAX_ANNOUNCE_PEERS,
-    WEBSOCKET_INTERVAL,
-)
+from coreproject_tracker.constants import WEBSOCKET_INTERVAL
+from coreproject_tracker.datastructures import WebsocketDatastructure
+from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
-    bin_to_hex,
-    convert_ipv4_coded_ipv6_to_ipv4,
+    bytes_to_bin_str,
+    convert_event_name_to_event_enum,
     hdel,
-    hex_to_bin,
+    hex_str_to_bin_str,
     hget,
     hset,
 )
-from coreproject_tracker.singletons import WebsocketConnectionManager
+from coreproject_tracker.managers import WebsocketConnectionManager
+
+ws_blueprint = Blueprint("websocket", __name__)
+connection_manager = WebsocketConnectionManager()
 
 
-class WebSocketServer(WebSocketServerProtocol):
-    __connection_manager = WebsocketConnectionManager()
+@ws_blueprint.websocket("/")
+async def ws():
+    """WebSocket endpoint that listens for incoming messages and publishes them."""
 
-    def onMessage(self, payload, isBinary):
-        """
-        Called when a message is received from the client.
-        """
-        threads.deferToThread(self.__onMessage, payload, isBinary)
+    @copy_current_websocket_context
+    async def parse_websocket() -> WebsocketDatastructure:
+        initial_message = await websocket.receive_json()
+        client_ip, client_port = websocket.scope.get("client")
 
-    def __sendMessage(self, message, isBinary):
-        reactor.callFromThread(self.sendMessage, message, isBinary)
+        _data = {
+            # Constants
+            "ip": client_ip,
+            "port": client_port,
+            "addr": f"{client_ip}:{client_port}",
+            # Required attributes
+            "info_hash_raw": initial_message["info_hash"],
+            "action": initial_message["action"],
+            "peer_id": initial_message["peer_id"],
+            "numwant": initial_message.get("numwant"),
+            "uploaded": initial_message.get("uploaded"),
+            "offers": initial_message.get("offers"),
+            "left": initial_message.get("left"),
+        }
 
-    def __onMessage(self, payload, isBinary):
-        payload = payload.decode("utf8") if not isBinary else payload
-        params = json.loads(payload)
-        try:
-            data = self.parse_websocket(params)
-        except ValueError as e:
-            self.sendMessage(
+        if initial_message.get("answer"):
+            _data |= {
+                "answer": initial_message["answer"],
+                "to_peer_id": initial_message["to_peer_id"],
+                "offer_id": initial_message["offer_id"],
+            }
+
+        if event := initial_message.get("event"):
+            _data |= {
+                "event": await convert_event_name_to_event_enum(event),
+            }
+
+        return WebsocketDatastructure(**_data)
+
+    data = await parse_websocket()
+    try:
+        ws_obj = cast(Websocket, websocket._get_current_object())
+        await connection_manager.add_connection(data.peer_id.hex(), ws_obj)
+
+        while True:
+            if data.event == EVENT_NAMES.STOP:
+                await connection_manager.remove_connection(data.peer_id.hex())
+                await websocket.close()
+
+            response = {"action": data.action}
+
+            await hset(
+                data.info_hash,
+                data.addr,
                 json.dumps(
                     {
-                        "failure reason": e,
+                        "peer_id": data.peer_id.hex(),
+                        "peer_ip": data.ip,
+                        "port": data.port,
+                        "left": data.left,
                     }
                 ),
-                isBinary,
             )
 
-        response = {}
-        response["action"] = data["action"]
-        hset(
-            data["info_hash"],
-            data["addr"],
-            json.dumps(
-                {
-                    "peer_id": data["peer_id"],
-                    "info_hash": data["info_hash"],
-                    "peer_ip": data["ip"],
-                    "port": data["port"],
-                    "left": data["left"],
+            seeders = 0
+            leechers = 0
+
+            redis_data = await hget(data.info_hash) or {}  # Ensure non-None value
+
+            for peer in redis_data.values():
+                peer = json.loads(peer)
+                if peer["left"] == 0:
+                    seeders += 1
+                else:
+                    leechers += 1
+
+            response |= {"completed": seeders, "incompleted": leechers}
+
+            if data.action == ACTIONS.ANNOUNCE:
+                response |= {
+                    "info_hash": await hex_str_to_bin_str(data.info_hash),
+                    "interval": WEBSOCKET_INTERVAL,
                 }
-            ),
-        )
+                await websocket.send_json(response)
 
-        seeders = 0
-        leechers = 0
+            if not data.answer:
+                await websocket.send_json(response)
 
-        redis_data = hget(data["info_hash"])
+            if offers := data.offers:
+                for key, value in redis_data.items():
+                    peer = json.loads(value)
 
-        for peer in redis_data.values():
-            peer = json.loads(peer)
-            if peer["left"] == 0:
-                seeders += 1
-            else:
-                leechers += 1
+                    peer_instance = await connection_manager.get_connection(
+                        peer["peer_id"]
+                    )
 
-        response["completed"] = seeders
-        response["incompleted"] = leechers
-
-        if response["action"] == "announce":
-            response["info_hash"] = hex_to_bin(params["info_hash"])
-            response["interval"] = WEBSOCKET_INTERVAL
-            self.__sendMessage(json.dumps(response).encode(), isBinary)
-
-        if not params.get("answer"):
-            self.__sendMessage(json.dumps(response).encode(), isBinary)
-
-        self.__connection_manager.add_connection(data["peer_id"], self)
-
-        if (offers := params.get("offers")) and isinstance(offers, list):
-            for key, peer in redis_data.items():
-                try:
-                    peer = json.loads(peer)
+                    if not peer_instance:
+                        await hdel(data.info_hash, key)
+                        continue
 
                     for offer in offers:
-                        # Peer doesn't exist in connection manager raises AttributeError
-                        with contextlib.suppress(AttributeError):
-                            peer_instance = self.__connection_manager.get_connection(
-                                peer["peer_id"]
-                            )
-                            peer_instance.sendMessage(
-                                json.dumps(
-                                    {
-                                        "action": "announce",
-                                        "offer": offer["offer"],
-                                        "offer_id": offer["offer_id"],
-                                        "peer_id": hex_to_bin(params["peer_id"]),
-                                        "info_hash": hex_to_bin(params["info_hash"]),
-                                    }
-                                ).encode(),
-                                isBinary,
-                            )
+                        await peer_instance.send_json(
+                            {
+                                "action": "announce",
+                                "offer": offer["offer"],
+                                "offer_id": offer["offer_id"],
+                                "peer_id": await bytes_to_bin_str(data.peer_id),
+                                "info_hash": await hex_str_to_bin_str(data.info_hash),
+                            }
+                        )
 
-                # Cleanup stale peers
-                except Disconnected:
-                    hdel(data["info_hash"], key)
+            if data.answer:
+                to_peer = await connection_manager.get_connection(data.to_peer_id.hex())
 
-        if params.get("answer"):
-            to_peer = self.__connection_manager.get_connection(
-                bin_to_hex(data["to_peer_id"])
-            )
-
-            if to_peer:
-                to_peer.sendMessage(
-                    json.dumps(
+                if to_peer:
+                    await to_peer.send_json(
                         {
                             "action": "announce",
-                            "answer": params["answer"],
-                            "offer_id": params["offer_id"],
-                            "peer_id": hex_to_bin(params["peer_id"]),
-                            "info_hash": hex_to_bin(params["info_hash"]),
+                            "answer": data.answer,
+                            "offer_id": data.offer_id,
+                            "peer_id": await bytes_to_bin_str(data.peer_id),
+                            "info_hash": await hex_str_to_bin_str(data.info_hash),
                         }
-                    ).encode(),
-                    isBinary,
-                )
-
-    def __sendMessage(self, message, isBinary):
-        reactor.callFromThread(self.sendMessage, message, isBinary)
-
-    def parse_websocket(self, params={}):
-        params["type"] = "ws"
-
-        if params["action"] == "announce":
-            info_hash_raw = params["info_hash"]
-            if not isinstance(info_hash_raw, str):
-                raise ValueError("`info_hash` is not a str")
-            if (info_hash_length := len(info_hash_raw)) != 20:
-                raise ValueError(
-                    f"`info_hash` is not a 20 bytes, it is {info_hash_length}"
-                )
-            info_hash = bin_to_hex(info_hash_raw)
-            params["info_hash"] = info_hash
-
-            peer_id = params["peer_id"]
-            if not isinstance(peer_id, str):
-                raise ValueError("`peer_id` is not a str")
-            if (peer_id_length := len(peer_id)) != 20:
-                raise ValueError(f"`peer_id` is not a 20 bytes, it is {peer_id_length}")
-            params["peer_id"] = bin_to_hex(peer_id)
-
-            if params.get("answer"):
-                to_peer_id = params["to_peer_id"]
-                if not isinstance(to_peer_id, str):
-                    raise ValueError("`to_peer_id` is not a str")
-                if (to_peer_id_length := len(peer_id)) != 20:
-                    raise ValueError(
-                        f"`to_peer_id` is not a 20 bytes, it is {to_peer_id_length}"
                     )
-                to_peer_id = bin_to_hex(to_peer_id)
 
-            try:
-                params["left"] = (
-                    float(params["left"])
-                    if params["left"] is not None
-                    else float("inf")
-                )
+            data = await parse_websocket()
 
-            except (ValueError, TypeError, KeyError):
-                params["left"] = float("inf")
+    except asyncio.CancelledError:
+        print("Connection closed")
 
-            offers = params.get("offers")
-            params["numwant"] = min(
-                len(offers) if offers else DEFAULT_ANNOUNCE_PEERS,
-                MAX_ANNOUNCE_PEERS,
-            )
-
-        client_ip = self.transport.getPeer().host
-        client_port = self.transport.getPeer().port
-
-        if ipv4_address := convert_ipv4_coded_ipv6_to_ipv4(client_ip):
-            params["ip"] = ipv4_address
-        else:
-            params["ip"] = client_ip
-
-        params["port"] = client_port
-        params["addr"] = f"{client_ip}:{client_port}"
-        return params
+    finally:
+        await connection_manager.remove_connection(data.peer_id.hex())

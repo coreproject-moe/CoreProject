@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WebSocket Check</title>
+    </head>
+    <body>
+        <h1>WebSocket connection check</h1>
+        <div id="status">connecting...</div>
+
+        <script>
+            // Create WebSocket connection.
+            const socket = new WebSocket('ws://localhost:8080/');
+
+            const statusDiv = document.getElementById('status');
+
+            socket.addEventListener('open', function (event) {
+                console.log('WebSocket is open and working!');
+                statusDiv.textContent = 'WebSocket is connected.';
+                statusDiv.style.color = 'green';
+            });
+
+            socket.addEventListener('message', function (event) {
+                console.log('Message from server:', event.data);
+                const messageDiv = document.createElement('div');
+                messageDiv.textContent = 'message from server: ' + event.data;
+                document.body.appendChild(messageDiv);
+            });
+
+            socket.addEventListener('close', function (event) {
+                if (event.wasClean) {
+                    console.log('WebSocket closed cleanly.');
+                    statusDiv.textContent = 'WebSocket closed cleanly.';
+                } else {
+                    console.error('WebSocket closed unexpectedly!');
+                    statusDiv.textContent = 'WebSocket closed unexpectedly!';
+                    statusDiv.style.color = 'red';
+                }
+            });
+
+            socket.addEventListener('error', function (error) {
+                console.error('WebSocket rrror:', error);
+                statusDiv.textContent = 'WebSocket error occurred.';
+                statusDiv.style.color = 'red';
+            });
+        </script>
+    </body>
+</html>

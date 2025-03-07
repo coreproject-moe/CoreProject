@@ -87,7 +87,7 @@ celerybeat-schedule
 .env
 .venv
 venv/
-ENV/
+# ENV/
 env.bak/
 venv.bak/
 
@@ -122,7 +122,6 @@ dmypy.json
 
 # Tattoo sucks
 *.rdb
-.python-version
 
 node_modules
 

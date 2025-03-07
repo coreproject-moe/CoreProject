@@ -1,44 +1,47 @@
 [project]
-name = "coreproject-py-tracker"
+name = "tracker"
 version = "0.1.0"
-description = ""
-authors = [
-    { name = "baseplate-admin", email = "61817579+baseplate-admin@users.noreply.github.com" },
-]
-requires-python = ">=3.13"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
 dependencies = [
-    "twisted>=24.11.0",
-    "autobahn[twisted]>=24.4.2,<25",
-    "bencode-py>=4.0.0,<5",
-    "redis[hiredis]>=5.2.1,<6",
-    "packaging>=24.2",
+    "anyio>=4.8.0",
+    "attrs>=25.1.0",
+    "bencode-py>=4.0.0",
+    "hypercorn>=0.17.3",
+    "quart>=0.20.0",
+    "quart-redis>=3.0.0",
+    "redis[hiredis]>=5.2.1",
+    "uvloop>=0.21.0 ; sys_platform == 'linux'",
 ]
+
+[tool.setuptools]
+packages = ["coreproject_tracker"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[project.scripts]
+coreproject_tracker = "coreproject_tracker.cli:main"
 
 [dependency-groups]
-dev = ["poethepoet>=0.32.0,<0.33"]
+dev = [
+    "py-spy>=0.4.0",
+]
+lint = [
+    "ruff>=0.9.7",
+
+]
 
 [tool.uv]
-package = false
-
-[tool.hatch.build.targets.sdist]
-include = ["./src/coreproject_tracker"]
-
-[tool.hatch.build.targets.wheel]
-include = ["./src/coreproject_tracker"]
-
-[tool.hatch.build.targets.wheel.sources]
-"./src/coreproject_tracker" = "coreproject_tracker"
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.poe.tasks]
-dev = "python ./src/run.py"
-
-[tool.ruff]
-line-length = 88
+default-groups = ["dev", "lint"]
 
 [tool.ruff.lint]
-ignore = ["E501", "C901"]
-select = ["I", "E", "F", "W", "C"]
+extend-select = ["I"]  # Enables isort rules
+
+[tool.ruff.format]
+skip-magic-trailing-comma = false  # Avoids conflict with isort.split-on-trailing-comma
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = true  # Keep this aligned with format.skip-magic-trailing-comma
+combine-as-imports = true

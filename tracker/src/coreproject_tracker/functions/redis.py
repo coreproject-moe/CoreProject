@@ -1,32 +1,30 @@
 import time
 
-from coreproject_tracker.constants import (
-    HASH_EXPIRE_TIME,
-    PEER_TTL,
-)
-from coreproject_tracker.singletons import RedisConnectionManager
+from quart_redis import get_redis
+
+from coreproject_tracker.constants import HASH_EXPIRE_TIME, PEER_TTL
 
 
-def hset(hash_key: str, field: str, value: str) -> None:
-    r = RedisConnectionManager.get_client()
+async def hset(hash_key: str, field: str, value: str) -> None:
+    r = get_redis()
 
     expiration = int(time.time() + PEER_TTL)
-    r.hset(hash_key, field, value)
+    await r.hset(hash_key, field, value)
 
-    r.hexpireat(hash_key, expiration, field)
-    r.expire(hash_key, HASH_EXPIRE_TIME)
+    await r.hexpireat(hash_key, expiration, field)
+    await r.expire(hash_key, HASH_EXPIRE_TIME)
 
 
-def hget(hash_key: str) -> None | dict[str, str | int]:
-    r = RedisConnectionManager.get_client()
+async def hget(hash_key: str) -> None | dict[str, str | int]:
+    r = get_redis()
 
     # Retrieve all fields and their values from the hash
-    data = r.hgetall(hash_key)
+    data = await r.hgetall(hash_key)
     if not data:
         return None  # Return None if the hash doesn't exist or is empty
 
     # Update the ttl again
-    r.expire(hash_key, HASH_EXPIRE_TIME)
+    await r.expire(hash_key, HASH_EXPIRE_TIME)
     valid_fields = {}
 
     # Iterate over each field-value pair in the hash
@@ -36,7 +34,6 @@ def hget(hash_key: str) -> None | dict[str, str | int]:
     return valid_fields
 
 
-def hdel(hash_key, field_name):
-    r = RedisConnectionManager.get_client()
-
-    r.hdel(hash_key, field_name)
+async def hdel(hash_key, field_name) -> None:
+    r = get_redis()
+    await r.hdel(hash_key, field_name)
