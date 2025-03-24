@@ -24,7 +24,7 @@
         "autoprefixer": "^10.4.21",
         "bits-ui": "^1.3.13",
         "clsx": "^2.1.1",
-        "eslint": "^9.22.0",
+        "eslint": "^9.23.0",
         "eslint-config-prettier": "^10.1.1",
         "eslint-plugin-svelte": "^3.3.3",
         "globals": "^16.0.0",
