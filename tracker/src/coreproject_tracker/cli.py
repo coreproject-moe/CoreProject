@@ -43,48 +43,56 @@ def udp_server_wrapper(host_port: tuple[str, int]) -> None:
     anyio.run(run_udp_server, host, port)
 
 
+def run_hypercorn_worker(config: Config, use_uvloop: bool = False) -> None:
+    """Worker process entry point for Hypercorn server"""
+    if HAS_UVLOOP:
+        uvloop.install()
+
+    anyio.run(serve, app, config)
+
+
 @click.command()
 @click.option("--host", default="127.0.0.1", help="Host to bind")
 @click.option("--port", default=5000, help="Port to bind")
-def main(host: str, port: int):
-    """Start application with multiple workers and UDP server"""
-    # Validate host IP first
-    try:
-        validate_host(host)
-    except ValueError as e:
-        logging.error(str(e))
-        sys.exit(1)
+@click.option(
+    "--workers", default=-1, help="Number of worker processes (-1 = CPU count)"
+)
+def main(host: str, port: int, workers: int):
+    """Start application with multiple workers"""
+    # Calculate worker count
+    worker_count = multiprocessing.cpu_count() if workers == -1 else workers
 
-    # UDP Server Process
-    udp_process = Process(target=udp_server_wrapper, args=((host, port),), daemon=True)
-    udp_process.start()
-
-    # Configure Hypercorn
+    # Configure Hypercorn (single worker per process)
     config = Config()
     config.bind = [f"{host}:{port}"]
-    config.workers = multiprocessing.cpu_count()
+    config.reuse_port = True  # Critical for multiple workers sharing port
 
-    if HAS_UVLOOP:
-        # uvloop requires patching before creating the event loop
-        from hypercorn.utils import _set_loop_policy
+    # Start UDP server in separate process (your existing implementation)
+    udp_process = Process(
+        target=udp_server_wrapper,  # Your UDP server entry function
+        args=((host, port),),
+        daemon=True,
+    )
+    udp_process.start()
 
-        _set_loop_policy(uvloop.EventLoopPolicy())
+    # Start Hypercorn worker processes
+    hypercorn_workers = []
+    for _ in range(worker_count):
+        p = Process(target=run_hypercorn_worker, args=(config, HAS_UVLOOP), daemon=True)
+        p.start()
+        hypercorn_workers.append(p)
 
-    # Run Hypercorn with proper cleanup
+    # Handle shutdown gracefully
     try:
-        anyio.run(
-            serve,
-            app,
-            config,
-            backend="asyncio",
-            backend_options={"use_uvloop": HAS_UVLOOP},
-        )
+        while True:
+            anyio.sleep(3600)  # Main process stays alive
     except KeyboardInterrupt:
-        logging.info("Received exit signal, shutting down...")
+        logging.info("Shutting down workers...")
     finally:
-        if udp_process.is_alive():
-            udp_process.terminate()
-            udp_process.join()
+        for p in hypercorn_workers + [udp_process]:
+            if p.is_alive():
+                p.terminate()
+                p.join()
 
 
 if __name__ == "__main__":
