@@ -1,5 +1,6 @@
 import asyncio
 import json
+from typing import TYPE_CHECKING
 
 from quart import Blueprint, copy_current_websocket_context, websocket
 from quart_redis import get_redis
@@ -16,13 +17,15 @@ from coreproject_tracker.functions import (
     hset,
 )
 
+if TYPE_CHECKING:
+    from redis.client import PubSub
+
 ws_blueprint = Blueprint("websocket", __name__)
 
 
 @ws_blueprint.websocket("/")
 async def ws():
     """WebSocket endpoint that uses Redis Pub/Sub for message dissemination."""
-    redis = get_redis()
 
     @copy_current_websocket_context
     async def parse_websocket() -> WebsocketDatastructure:
@@ -57,15 +60,15 @@ async def ws():
         return WebsocketDatastructure(**_data)
 
     data = await parse_websocket()
-    pubsub = None
     task = None
+    redis = get_redis()
+    pubsub: PubSub | None = None
 
     try:
         # Set up Redis Pub/Sub for this connection
         pubsub = redis.pubsub()
         await pubsub.subscribe(f"peer:{data.peer_id.hex()}")
 
-        # Background task to listen for Pub/Sub messages
         async def listen_pubsub():
             try:
                 while True:
@@ -128,7 +131,7 @@ async def ws():
 
             # Handle offers by publishing to respective peers
             if offers := data.offers:
-                for key, value in redis_data.items():
+                for value in redis_data.values():
                     peer_info = json.loads(value)
                     for offer in offers:
                         message = json.dumps(
