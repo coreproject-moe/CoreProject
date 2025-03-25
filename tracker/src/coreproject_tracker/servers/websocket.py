@@ -1,8 +1,9 @@
 import asyncio
 import json
-from typing import cast
+from typing import TYPE_CHECKING
 
-from quart import Blueprint, Websocket, copy_current_websocket_context, websocket
+from quart import Blueprint, copy_current_websocket_context, websocket
+from quart_redis import get_redis
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import WebsocketDatastructure
@@ -15,15 +16,18 @@ from coreproject_tracker.functions import (
     hget,
     hset,
 )
-from coreproject_tracker.managers import WebsocketConnectionManager
+
+if TYPE_CHECKING:
+    from redis.client import PubSub
 
 ws_blueprint = Blueprint("websocket", __name__)
-connection_manager = WebsocketConnectionManager()
 
 
 @ws_blueprint.websocket("/")
 async def ws():
-    """WebSocket endpoint that listens for incoming messages and publishes them."""
+    """
+    WebSocket endpoint that uses Redis Pub/Sub for message dissemination.
+    """
 
     @copy_current_websocket_context
     async def parse_websocket() -> WebsocketDatastructure:
@@ -31,11 +35,9 @@ async def ws():
         client_ip, client_port = websocket.scope.get("client")
 
         _data = {
-            # Constants
             "ip": client_ip,
             "port": client_port,
             "addr": f"{client_ip}:{client_port}",
-            # Required attributes
             "info_hash_raw": initial_message["info_hash"],
             "action": initial_message["action"],
             "peer_id": initial_message["peer_id"],
@@ -60,14 +62,35 @@ async def ws():
         return WebsocketDatastructure(**_data)
 
     data = await parse_websocket()
+    task = None
+    redis = get_redis()
+    pubsub: PubSub | None = None
+
     try:
-        ws_obj = cast(Websocket, websocket._get_current_object())
-        await connection_manager.add_connection(data.peer_id.hex(), ws_obj)
+        pubsub = redis.pubsub()
+        # Not using `peer:data.peer_id.hex()` causes phantom errors
+        await pubsub.subscribe(f"peer:{data.peer_id.hex()}")
+
+        async def listen_pubsub():
+            try:
+                while True:
+                    message = await pubsub.get_message(
+                        ignore_subscribe_messages=True, timeout=1.0
+                    )
+                    if message and message["type"] == "message":
+                        await websocket.send_json(json.loads(message["data"]))
+            except asyncio.CancelledError:
+                pass
+            finally:
+                await pubsub.unsubscribe(f"peer:{data.peer_id.hex()}")
+                await pubsub.close()
+
+        task = asyncio.create_task(listen_pubsub())
 
         while True:
             if data.event == EVENT_NAMES.STOP:
-                await connection_manager.remove_connection(data.peer_id.hex())
                 await websocket.close()
+                break
 
             response = {"action": data.action}
 
@@ -86,12 +109,10 @@ async def ws():
 
             seeders = 0
             leechers = 0
-
-            redis_data = await hget(data.info_hash) or {}  # Ensure non-None value
-
+            redis_data = await hget(data.info_hash) or {}
             for peer in redis_data.values():
-                peer = json.loads(peer)
-                if peer["left"] == 0:
+                peer_info = json.loads(peer)
+                if peer_info["left"] == 0:
                     seeders += 1
                 else:
                     leechers += 1
@@ -108,20 +129,12 @@ async def ws():
             if not data.answer:
                 await websocket.send_json(response)
 
+            # Handle offers by publishing to respective peers
             if offers := data.offers:
-                for key, value in redis_data.items():
-                    peer = json.loads(value)
-
-                    peer_instance = await connection_manager.get_connection(
-                        peer["peer_id"]
-                    )
-
-                    if not peer_instance:
-                        await hdel(data.info_hash, key)
-                        continue
-
+                for value in redis_data.values():
+                    peer_info = json.loads(value)
                     for offer in offers:
-                        await peer_instance.send_json(
+                        message = json.dumps(
                             {
                                 "action": "announce",
                                 "offer": offer["offer"],
@@ -130,25 +143,36 @@ async def ws():
                                 "info_hash": await hex_str_to_bin_str(data.info_hash),
                             }
                         )
+                        await redis.publish(f"peer:{peer_info['peer_id']}", message)
 
+            # Handle answers by publishing to the target peer
             if data.answer:
-                to_peer = await connection_manager.get_connection(data.to_peer_id.hex())
+                message = json.dumps(
+                    {
+                        "action": "announce",
+                        "answer": data.answer,
+                        "offer_id": data.offer_id,
+                        "peer_id": await bytes_to_bin_str(data.peer_id),
+                        "info_hash": await hex_str_to_bin_str(data.info_hash),
+                    }
+                )
+                await redis.publish(f"peer:{data.to_peer_id.hex()}", message)
 
-                if to_peer:
-                    await to_peer.send_json(
-                        {
-                            "action": "announce",
-                            "answer": data.answer,
-                            "offer_id": data.offer_id,
-                            "peer_id": await bytes_to_bin_str(data.peer_id),
-                            "info_hash": await hex_str_to_bin_str(data.info_hash),
-                        }
-                    )
-
+            # Wait for next message from client
             data = await parse_websocket()
 
     except asyncio.CancelledError:
         print("Connection closed")
 
     finally:
-        await connection_manager.remove_connection(data.peer_id.hex())
+        # Cleanup
+        if task:
+            task.cancel()
+            try:
+                await task
+            except asyncio.CancelledError:
+                pass
+        if pubsub:
+            await pubsub.unsubscribe(f"peer:{data.peer_id.hex()}")
+            await pubsub.close()
+        await hdel(data.info_hash, data.addr)
