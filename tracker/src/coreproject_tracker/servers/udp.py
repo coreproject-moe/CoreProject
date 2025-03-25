@@ -1,5 +1,6 @@
 import json
 import sys
+import logging
 
 import anyio
 
@@ -61,7 +62,7 @@ async def make_udp_packet(params: UdpDatastructure) -> bytes:
 
 
 async def run_udp_server(server_host: str, server_port: int):
-    print(f"Running UDP server on `udp://{server_host}:{server_port}`")
+    logging.info(f"Running UDP server on udp://{server_host}:{server_port}")
     opts = {
         "local_host": server_host,
         "local_port": server_port,

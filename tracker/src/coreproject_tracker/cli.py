@@ -70,7 +70,6 @@ async def _main_async_wrapper(host: str, port: int, workers: int) -> None:
         hypercorn_workers.append(p)
 
     try:
-        # Keep main process alive
         while True:
             await anyio.sleep(3600)
     except KeyboardInterrupt:
