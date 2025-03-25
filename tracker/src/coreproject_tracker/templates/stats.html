@@ -4,7 +4,66 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>HTML 5 Boilerplate</title>
+        <title>Server Statistics</title>
+        <style>
+            .flex-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 30px;
+            }
+            .grid-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr; /* Two equal columns */
+                gap: 20px; /* Spacing between columns */
+                padding: 20px;
+                align-items: stretch; /* Ensures equal height */
+            }
+            .grid-item {
+                background-color: #f0f0f0;
+                padding: 20px;
+                text-align: center;
+                border-radius: 8px;
+                justify-items: center;
+                align-items: center;
+                display: grid;
+            }
+        </style>
     </head>
-    <body></body>
+    <body>
+        <div class="flex-container">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <img
+                        width="120"
+                        height="40"
+                        src="{{ url_for('static', filename='quart.png') }}"
+                        alt="Quart Logo"
+                    />
+                </div>
+                <div class="grid-item">PyPi Version: {{ quart_version }}</div>
+                <div class="grid-item">
+                    <img
+                        width="120"
+                        height="40"
+                        src="{{ url_for('static', filename='redis.svg') }}"
+                        alt="Quart Logo"
+                    />
+                </div>
+                <div class="grid-item">
+                    <div>
+                        <p>Server Version: {{ redis_version['server'] }}</p>
+                        <p>Client Version: {{ redis_version['client'] }}</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h1>Tracker Information</h1>
+                <h3>Total Torrents: {{ total['torrents'] }}</h3>
+                <!--<h3>Seeders: {{ total_seeders }}</h3>-->
+                <!--<h3>Leechers: {{ total_leechers }}</h3>-->
+            </div>
+        </div>
+    </body>
 </html>
