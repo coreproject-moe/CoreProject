@@ -2,6 +2,7 @@ import logging
 import multiprocessing
 import sys
 from multiprocessing import Process
+from typing import Tuple
 
 import anyio
 import click
@@ -17,7 +18,7 @@ except ImportError:
 
 from coreproject_tracker.enums import IP
 from coreproject_tracker.functions import check_ip_type
-from coreproject_tracker.main import app  # Import your Quart app instance
+from coreproject_tracker.main import app
 from coreproject_tracker.servers import run_udp_server
 
 logging.basicConfig(
@@ -26,29 +27,60 @@ logging.basicConfig(
 
 
 def validate_host(host: str) -> None:
-    """Synchronous wrapper for IP validation"""
-    ip = anyio.run(check_ip_type, host)
-    if ip == IP.IPV6:
-        if sys.platform == "win32":
-            raise ValueError(
-                f"`ip` is `{host}`,"
-                + "`IPV6` is not supported on windows under `anyio`,"
-                + "see: https://github.com/agronholm/anyio/discussions/872"
-            )
+    """Validate host IP type synchronously"""
+    ip_type = anyio.run(check_ip_type, host)
+    if not ip_type:
+        raise ValueError(f"Invalid host: {host}")
+    if ip_type == IP.IPV6 and sys.platform == "win32":
+        raise ValueError(
+            "IPv6 is not supported on Windows under anyio. "
+            "See: https://github.com/agronholm/anyio/discussions/872"
+        )
 
 
-def udp_server_wrapper(host_port: tuple[str, int]) -> None:
-    """Wrapper function for UDP server to run in a process"""
+def udp_server_wrapper(host_port: Tuple[str, int]) -> None:
+    """Wrapper for UDP server process"""
     host, port = host_port
     anyio.run(run_udp_server, host, port)
 
 
-def run_hypercorn_worker(config: Config, use_uvloop: bool = False) -> None:
-    """Worker process entry point for Hypercorn server"""
+def run_hypercorn_worker(config: Config, use_uvloop: bool) -> None:
+    """Hypercorn worker process entry point"""
     if HAS_UVLOOP:
         uvloop.install()
 
     anyio.run(serve, app, config)
+
+
+async def _main_async_wrapper(host: str, port: int, workers: int) -> None:
+    """Async context for process management"""
+    config = Config()
+    config.bind = [f"{host}:{port}"]
+    config.reuse_port = True
+
+    # Start UDP server process
+    udp_process = Process(target=udp_server_wrapper, args=((host, port),), daemon=True)
+    udp_process.start()
+
+    # Start Hypercorn workers
+    hypercorn_workers = []
+    for _ in range(workers):
+        p = Process(target=run_hypercorn_worker, args=(config, HAS_UVLOOP), daemon=True)
+        p.start()
+        hypercorn_workers.append(p)
+
+    try:
+        # Keep main process alive
+        while True:
+            await anyio.sleep(3600)
+    except KeyboardInterrupt:
+        logging.info("Shutdown signal received")
+    finally:
+        # Cleanup processes
+        for p in hypercorn_workers + [udp_process]:
+            if p.is_alive():
+                p.terminate()
+                p.join()
 
 
 @click.command()
@@ -58,47 +90,23 @@ def run_hypercorn_worker(config: Config, use_uvloop: bool = False) -> None:
     "--workers", default=-1, help="Number of worker processes (-1 = CPU count)"
 )
 def main(host: str, port: int, workers: int):
-    """Start application with multiple workers"""
-    # Calculate worker count
-    worker_count = multiprocessing.cpu_count() if workers == -1 else workers
-
-    # Configure Hypercorn (single worker per process)
-    config = Config()
-    config.bind = [f"{host}:{port}"]
-    config.reuse_port = True  # Critical for multiple workers sharing port
-
-    # Start UDP server in separate process (your existing implementation)
-    udp_process = Process(
-        target=udp_server_wrapper,  # Your UDP server entry function
-        args=((host, port),),
-        daemon=True,
-    )
-    udp_process.start()
-
-    # Start Hypercorn worker processes
-    hypercorn_workers = []
-    for _ in range(worker_count):
-        p = Process(target=run_hypercorn_worker, args=(config, HAS_UVLOOP), daemon=True)
-        p.start()
-        hypercorn_workers.append(p)
-
-    # Handle shutdown gracefully
+    """Entry point for CoreProject Tracker"""
     try:
-        while True:
-            anyio.sleep(3600)  # Main process stays alive
+        validate_host(host)
+    except ValueError as e:
+        logging.error(str(e))
+        sys.exit(1)
+
+    worker_count = multiprocessing.cpu_count() if workers == -1 else max(1, workers)
+
+    try:
+        anyio.run(_main_async_wrapper, host, port, worker_count)
     except KeyboardInterrupt:
-        logging.info("Shutting down workers...")
-    finally:
-        for p in hypercorn_workers + [udp_process]:
-            if p.is_alive():
-                p.terminate()
-                p.join()
+        logging.info("Application shutdown complete")
 
 
 if __name__ == "__main__":
-    # Windows multiprocessing safeguard
     if sys.platform == "win32":
         multiprocessing.freeze_support()
 
-    # Click command execution
     main()
