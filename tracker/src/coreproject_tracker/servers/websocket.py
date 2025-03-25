@@ -25,7 +25,9 @@ ws_blueprint = Blueprint("websocket", __name__)
 
 @ws_blueprint.websocket("/")
 async def ws():
-    """WebSocket endpoint that uses Redis Pub/Sub for message dissemination."""
+    """
+    WebSocket endpoint that uses Redis Pub/Sub for message dissemination.
+    """
 
     @copy_current_websocket_context
     async def parse_websocket() -> WebsocketDatastructure:
@@ -65,8 +67,8 @@ async def ws():
     pubsub: PubSub | None = None
 
     try:
-        # Set up Redis Pub/Sub for this connection
         pubsub = redis.pubsub()
+        # Not using `peer:data.peer_id.hex()` causes phantom errors
         await pubsub.subscribe(f"peer:{data.peer_id.hex()}")
 
         async def listen_pubsub():
@@ -92,7 +94,6 @@ async def ws():
 
             response = {"action": data.action}
 
-            # Update peer info in Redis
             await hset(
                 data.info_hash,
                 data.addr,
@@ -106,7 +107,6 @@ async def ws():
                 ),
             )
 
-            # Calculate seeders and leechers
             seeders = 0
             leechers = 0
             redis_data = await hget(data.info_hash) or {}
