@@ -457,12 +457,12 @@ wheels = [
 [[package]]
 name = "tracker"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "anyio" },
     { name = "attrs" },
     { name = "bencode-py" },
-    { name = "flask-orjson" },
+    { name = "flask-orjson", marker = "platform_python_implementation == 'CPython'" },
     { name = "hypercorn" },
     { name = "quart" },
     { name = "quart-redis" },
@@ -483,7 +483,7 @@ requires-dist = [
     { name = "anyio", specifier = ">=4.8.0" },
     { name = "attrs", specifier = ">=25.1.0" },
     { name = "bencode-py", specifier = ">=4.0.0" },
-    { name = "flask-orjson", specifier = ">=2.0.0" },
+    { name = "flask-orjson", marker = "platform_python_implementation == 'CPython'", specifier = ">=2.0.0" },
     { name = "hypercorn", specifier = ">=0.17.3" },
     { name = "quart", specifier = ">=0.20.0" },
     { name = "quart-redis", specifier = ">=3.0.0" },
