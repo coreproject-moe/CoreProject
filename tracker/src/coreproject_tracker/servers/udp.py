@@ -24,8 +24,7 @@ async def make_udp_packet(params: UdpDatastructure) -> bytes:
     Create UDP packets for BitTorrent tracker protocol.
 
     Args:
-        params: Dictionary containing packet parameters including 'action' and other
-            action-specific parameters.
+        params: Dictionary containing packet parameters including 'action' and other action-specific parameters.
 
     Returns:
         bytes: The constructed UDP packet
