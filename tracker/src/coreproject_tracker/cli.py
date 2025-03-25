@@ -16,9 +16,9 @@ try:
 except ImportError:
     HAS_UVLOOP = False
 
+from coreproject_tracker.app import make_app
 from coreproject_tracker.enums import IP
 from coreproject_tracker.functions import check_ip_type
-from coreproject_tracker.main import app
 from coreproject_tracker.servers import run_udp_server
 
 logging.basicConfig(
@@ -44,12 +44,12 @@ def udp_server_wrapper(host_port: Tuple[str, int]) -> None:
     anyio.run(run_udp_server, host, port)
 
 
-def run_hypercorn_worker(config: Config, use_uvloop: bool) -> None:
+def run_hypercorn_worker(config: Config) -> None:
     """Hypercorn worker process entry point"""
     if HAS_UVLOOP:
         uvloop.install()
 
-    anyio.run(serve, app, config)
+    anyio.run(serve, make_app(), config)
 
 
 async def _main_async_wrapper(host: str, port: int, workers: int) -> None:
@@ -65,7 +65,7 @@ async def _main_async_wrapper(host: str, port: int, workers: int) -> None:
     # Start Hypercorn workers
     hypercorn_workers = []
     for _ in range(workers):
-        p = Process(target=run_hypercorn_worker, args=(config, HAS_UVLOOP), daemon=True)
+        p = Process(target=run_hypercorn_worker, args=(config,), daemon=True)
         p.start()
         hypercorn_workers.append(p)
 
