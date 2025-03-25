@@ -1,8 +1,8 @@
-import json
-import sys
 import logging
+import sys
 
 import anyio
+from quart import json
 
 from coreproject_tracker.datastructures import UdpDatastructure
 from coreproject_tracker.enums import ACTIONS, EVENT_NAMES

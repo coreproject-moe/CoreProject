@@ -1,8 +1,7 @@
-import json
 from http import HTTPStatus
 
 import bencodepy
-from quart import Blueprint, render_template, request
+from quart import Blueprint, json, render_template, request
 
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
 from coreproject_tracker.datastructures import HttpDatastructure

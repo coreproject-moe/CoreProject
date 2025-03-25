@@ -1,8 +1,7 @@
 import asyncio
-import json
 from typing import TYPE_CHECKING
 
-from quart import Blueprint, copy_current_websocket_context, websocket
+from quart import Blueprint, copy_current_websocket_context, json, websocket
 from quart_redis import get_redis
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
