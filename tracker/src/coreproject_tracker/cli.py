@@ -1,4 +1,3 @@
-import asyncio
 import logging
 import multiprocessing
 import sys
@@ -27,13 +26,8 @@ logging.basicConfig(
 )
 
 
-def clear_event_loop():
-    asyncio.set_event_loop(None)  # Clear any inherited event loop
-
-
 def validate_host(host: str) -> None:
     """Validate host IP type synchronously"""
-    clear_event_loop()
     ip_type = anyio.run(check_ip_type, host)
     if not ip_type:
         raise ValueError(f"Invalid host: {host}")
@@ -46,15 +40,12 @@ def validate_host(host: str) -> None:
 
 def udp_server_wrapper(host_port: Tuple[str, int]) -> None:
     """Wrapper for UDP server process"""
-    clear_event_loop()
     host, port = host_port
     anyio.run(run_udp_server, host, port)
 
 
 def run_hypercorn_worker(config: Config) -> None:
     """Hypercorn worker process entry point"""
-    clear_event_loop()
-
     if HAS_UVLOOP:
         uvloop.install()
 
@@ -116,7 +107,5 @@ def main(host: str, port: int, workers: int):
 if __name__ == "__main__":
     if sys.platform == "win32":
         multiprocessing.freeze_support()
-    else:
-        multiprocessing.set_start_method("spawn")
 
     main()
