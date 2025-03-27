@@ -107,5 +107,7 @@ def main(host: str, port: int, workers: int):
 if __name__ == "__main__":
     if sys.platform == "win32":
         multiprocessing.freeze_support()
-
+    else:
+        multiprocessing.set_start_method("spawn", force=True)
+        # Apply nest_asyncio patch to allow nested event loops
     main()
