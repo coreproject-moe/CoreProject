@@ -16,11 +16,6 @@ dependencies = [
     "uvloop>=0.21.0; sys_platform == 'linux'",
 ]
 
-[tool.setuptools]
-packages = ["coreproject_tracker"]
-
-[tool.setuptools.package-dir]
-"" = "src"
 
 [project.scripts]
 coreproject_tracker = "coreproject_tracker.cli:main"
