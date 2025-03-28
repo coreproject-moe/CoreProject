@@ -1,44 +1,43 @@
-# Stage 1: Build stage
-FROM python:3.12-alpine AS builder
+# Stage 1: Builder
+FROM python:3.13-alpine AS builder
+
+ENV PATH="/root/.local/bin:$PATH"
 
 # Install system dependencies
-RUN apk add --no-cache \
-    build-base \
-    gcc \
-    musl-dev \
-    python3-dev
+RUN apk update && apk add --no-cache curl gcc musl-dev
 
 # Install uv
-RUN pip install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Set working directory
 WORKDIR /app
 
-# Copy only dependency files
-COPY pyproject.toml uv.lock ./
-
-# Create a virtual environment and install dependencies
-RUN python -m venv /opt/venv && \
-    . /opt/venv/bin/activate && \
-    uv sync --frozen --no-dev
-
-# Stage 2: Production stage
-FROM python:3.12-alpine
-
-# Install runtime dependencies
-RUN apk add --no-cache libstdc++
-
-# Copy virtual environment from builder
-COPY --from=builder /opt/venv /opt/venv
-
-# Set working directory
-WORKDIR /app
-
-# Copy application code
+# Copy all files (including source code) into the container
 COPY . .
 
-# Activate virtual environment
-ENV PATH="/opt/venv/bin:$PATH"
+# Remove any existing .venv directory
+RUN rm -rf .venv
 
-# Set the command to run the application
-CMD ["uv", "run", "coreproject_tracker"]
+# Install dependencies and your package using the lockfile
+RUN uv sync --no-cache-dir --no-default-groups
+
+# Stage 2: Final stage
+FROM python:3.13-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy installed dependencies and source code from builder
+COPY --from=builder /root/.local /root/.local
+COPY --from=builder /usr/local /usr/local
+COPY --from=builder /app /app
+
+# Ensure the PATH is set correctly
+ENV PATH="/app/.venv/bin:/root/.local/bin:/usr/local/bin:$PATH"
+
+EXPOSE 5000/udp
+EXPOSE 5000/tcp
+
+# Run the app by directly invoking the module
+# CMD ["sh", "-c", "while true; do sleep 30; done"] 
+CMD [ "coreproject_tracker" ]
