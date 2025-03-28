@@ -19,7 +19,7 @@ COPY . .
 RUN rm -rf .venv
 
 # Install dependencies and your package using the lockfile
-RUN uv sync --no-cache-dir --no-default-groups
+RUN uv sync --no-cache-dir --no-default-groups 
 
 # Stage 2: Final stage
 FROM python:3.13-alpine
