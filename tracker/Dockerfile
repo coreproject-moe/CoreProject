@@ -33,7 +33,7 @@ COPY --from=builder /usr/local /usr/local
 COPY --from=builder /app /app
 
 # Ensure the PATH is set correctly
-ENV PATH="/app/.venv/bin:/root/.local/bin:/usr/local/bin:$PATH"
+ENV PATH="/app/.venv/bin:$PATH"
 
 EXPOSE 5000/udp
 EXPOSE 5000/tcp

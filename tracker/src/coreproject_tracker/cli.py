@@ -31,10 +31,7 @@ async def _main_async_wrapper(host: str, port: int) -> None:
         uvloop.install()
 
     async with anyio.create_task_group() as tg:
-        # Start UDP server as async task
         tg.start_soon(run_udp_server, host, port)
-
-        # Start Hypercorn server
         tg.start_soon(serve, make_app(), config)
 
         # Keep running until cancelled
