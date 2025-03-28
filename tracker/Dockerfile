@@ -12,22 +12,25 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 # Set working directory
 WORKDIR /app
 
-# Copy all files (including source code) into the container
+# Copy all files into the container
 COPY . .
 
 # Remove any existing .venv directory
 RUN rm -rf .venv
 
-# Install dependencies and your package using the lockfile
-RUN uv sync --no-cache-dir --no-default-groups 
+# Install dependencies
+RUN uv sync --no-cache-dir --no-default-groups
 
 # Stage 2: Final stage
 FROM python:3.13-alpine
 
-# Set working directory
+# Set default environment variables
+ENV HOST=127.0.0.1
+ENV PORT=5000
+
 WORKDIR /app
 
-# Copy installed dependencies and source code from builder
+# Copy installed dependencies and source code
 COPY --from=builder /root/.local /root/.local
 COPY --from=builder /usr/local /usr/local
 COPY --from=builder /app /app
@@ -35,9 +38,7 @@ COPY --from=builder /app /app
 # Ensure the PATH is set correctly
 ENV PATH="/app/.venv/bin:$PATH"
 
-EXPOSE 5000/udp
-EXPOSE 5000/tcp
+EXPOSE 5000/udp 5000/tcp
 
-# Run the app by directly invoking the module
-# CMD ["sh", "-c", "while true; do sleep 30; done"] 
-CMD [ "coreproject_tracker" ]
+# Use shell form to allow environment variable substitution
+CMD ["sh", "-c", "coreproject_tracker --host ${HOST} --port ${PORT}"]

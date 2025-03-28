@@ -17,6 +17,7 @@ services:
             # Example environment variables
             REDIS_HOST: localhost
             REDIS_PORT: 16379
+
             # Host
             HOST: "::1"
             PORT: 5000
