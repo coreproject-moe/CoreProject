@@ -10,7 +10,7 @@ python = "^3.11"
 discord-py = "^2.5.2"
 sqlalchemy = {extras = ["postgresql-asyncpg"], version = "^2.0.39"}
 aiohttp-jinja2 = "^1.6"
-alembic = "^1.15.1"
+alembic = "^1.15.2"
 
 
 [tool.poetry.group.dev.dependencies]
