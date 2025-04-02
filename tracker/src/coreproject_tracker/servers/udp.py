@@ -146,10 +146,11 @@ async def run_udp_server(server_host: str, server_port: int):
                     except (ValueError, KeyError):
                         continue
 
-                    # This is here to make undo possible
-                    peers.extend(_peers)
-                    seeders += _seeders
-                    leechers += _leechers
+                    finally:
+                        # This is here to make undo possible
+                        peers.extend(_peers)
+                        seeders += _seeders
+                        leechers += _leechers
 
                 _data |= {
                     "peers": await addrs_to_compact(peers),
