@@ -2,7 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
-import CoreIcon from "@/icons/CoreProject.svg";
+import CoreProjectIcon from "@/icons/CoreProject.svg";
+import CoreIcon from "@/icons/CoreIcon.svg";
+
+import Link from "next/link";
 
 const buttonMapping = {
   Dashboard: "/",
@@ -12,10 +15,19 @@ const buttonMapping = {
 export function Navbar() {
   const pathname = usePathname();
   return (
-    <div className="mx-10 my-5 grid grid-cols-3">
+    <div className="mx-2 my-5 grid h-12 grid-cols-3 md:mx-10">
       {/* Left section */}
-      <div className="flex flex-col items-start justify-center">
-        <CoreIcon />
+      <div>
+        <div className="flex flex-col items-start justify-center">
+          <div className="hidden h-3 w-40 md:block">
+            <CoreProjectIcon />
+          </div>
+        </div>
+        <div className="flex">
+          <div className="block h-3 w-8 md:hidden">
+            <CoreIcon />
+          </div>
+        </div>
       </div>
 
       {/* Middle section  */}
@@ -23,15 +35,24 @@ export function Navbar() {
         {Object.entries(buttonMapping).map(([name, link], key) => {
           const isActive = pathname === link;
 
-          return (
-            <Button key={key} variant={isActive ? "default" : "outline"}>
-              {name}
-            </Button>
-          );
+          if (isActive) {
+            return (
+              <Button key={key} variant="default">
+                {name}
+              </Button>
+            );
+          } else {
+            return (
+              <Button key={key} variant="outline" asChild>
+                <Link href={link}>{name}</Link>
+              </Button>
+            );
+          }
         })}
       </div>
+
       {/* Right section */}
-      <div className="flex flex-col items-end justify-center">hello</div>
+      <div className="flex flex-col items-end justify-center" />
     </div>
   );
 }
