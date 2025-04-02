@@ -2,7 +2,7 @@ from http import HTTPStatus
 from importlib.metadata import version
 
 import bencodepy
-from quart import Blueprint, json, render_template, request
+from quart import Blueprint, json, jsonify, request
 from quart_redis import get_redis
 
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
@@ -125,18 +125,25 @@ async def http_endpoint():
     return bencodepy.bencode(output)
 
 
-@http_blueprint.route("/stats")
-async def stats():
+@http_blueprint.route("/api")
+async def api_endpoint():
     r = get_redis()
 
+    redis_information = await r.info()
+    redis_server_version = redis_information["redis_version"]
+    redis_client_version = version("redis")
+    database_size = await r.dbsize()
+
+    quart_version = version("quart")
+
     data = {
-        "quart_version": version("quart"),
+        "quart_version": quart_version,
         "redis_version": {
-            "client": version("redis"),
-            "server": (await r.info())["redis_version"],
+            "client": redis_client_version,
+            "server": redis_server_version,
         },
         "total": {
-            "torrents": (await r.dbsize()),
+            "torrents": database_size,
         },
     }
-    return await render_template("stats.html", **data)
+    return jsonify(data), HTTPStatus.OK
