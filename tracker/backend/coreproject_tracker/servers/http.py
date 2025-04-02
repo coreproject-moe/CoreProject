@@ -4,6 +4,7 @@ from importlib.metadata import version
 import bencodepy
 from quart import Blueprint, json, jsonify, request
 from quart_redis import get_redis
+import platform
 
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
 from coreproject_tracker.datastructures import HttpDatastructure
@@ -137,12 +138,15 @@ async def api_endpoint():
 
     quart_version = version("quart")
 
+    python_version = platform.python_version()
+
     data = {
         "quart_version": quart_version,
         "redis_version": {
             "client": redis_client_version,
             "server": redis_server_version,
         },
+        "python_version": python_version,
         "total": {
             "torrents": database_size,
         },

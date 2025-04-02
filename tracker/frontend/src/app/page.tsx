@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { LoaderCircle } from "lucide-react";
+import { Layers2, LoaderCircle } from "lucide-react";
 import RedisIcon from "@/icons/redis.svg";
 
 import Image from "next/image";
@@ -18,7 +18,11 @@ export default function Home() {
 
   return (
     <div className="mx-10 flex flex-col gap-5">
-      <h1 className="text-3xl">Stack version:</h1>
+      <div className="flex items-center gap-3">
+        <Layers2 />
+        <h1 className="text-3xl">Stack version:</h1>
+      </div>
+
       {isLoading ? (
         <div className="flex w-full items-center justify-center gap-3">
           <p>Loading</p>
@@ -31,7 +35,7 @@ export default function Home() {
           ) : (
             <>
               <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
-                <Card>
+                <Card className="md:h-[22vh] lg:h-[17vh]">
                   <CardHeader>
                     <CardTitle>Quart</CardTitle>
                     <CardDescription>
@@ -55,11 +59,11 @@ export default function Home() {
                   </CardContent>
                   <CardFooter className="justify-center gap-2">
                     <p>Version:</p>
-                    <p>{"0.123.1"}</p>
+                    <p>{data.quart_version}</p>
                   </CardFooter>
                 </Card>
 
-                <Card>
+                <Card className="md:h-[22vh] lg:h-[17vh]">
                   <CardHeader>
                     <CardTitle>Python</CardTitle>
                     <CardDescription>
@@ -83,11 +87,11 @@ export default function Home() {
                   </CardContent>
                   <CardFooter className="justify-center gap-2">
                     <p>Version:</p>
-                    <p>{"0.123.1"}</p>
+                    <p>{data.python_version}</p>
                   </CardFooter>
                 </Card>
 
-                <Card>
+                <Card className="md:h-[22vh] lg:h-[17vh]">
                   <CardHeader>
                     <CardTitle>Redis</CardTitle>
                     <CardDescription>
@@ -107,8 +111,15 @@ export default function Home() {
                     </div>
                   </CardContent>
                   <CardFooter className="justify-center gap-2">
-                    <p>Version:</p>
-                    <p>{"0.123.1"}</p>
+                    <div className="space-x-2">
+                      <span>Version (server):</span>
+                      <span>{data.redis_version.server}</span>
+                    </div>
+                    <div>|</div>
+                    <div className="space-x-2">
+                      <span>Version (client):</span>
+                      <span>{data.redis_version.client}</span>
+                    </div>
                   </CardFooter>
                 </Card>
               </div>
