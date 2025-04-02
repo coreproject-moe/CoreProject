@@ -7,6 +7,9 @@ import click
 from hypercorn.asyncio import serve
 from hypercorn.config import Config
 
+from coreproject_tracker.enums import IP
+from coreproject_tracker.functions import check_ip_type
+
 try:
     import uvloop  # type: ignore[import]
 
@@ -24,6 +27,14 @@ logging.basicConfig(
 
 async def _main_async_wrapper(host: str, port: int) -> None:
     """Async context for server management"""
+    match await check_ip_type(host):
+        case IP.IPV6:
+            if sys.platform == "win32":
+                raise ValueError(
+                    "IPv6 not supported on Windows under AnyIO. "
+                    + "See:https://github.com/agronholm/anyio/discussions/872"
+                )
+
     config = Config()
     config.bind = [f"{host}:{port}"]
 
