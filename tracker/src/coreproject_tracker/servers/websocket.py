@@ -1,5 +1,4 @@
 import asyncio
-from typing import TYPE_CHECKING
 
 from quart import Blueprint, copy_current_websocket_context, json, websocket
 from quart_redis import get_redis
@@ -16,9 +15,6 @@ from coreproject_tracker.functions import (
     hset,
 )
 
-if TYPE_CHECKING:
-    from redis.client import PubSub
-
 ws_blueprint = Blueprint("websocket", __name__)
 
 
@@ -29,7 +25,7 @@ async def ws():
     """
 
     @copy_current_websocket_context
-    async def parse_websocket() -> WebsocketDatastructure:
+    async def parse_websocket():
         initial_message = await websocket.receive_json()
         client_ip, client_port = websocket.scope.get("client")
 
@@ -60,25 +56,27 @@ async def ws():
 
         return WebsocketDatastructure(**_data)
 
-    data = await parse_websocket()
-    task = None
+    @copy_current_websocket_context
+    async def listen_pubsub():
+        while True:
+            message = await pubsub.get_message(
+                ignore_subscribe_messages=True, timeout=1.0
+            )
+            if message and message["type"] == "message":
+                await websocket.send_json(json.loads(message["data"]))
+
+    # Explicitly define the `WebsocketDatastructure` cause the decorator fucks with type
+    data: WebsocketDatastructure = await parse_websocket()
+
+    task: asyncio.Task | None = None
     redis = get_redis()
-    pubsub: PubSub | None = None
+    pubsub = redis.pubsub()
+
+    # Not using `peer:data.peer_id.hex()`
+    # because using `peer:data.peer_id.hex()` causes phantom errors
+    await pubsub.subscribe(f"peer:{data.peer_id.hex()}")
 
     try:
-        pubsub = redis.pubsub()
-        # Not using `peer:data.peer_id.hex()`
-        # because using `peer:data.peer_id.hex()` causes phantom errors
-        await pubsub.subscribe(f"peer:{data.peer_id.hex()}")
-
-        async def listen_pubsub():
-            while True:
-                message = await pubsub.get_message(
-                    ignore_subscribe_messages=True, timeout=1.0
-                )
-                if message and message["type"] == "message":
-                    await websocket.send_json(json.loads(message["data"]))
-
         task = asyncio.create_task(listen_pubsub())
 
         while True:
@@ -153,7 +151,7 @@ async def ws():
                 await redis.publish(f"peer:{data.to_peer_id.hex()}", message)
 
             # Wait for next message from client
-            data = await parse_websocket()
+            data: WebsocketDatastructure = await parse_websocket()
 
     except asyncio.CancelledError:
         print("Connection closed")
