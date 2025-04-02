@@ -1,5 +1,4 @@
 import logging
-import multiprocessing
 import sys
 
 import anyio
@@ -45,9 +44,6 @@ async def _main_async_wrapper(host: str, port: int) -> None:
         tg.start_soon(run_udp_server, host, port)
         tg.start_soon(serve, make_app(), config)
 
-        # Keep running until cancelled
-        await anyio.sleep_forever()
-
 
 @click.command()
 @click.option("--host", default="127.0.0.1", help="Host to bind")
@@ -62,6 +58,4 @@ def main(host: str, port: int):
 
 
 if __name__ == "__main__":
-    if sys.platform == "win32":
-        multiprocessing.freeze_support()
     main()
