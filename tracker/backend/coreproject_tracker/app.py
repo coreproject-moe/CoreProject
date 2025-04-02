@@ -1,5 +1,6 @@
 from quart import Quart
 from quart_redis import RedisHandler
+from quart_cors import cors
 
 # Use orjson
 try:
@@ -15,6 +16,7 @@ from coreproject_tracker.servers import http_blueprint, ws_blueprint
 
 def make_app() -> Quart:
     app = Quart(__name__)
+    app = cors(app, allow_origin="*")
 
     if HAS_FLASK_ORJSON:
         app.json = OrjsonProvider(app)
