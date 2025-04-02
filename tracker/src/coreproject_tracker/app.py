@@ -3,7 +3,7 @@ from quart_redis import RedisHandler
 
 # Use orjson
 try:
-    from flask_orjson import OrjsonProvider  # type: ignore
+    from flask_orjson import OrjsonProvider  # type: ignore[import]
 
     HAS_FLASK_ORJSON = True
 except ImportError:
