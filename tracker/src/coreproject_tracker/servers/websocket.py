@@ -67,22 +67,17 @@ async def ws():
 
     try:
         pubsub = redis.pubsub()
-        # Not using `peer:data.peer_id.hex()` causes phantom errors
+        # Not using `peer:data.peer_id.hex()`
+        # because using `peer:data.peer_id.hex()` causes phantom errors
         await pubsub.subscribe(f"peer:{data.peer_id.hex()}")
 
         async def listen_pubsub():
-            try:
-                while True:
-                    message = await pubsub.get_message(
-                        ignore_subscribe_messages=True, timeout=1.0
-                    )
-                    if message and message["type"] == "message":
-                        await websocket.send_json(json.loads(message["data"]))
-            except asyncio.CancelledError:
-                pass
-            finally:
-                await pubsub.unsubscribe(f"peer:{data.peer_id.hex()}")
-                await pubsub.close()
+            while True:
+                message = await pubsub.get_message(
+                    ignore_subscribe_messages=True, timeout=1.0
+                )
+                if message and message["type"] == "message":
+                    await websocket.send_json(json.loads(message["data"]))
 
         task = asyncio.create_task(listen_pubsub())
 
