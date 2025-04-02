@@ -59,7 +59,7 @@ export default function Home() {
                   </CardContent>
                   <CardFooter className="justify-center gap-2">
                     <p>Version:</p>
-                    <p>{data.quart_version}</p>
+                    <code>{data.quart_version}</code>
                   </CardFooter>
                 </Card>
 
@@ -87,7 +87,7 @@ export default function Home() {
                   </CardContent>
                   <CardFooter className="justify-center gap-2">
                     <p>Version:</p>
-                    <p>{data.python_version}</p>
+                    <code>{data.python_version}</code>
                   </CardFooter>
                 </Card>
 
@@ -113,12 +113,12 @@ export default function Home() {
                   <CardFooter className="justify-center gap-2">
                     <div className="space-x-2">
                       <span>Server:</span>
-                      <span>{data.redis_version.server}</span>
+                      <code>{data.redis_version.server}</code>
                     </div>
-                    <div>|</div>
+                    <div className="text-primary/30">|</div>
                     <div className="space-x-2">
                       <span>Client:</span>
-                      <span>{data.redis_version.client}</span>
+                      <code>{data.redis_version.client}</code>
                     </div>
                   </CardFooter>
                 </Card>
