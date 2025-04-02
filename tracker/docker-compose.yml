@@ -9,7 +9,7 @@ services:
     tracker:
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: ./backend/Dockerfile
         container_name: coreproject-tracker
         network_mode: 'host'
         restart: always
