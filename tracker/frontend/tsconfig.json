@@ -28,6 +28,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/app/test/page.tsx"  ],
   "exclude": ["node_modules"]
 }
