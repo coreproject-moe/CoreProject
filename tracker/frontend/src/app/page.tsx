@@ -112,12 +112,12 @@ export default function Home() {
                   </CardContent>
                   <CardFooter className="justify-center gap-2">
                     <div className="space-x-2">
-                      <span>Version (server):</span>
+                      <span>Server:</span>
                       <span>{data.redis_version.server}</span>
                     </div>
                     <div>|</div>
                     <div className="space-x-2">
-                      <span>Version (client):</span>
+                      <span>Client:</span>
                       <span>{data.redis_version.client}</span>
                     </div>
                   </CardFooter>
