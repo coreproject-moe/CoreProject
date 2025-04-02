@@ -9,7 +9,6 @@ import Link from "next/link";
 
 const buttonMapping = {
   Dashboard: "/",
-  Test: "/test",
 };
 
 export function Navbar() {
