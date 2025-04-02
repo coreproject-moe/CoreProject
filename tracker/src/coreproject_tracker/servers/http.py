@@ -109,12 +109,11 @@ async def http_endpoint():
         except (ValueError, KeyError):
             continue
 
-        finally:
-            # This is here to make undo possible
-            peers.extend(_peers)
-            peers6.extend(_peers6)
-            seeders += _seeders
-            leechers += _leechers
+        # This is here to make undo possible
+        peers.extend(_peers)
+        peers6.extend(_peers6)
+        seeders += _seeders
+        leechers += _leechers
 
     output = {
         "peers": peers,
