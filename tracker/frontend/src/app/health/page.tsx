@@ -7,9 +7,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { WS_ENDPOINT } from "@/constants/url";
 import { isDataBencoded } from "@/functions/bencode";
 import { useHttpData } from "@/hooks/useHttpData";
-import { CheckCheck, CirclePlus, HeartPulse, LoaderCircle } from "lucide-react";
+import { CheckCheck, HeartPulse, LoaderCircle, X } from "lucide-react";
+import { useState } from "react";
 
 function HttpCard() {
   const {
@@ -52,7 +54,7 @@ function HttpCard() {
             </>
           ) : httpIsError ? (
             <>
-              <CirclePlus className="rotate-45 text-red-500" />
+              <X className="text-red-500" />
               <p className="text-red-300"> {httpIsError.toString()}</p>
             </>
           ) : (
@@ -71,6 +73,21 @@ function HttpCard() {
 }
 
 function WebsocketCard() {
+  const ws = new WebSocket(WS_ENDPOINT);
+
+  const [loading, setLoading] = useState(true);
+  const [wsLoaded, setWsLoaded] = useState(false);
+  const [wsError, setWsError] = useState<Error>();
+
+  ws.onopen = () => {
+    setWsLoaded(true);
+    setLoading(false);
+  };
+
+  ws.onerror = () => {
+    setWsError(new Error("WebSocket connection error"));
+  };
+
   return (
     <>
       <Card className="md:h-[22vh] lg:h-[17vh]">
@@ -79,7 +96,26 @@ function WebsocketCard() {
           <CardDescription></CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex h-full flex-col items-center justify-center gap-2"></div>
+          <div className="flex h-full flex-col items-center justify-center gap-2">
+            {loading ? (
+              <>
+                <LoaderCircle className="animate-spin" />
+                Checking
+              </>
+            ) : wsError ? (
+              <>
+                <X className="text-red-500" />
+                <p className="text-red-300"> {wsError.toString()}</p>
+              </>
+            ) : (
+              wsLoaded && (
+                <>
+                  <CheckCheck className="text-green-400" />
+                  <p className="text-primary/90">Tracker is working</p>
+                </>
+              )
+            )}
+          </div>
         </CardContent>
       </Card>
     </>
