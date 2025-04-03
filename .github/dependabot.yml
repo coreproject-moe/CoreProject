@@ -16,7 +16,13 @@ updates:
     # Tracker
     # =======
     - package-ecosystem: uv
-      directory: /tracker/
+      directory: /tracker/backend/
+      schedule:
+          interval: weekly
+      open-pull-requests-limit: 100
+
+    - package-ecosystem: npm
+      directory: /tracker/frontend/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
