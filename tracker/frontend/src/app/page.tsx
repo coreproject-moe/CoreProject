@@ -7,7 +7,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { AudioLines, Layers2, LoaderCircle, TrendingUp } from "lucide-react";
+import {
+  AudioLines,
+  HardDriveDownload,
+  HardDriveUpload,
+  Layers2,
+  LoaderCircle,
+  Router,
+  TrendingUp,
+} from "lucide-react";
 import RedisIcon from "@/icons/redis.svg";
 
 import Image from "next/image";
@@ -46,7 +54,10 @@ function VersionCardComponent({ data }: { data: any }) {
     <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
       {mapping.map((value, index) => {
         return (
-          <Card key={index} className="md:h-[22vh] lg:h-[19vh]">
+          <Card
+            key={`version-card-component-${index}`}
+            className="md:h-[22vh] lg:h-[19vh]"
+          >
             <CardHeader>
               <CardTitle>{value.title}</CardTitle>
               <CardDescription>
@@ -104,6 +115,114 @@ function VersionCardComponent({ data }: { data: any }) {
   );
 }
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+function TorrentCardComponent({ data }: { data: any }) {
+  const totalTorrent = Object.keys(data.redis_data).length;
+  const totalValueLengths = Object.values(data.redis_data).map(
+    (value) => Object.keys(value as Record<string, unknown>).length,
+  );
+  const totalLength = totalValueLengths.reduce(
+    (acc, length) => acc + length,
+    0,
+  );
+
+  // Counting seeders and leechers
+  let seeders = 0;
+  let leechers = 0;
+
+  // Iterate through redis_data
+  for (const key in data.redis_data) {
+    const value = data.redis_data[key];
+    for (const peer in value) {
+      const peerData = value[peer];
+      try {
+        // Parse the peer data string into an object
+        const peerInfo = JSON.parse(peerData);
+        if (peerInfo.left === 0) {
+          seeders++;
+        } else {
+          leechers++;
+        }
+      } catch (e) {
+        // If the data is invalid or can't be parsed, skip it
+        continue;
+      }
+    }
+  }
+
+  const mapping = [
+    {
+      title: "Total Torrents",
+      description: "The amount of torrents in the database.",
+      value: totalTorrent,
+      icon: TrendingUp,
+      valueDescription: "Count:",
+    },
+    {
+      title: "Total Clients",
+      description: "The amount of clients that are either seeding or leeching.",
+      value: totalLength,
+      icon: Router,
+      valueDescription: "Count:",
+    },
+  ];
+
+  return (
+    <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
+      {mapping.map((value, index) => {
+        return (
+          <Card
+            key={`torrent-card-component-${index}`}
+            className="md:h-[22vh] lg:h-[17vh]"
+          >
+            <CardHeader>
+              <CardTitle>{value.title}</CardTitle>
+              <CardDescription>
+                <p>{value.description}</p>
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="relative flex items-center justify-center">
+                <value.icon />
+              </div>
+            </CardContent>
+            <CardFooter className="justify-center gap-2">
+              <p>{value.valueDescription}</p>
+              <code>{value.value}</code>
+            </CardFooter>
+          </Card>
+        );
+      })}
+      <Card className="md:h-[22vh] lg:h-[17vh]">
+        <CardHeader>
+          <CardTitle>Total Seeders/Leechers</CardTitle>
+          <CardDescription>
+            <p>The amount of seeders or leechers</p>
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid h-full grid-cols-2">
+            <div className="flex flex-col items-center justify-center gap-3">
+              <HardDriveUpload className="text-green-400" />
+
+              <p className="text-primary/90 text-sm">
+                Total Seeders: {seeders}
+              </p>
+            </div>
+            <div className="flex flex-col items-center justify-center gap-3">
+              <HardDriveDownload className="text-red-400" />
+
+              <p className="text-primary/90 text-sm">
+                Total Leechers: {leechers}
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
 export default function Page() {
   const {
     data: backendData,
@@ -144,25 +263,7 @@ export default function Page() {
               </div>
 
               {/* Grid to show tracker information  */}
-              <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
-                <Card className="md:h-[22vh] lg:h-[17vh]">
-                  <CardHeader>
-                    <CardTitle>Total Torrents</CardTitle>
-                    <CardDescription>
-                      <p>The amount of torrents in the database.</p>
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="relative inset-0 flex h-[50px] items-center justify-center">
-                      <TrendingUp />
-                    </div>
-                  </CardContent>
-                  <CardFooter className="justify-center gap-2">
-                    <p>Total Torrents:</p>
-                    <code>{backendData.quart_version}</code>
-                  </CardFooter>
-                </Card>
-              </div>
+              <TorrentCardComponent data={backendData} />
             </>
           )}
         </>
