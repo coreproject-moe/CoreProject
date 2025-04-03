@@ -164,7 +164,5 @@ async def run_udp_server(server_host: str, server_port: int):
                 await hdel(data.info_hash, f"{data.ip}:{data.port}")
 
             packet = await make_udp_packet(data)
-            logging.info(
-                f"Sent UDP packet for {data.info_hash.hex()}. Action:{data.action}. Event Name: {data.event_name}"
-            )
+            logging.info(f"Sent UDP packet for {host}:{port}")
             await udp.sendto(packet, host, port)

@@ -156,9 +156,7 @@ async def ws():
             data: WebsocketDatastructure = await parse_websocket()
 
     except asyncio.CancelledError:
-        logging.info(
-            f"WebSocket disconneted for `{data.ip}:{data.port}`. Info hash: {data.info_hash.hex()}"
-        )
+        logging.info(f"WebSocket disconneted for `{data.ip}:{data.port}`")
 
     finally:
         # Cleanup
