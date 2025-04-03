@@ -14,7 +14,8 @@ import Image from "next/image";
 import { useBackendData } from "@/hooks/useBackendData";
 import React from "react";
 
-function CardComponent({ data }: { data: any }) {
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+function VersionCardComponent({ data }: { data: any }) {
   const mapping = [
     {
       title: "Quart",
@@ -64,7 +65,13 @@ function CardComponent({ data }: { data: any }) {
                   />
                 )}
 
-                {typeof value.icon === "function" && <value.icon />}
+                {typeof value.icon === "function" && (
+                  <value.icon
+                    width="120"
+                    height="250"
+                    className="absolute z-20 h-[40px]"
+                  />
+                )}
 
                 <div className="bg-primary absolute z-10 h-[45px] w-[125px] rounded-lg"></div>
               </div>
@@ -97,7 +104,7 @@ function CardComponent({ data }: { data: any }) {
   );
 }
 
-export default function Home() {
+export default function Page() {
   const {
     data: backendData,
     isLoading: backendIsLoading,
@@ -126,7 +133,7 @@ export default function Home() {
                 </div>
               </div>
               {/* Grid to show version  */}
-              <CardComponent data={backendData} />
+              <VersionCardComponent data={backendData} />
 
               {/* Tracker information */}
               <div className="my-10 flex flex-col gap-5">
