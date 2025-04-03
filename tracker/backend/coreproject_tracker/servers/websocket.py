@@ -1,4 +1,5 @@
 import asyncio
+import logging
 
 from quart import Blueprint, copy_current_websocket_context, json, websocket
 from quart_redis import get_redis
@@ -155,7 +156,9 @@ async def ws():
             data: WebsocketDatastructure = await parse_websocket()
 
     except asyncio.CancelledError:
-        print("Connection closed")
+        logging.info(
+            f"WebSocket disconneted for `{data.ip}:{data.port}`. Info hash: {data.info_hash.hex()}"
+        )
 
     finally:
         # Cleanup
