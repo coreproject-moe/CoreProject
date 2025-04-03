@@ -9,6 +9,7 @@ from .convertion import (
     bytes_to_bin_str as bytes_to_bin_str,
     hex_str_to_bin_str as hex_str_to_bin_str,
 )
+from .dictionary import decode_dictionary as decode_dictionary
 from .events import (
     convert_event_id_to_event_enum as convert_event_id_to_event_enum,
     convert_event_name_to_event_enum as convert_event_name_to_event_enum,
@@ -20,4 +21,9 @@ from .ip import (
     convert_ipv4_coded_ipv6_to_ipv4 as convert_ipv4_coded_ipv6_to_ipv4,
     convert_str_to_ip_object as convert_str_to_ip_object,
 )
-from .redis import hdel as hdel, hget as hget, hset as hset
+from .redis import (
+    get_all_hash_keys as get_all_hash_keys,
+    hdel as hdel,
+    hget as hget,
+    hset as hset,
+)

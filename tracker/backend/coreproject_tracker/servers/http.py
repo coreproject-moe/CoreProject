@@ -1,10 +1,10 @@
+import platform
 from http import HTTPStatus
 from importlib.metadata import version
 
 import bencodepy
 from quart import Blueprint, json, jsonify, request
 from quart_redis import get_redis
-import platform
 
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
 from coreproject_tracker.datastructures import HttpDatastructure
@@ -12,6 +12,8 @@ from coreproject_tracker.enums import EVENT_NAMES, IP
 from coreproject_tracker.functions import (
     check_ip_type,
     convert_event_name_to_event_enum,
+    decode_dictionary,
+    get_all_hash_keys,
     get_n_random_items,
     hdel,
     hex_str_to_bin_str,
@@ -140,6 +142,16 @@ async def api_endpoint():
 
     python_version = platform.python_version()
 
+    hash_keys = await get_all_hash_keys()  # Get all hash keys dynamically
+    pipe = await r.pipeline()
+    for hash_key in hash_keys:
+        await pipe.hgetall(hash_key)  # Fetch all values for each hash key
+    hash_data = await pipe.execute()
+
+    result = dict(zip(hash_keys, hash_data))
+    result = await decode_dictionary(result)
+    print(result)
+
     data = {
         "quart_version": quart_version,
         "redis_version": {
@@ -150,5 +162,6 @@ async def api_endpoint():
         "total": {
             "torrents": database_size,
         },
+        "redis_data": result,
     }
     return jsonify(data), HTTPStatus.OK

@@ -36,4 +36,20 @@ async def hget(hash_key: str) -> None | dict[str, str | int]:
 
 async def hdel(hash_key, field_name) -> None:
     r = get_redis()
+
     await r.hdel(hash_key, field_name)
+
+
+async def get_all_hash_keys():
+    r = get_redis()
+
+    cursor = "0"
+    hash_keys = []
+
+    while cursor != 0:
+        cursor, keys = await r.scan(cursor, match="*", count=10000)  # Match all keys
+        for key in keys:
+            if await r.type(key) == b"hash":
+                hash_keys.append(key)
+
+    return hash_keys
