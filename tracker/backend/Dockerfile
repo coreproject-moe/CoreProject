@@ -1,44 +1,39 @@
-# Stage 1: Builder
-FROM python:3.13-alpine AS builder
+# First, build the application in the `/app` directory.
+# See `Dockerfile` for details.
+FROM ghcr.io/astral-sh/uv:python3.13-alpine AS builder
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
 
-ENV PATH="/root/.local/bin:$PATH"
+# Disable Python downloads, because we want to use the system interpreter
+# across both images. If using a managed Python version, it needs to be
+# copied from the build image into the final image; see `standalone.Dockerfile`
+# for an example.
+ENV UV_PYTHON_DOWNLOADS=0
 
-# Install system dependencies
-RUN apk update && apk add --no-cache curl gcc musl-dev
-
-# Install uv
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# Set working directory
 WORKDIR /app
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --frozen --no-install-project --no-dev
+ADD . /app
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen --no-dev
 
-# Copy all files into the container
-COPY . .
 
-# Remove any existing .venv directory
-RUN rm -rf .venv
-
-# Install dependencies
-RUN uv sync --no-cache-dir --no-default-groups
-
-# Stage 2: Final stage
+# Then, use a final image without uv
 FROM python:3.13-alpine
+# It is important to use the image that matches the builder, as the path to the
+# Python executable must be the same, e.g., using `python:3.11-slim-bookworm`
+# will fail.
 
-# Set default environment variables
-ENV HOST=127.0.0.1
-ENV PORT=5000
+# Copy the application from the builder
+COPY --from=builder --chown=app:app /app /app
 
-WORKDIR /app
-
-# Copy installed dependencies and source code
-COPY --from=builder /root/.local /root/.local
-COPY --from=builder /usr/local /usr/local
-COPY --from=builder /app /app
-
-# Ensure the PATH is set correctly
+# Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
 
+ENV HOST=127.0.0.1
+ENV PORT=5000
 EXPOSE 5000/udp 5000/tcp
 
-# Use shell form to allow environment variable substitution
+# Run the FastAPI application by default
 CMD ["sh", "-c", "coreproject_tracker --host ${HOST} --port ${PORT}"]

@@ -5,7 +5,7 @@ __pycache__
 *.pyd
 .Python
 env
-venv
+.venv
 ENV
 env.bak
 venv.bak
