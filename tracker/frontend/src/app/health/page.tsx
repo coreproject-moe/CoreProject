@@ -85,6 +85,7 @@ function WebsocketCard() {
   };
 
   ws.onerror = () => {
+    setLoading(false);
     setWsError(new Error("WebSocket connection error"));
   };
 
@@ -93,7 +94,13 @@ function WebsocketCard() {
       <Card className="md:h-[22vh] lg:h-[17vh]">
         <CardHeader>
           <CardTitle>Websocket Check</CardTitle>
-          <CardDescription></CardDescription>
+          <CardDescription>
+            {loading ? (
+              <p>Checking if the tracker is responding with http</p>
+            ) : (
+              !wsError && <p>There is no error</p>
+            )}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex h-full flex-col items-center justify-center gap-2">
