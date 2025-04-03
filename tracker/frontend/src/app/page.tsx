@@ -9,12 +9,14 @@ import {
 } from "@/components/ui/card";
 import {
   AudioLines,
+  EarthLock,
+  File,
+  GlobeLock,
   HardDriveDownload,
   HardDriveUpload,
   Layers2,
   LoaderCircle,
   Router,
-  TrendingUp,
 } from "lucide-react";
 import RedisIcon from "@/icons/redis.svg";
 
@@ -118,10 +120,10 @@ function VersionCardComponent({ data }: { data: any }) {
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 function TorrentCardComponent({ data }: { data: any }) {
   const totalTorrent = Object.keys(data.redis_data).length;
-  const totalValueLengths = Object.values(data.redis_data).map(
+  const totalClientValueLengths = Object.values(data.redis_data).map(
     (value) => Object.keys(value as Record<string, unknown>).length,
   );
-  const totalLength = totalValueLengths.reduce(
+  const totalClientLength = totalClientValueLengths.reduce(
     (acc, length) => acc + length,
     0,
   );
@@ -129,6 +131,9 @@ function TorrentCardComponent({ data }: { data: any }) {
   // Counting seeders and leechers
   let seeders = 0;
   let leechers = 0;
+  let udpClients = 0;
+  let websocketClients = 0;
+  let httpClients = 0;
 
   // Iterate through redis_data
   for (const key in data.redis_data) {
@@ -136,63 +141,96 @@ function TorrentCardComponent({ data }: { data: any }) {
     for (const peer in value) {
       const peerData = value[peer];
       try {
-        // Parse the peer data string into an object
         const peerInfo = JSON.parse(peerData);
+
+        // Seeder and Leechers
         if (peerInfo.left === 0) {
           seeders++;
         } else {
           leechers++;
         }
-      } catch (e) {
+
+        // Client type
+        if (peerInfo.type === "http") {
+          httpClients++;
+        } else if (peerInfo.type === "udp") {
+          udpClients++;
+        } else if (peerInfo.type === "websocket") {
+          websocketClients++;
+        } else {
+          console.error(`Unknown client type: ${peerInfo.type}`);
+        }
+      } catch {
         // If the data is invalid or can't be parsed, skip it
         continue;
       }
     }
   }
 
-  const mapping = [
-    {
-      title: "Total Torrents",
-      description: "The amount of torrents in the database.",
-      value: totalTorrent,
-      icon: TrendingUp,
-      valueDescription: "Count:",
-    },
-    {
-      title: "Total Clients",
-      description: "The amount of clients that are either seeding or leeching.",
-      value: totalLength,
-      icon: Router,
-      valueDescription: "Count:",
-    },
-  ];
-
   return (
     <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
-      {mapping.map((value, index) => {
-        return (
-          <Card
-            key={`torrent-card-component-${index}`}
-            className="md:h-[22vh] lg:h-[17vh]"
-          >
-            <CardHeader>
-              <CardTitle>{value.title}</CardTitle>
-              <CardDescription>
-                <p>{value.description}</p>
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="relative flex items-center justify-center">
-                <value.icon />
-              </div>
-            </CardContent>
-            <CardFooter className="justify-center gap-2">
-              <p>{value.valueDescription}</p>
-              <code>{value.value}</code>
-            </CardFooter>
-          </Card>
-        );
-      })}
+      <Card className="md:h-[22vh] lg:h-[17vh]">
+        <CardHeader>
+          <CardTitle>Total Torrents and Clients</CardTitle>
+          <CardDescription>
+            <p>The amount of torrents and clients</p>
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid h-full grid-cols-2">
+            <div className="flex flex-col items-center justify-center gap-3">
+              <File className="text-green-400" />
+
+              <p className="text-primary/90 text-sm">
+                Total Torrents: {totalTorrent}
+              </p>
+            </div>
+            <div className="flex flex-col items-center justify-center gap-3">
+              <Router className="text-green-600" />
+
+              <p className="text-primary/90 text-sm">
+                Total Clients: {totalClientLength}
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="md:h-[22vh] lg:h-[17vh]">
+        <CardHeader>
+          <CardTitle>Client Distribution</CardTitle>
+          <CardDescription>
+            <p>The amount of client in udp or http/websocket</p>
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid h-full grid-cols-3">
+            <div className="flex flex-col items-center justify-center gap-3">
+              <GlobeLock className="text-green-400" />
+
+              <p className="text-primary/90 text-sm">
+                Total UDP Clients: {udpClients}
+              </p>
+            </div>
+            <div className="flex flex-col items-center justify-center gap-3">
+              <EarthLock className="text-green-400" />
+
+              <p className="text-primary/90 text-sm">
+                Total HTTP Clients: {httpClients}
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center justify-center gap-3">
+              <WaypointsIcon className="text-green-400" />
+
+              <p className="text-primary/90 text-sm">
+                Total Websocket Clients: {websocketClients}
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       <Card className="md:h-[22vh] lg:h-[17vh]">
         <CardHeader>
           <CardTitle>Total Seeders/Leechers</CardTitle>
@@ -245,12 +283,14 @@ export default function Page() {
             </div>
           ) : (
             <>
+              {/* Stack version */}
               <div className="mb-5 flex flex-col gap-5">
                 <div className="flex items-center gap-3">
                   <Layers2 />
                   <h1 className="text-3xl">Stack version:</h1>
                 </div>
               </div>
+
               {/* Grid to show version  */}
               <VersionCardComponent data={backendData} />
 
