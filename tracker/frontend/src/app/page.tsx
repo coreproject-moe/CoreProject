@@ -33,97 +33,93 @@ export default function Home() {
           {isError ? (
             <>Error Occured</>
           ) : (
-            <>
-              <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
-                <Card className="md:h-[22vh] lg:h-[17vh]">
-                  <CardHeader>
-                    <CardTitle>Quart</CardTitle>
-                    <CardDescription>
-                      <p>
-                        An async Python micro framework for building web
-                        applications.
-                      </p>
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="relative inset-0 flex h-[50px] items-center justify-center">
-                      <Image
-                        src="/quart.png"
-                        width="120"
-                        height="250"
-                        alt="quart"
-                        className="absolute z-20 h-[40px] object-fill"
-                      />
-                      <div className="bg-primary absolute z-10 h-[45px] w-[125px] rounded-lg"></div>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="justify-center gap-2">
-                    <p>Version:</p>
-                    <code>{data.quart_version}</code>
-                  </CardFooter>
-                </Card>
+            <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
+              <Card className="md:h-[22vh] lg:h-[17vh]">
+                <CardHeader>
+                  <CardTitle>Quart</CardTitle>
+                  <CardDescription>
+                    <p>
+                      An async Python micro framework for building web
+                      applications.
+                    </p>
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="relative inset-0 flex h-[50px] items-center justify-center">
+                    <Image
+                      src="/quart.png"
+                      width="120"
+                      height="250"
+                      alt="quart"
+                      className="absolute z-20 h-[40px] object-fill"
+                    />
+                    <div className="bg-primary absolute z-10 h-[45px] w-[125px] rounded-lg"></div>
+                  </div>
+                </CardContent>
+                <CardFooter className="justify-center gap-2">
+                  <p>Version:</p>
+                  <code>{data.quart_version}</code>
+                </CardFooter>
+              </Card>
 
-                <Card className="md:h-[22vh] lg:h-[17vh]">
-                  <CardHeader>
-                    <CardTitle>Python</CardTitle>
-                    <CardDescription>
-                      <p>
-                        Python is a programming language that lets you work
-                        quickly and integrate systems more effectively.
-                      </p>
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="relative inset-0 flex h-[50px] items-center justify-center">
-                      <Image
-                        src="/python.svg"
-                        width="120"
-                        height="250"
-                        alt="quart"
-                        className="absolute z-20 h-[40px] object-fill"
-                      />
-                      <div className="bg-primary absolute z-10 h-[45px] w-[125px] rounded-lg"></div>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="justify-center gap-2">
-                    <p>Version:</p>
-                    <code>{data.python_version}</code>
-                  </CardFooter>
-                </Card>
+              <Card className="md:h-[22vh] lg:h-[17vh]">
+                <CardHeader>
+                  <CardTitle>Python</CardTitle>
+                  <CardDescription>
+                    <p>
+                      Python is a programming language that lets you work
+                      quickly and integrate systems more effectively.
+                    </p>
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="relative inset-0 flex h-[50px] items-center justify-center">
+                    <Image
+                      src="/python.svg"
+                      width="120"
+                      height="250"
+                      alt="quart"
+                      className="absolute z-20 h-[40px] object-fill"
+                    />
+                    <div className="bg-primary absolute z-10 h-[45px] w-[125px] rounded-lg"></div>
+                  </div>
+                </CardContent>
+                <CardFooter className="justify-center gap-2">
+                  <p>Version:</p>
+                  <code>{data.python_version}</code>
+                </CardFooter>
+              </Card>
 
-                <Card className="md:h-[22vh] lg:h-[17vh]">
-                  <CardHeader>
-                    <CardTitle>Redis</CardTitle>
-                    <CardDescription>
-                      <p>
-                        Redis is an in-memory database that persists on disk.
-                      </p>
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="relative inset-0 flex h-[50px] items-center justify-center">
-                      <RedisIcon
-                        width="120"
-                        height="250"
-                        className="absolute z-20 h-[40px]"
-                      />
-                      <div className="bg-primary absolute z-10 h-[45px] w-[125px] rounded-lg"></div>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="justify-center gap-2">
-                    <div className="space-x-2">
-                      <span>Server:</span>
-                      <code>{data.redis_version.server}</code>
-                    </div>
-                    <div className="text-primary/30">|</div>
-                    <div className="space-x-2">
-                      <span>Client:</span>
-                      <code>{data.redis_version.client}</code>
-                    </div>
-                  </CardFooter>
-                </Card>
-              </div>
-            </>
+              <Card className="md:h-[22vh] lg:h-[17vh]">
+                <CardHeader>
+                  <CardTitle>Redis</CardTitle>
+                  <CardDescription>
+                    <p>Redis is an in-memory database that persists on disk.</p>
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="relative inset-0 flex h-[50px] items-center justify-center">
+                    <RedisIcon
+                      width="120"
+                      height="250"
+                      className="absolute z-20 h-[40px]"
+                    />
+                    <div className="bg-primary absolute z-10 h-[45px] w-[125px] rounded-lg"></div>
+                  </div>
+                </CardContent>
+                <CardFooter className="justify-center gap-2">
+                  <div className="space-x-2">
+                    <span>Server:</span>
+                    <code>{data.redis_version.server}</code>
+                  </div>
+                  <div className="text-primary/30">|</div>
+                  <div className="space-x-2">
+                    <span>Client:</span>
+                    <code>{data.redis_version.client}</code>
+                  </div>
+                </CardFooter>
+              </Card>
+            </div>
           )}
         </>
       )}
