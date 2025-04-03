@@ -136,7 +136,6 @@ async def api_endpoint():
     redis_information = await r.info()
     redis_server_version = redis_information["redis_version"]
     redis_client_version = version("redis")
-    database_size = await r.dbsize()
 
     quart_version = version("quart")
 
@@ -150,7 +149,6 @@ async def api_endpoint():
 
     result = dict(zip(hash_keys, hash_data))
     result = await decode_dictionary(result)
-    print(result)
 
     data = {
         "quart_version": quart_version,
@@ -159,9 +157,6 @@ async def api_endpoint():
             "server": redis_server_version,
         },
         "python_version": python_version,
-        "total": {
-            "torrents": database_size,
-        },
         "redis_data": result,
     }
     return jsonify(data), HTTPStatus.OK
