@@ -14,7 +14,11 @@ import Image from "next/image";
 import { useBackendData } from "@/hooks/useBackendData";
 
 export default function Home() {
-  const { data, isLoading, isError } = useBackendData();
+  const {
+    data: backendData,
+    isLoading: backendIsLoading,
+    isError: backendIsError,
+  } = useBackendData();
 
   return (
     <div className="mx-10 flex flex-col gap-5">
@@ -23,15 +27,17 @@ export default function Home() {
         <h1 className="text-3xl">Stack version:</h1>
       </div>
 
-      {isLoading ? (
+      {backendIsLoading ? (
         <div className="flex w-full items-center justify-center gap-3">
           <p>Loading</p>
           <LoaderCircle className="animate-spin" />
         </div>
       ) : (
         <>
-          {isError ? (
-            <>Error Occured</>
+          {backendIsError ? (
+            <div className="flex items-center justify-center">
+              Error occured while fetching data from backend
+            </div>
           ) : (
             <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
               <Card className="md:h-[22vh] lg:h-[17vh]">
@@ -58,7 +64,7 @@ export default function Home() {
                 </CardContent>
                 <CardFooter className="justify-center gap-2">
                   <p>Version:</p>
-                  <code>{data.quart_version}</code>
+                  <code>{backendData.quart_version}</code>
                 </CardFooter>
               </Card>
 
@@ -86,7 +92,7 @@ export default function Home() {
                 </CardContent>
                 <CardFooter className="justify-center gap-2">
                   <p>Version:</p>
-                  <code>{data.python_version}</code>
+                  <code>{backendData.python_version}</code>
                 </CardFooter>
               </Card>
 
@@ -110,12 +116,12 @@ export default function Home() {
                 <CardFooter className="justify-center gap-2">
                   <div className="space-x-2">
                     <span>Server:</span>
-                    <code>{data.redis_version.server}</code>
+                    <code>{backendData.redis_version.server}</code>
                   </div>
                   <div className="text-primary/30">|</div>
                   <div className="space-x-2">
                     <span>Client:</span>
-                    <code>{data.redis_version.client}</code>
+                    <code>{backendData.redis_version.client}</code>
                   </div>
                 </CardFooter>
               </Card>
