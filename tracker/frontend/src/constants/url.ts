@@ -4,5 +4,5 @@ export const BACKEND_HOST =
 export const HTTP_ENDPOINT = `http://${BACKEND_HOST}`;
 export const WS_ENDPOINT = `ws://${BACKEND_HOST}/`;
 
-export const API_URL = `${BACKEND_HOST}/api`;
-export const HTTP_TRACKER_ENDPOINT = `${BACKEND_HOST}/http`;
+export const API_URL = `${HTTP_ENDPOINT}/api`;
+export const HTTP_TRACKER_ENDPOINT = `${HTTP_ENDPOINT}/http`;
