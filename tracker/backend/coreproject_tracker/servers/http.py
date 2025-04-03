@@ -30,6 +30,8 @@ async def http_endpoint():
     if len(request.args) == 0:
         return "🐟🐈 ⸜(｡˃ ᵕ ˂ )⸝♡"
 
+    print(request.url)
+
     try:
         _data = {
             "info_hash_raw": request.args.get("info_hash"),

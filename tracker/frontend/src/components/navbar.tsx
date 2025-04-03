@@ -8,7 +8,8 @@ import CoreIcon from "@/icons/CoreIcon.svg";
 import Link from "next/link";
 
 const buttonMapping = {
-  Dashboard: "/",
+  dashboard: "/",
+  health: "/health",
 };
 
 export function Navbar() {
@@ -37,13 +38,15 @@ export function Navbar() {
           if (isActive) {
             return (
               <Button key={key} variant="default">
-                {name}
+                <p className="capitalize">{name}</p>
               </Button>
             );
           } else {
             return (
               <Button key={key} variant="outline" asChild>
-                <Link href={link}>{name}</Link>
+                <Link href={link}>
+                  <p className="capitalize">{name}</p>
+                </Link>
               </Button>
             );
           }
