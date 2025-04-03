@@ -58,6 +58,7 @@ async def http_endpoint():
         f"{data.peer_ip}:{data.port}",
         json.dumps(
             {
+                "type": "http",
                 "peer_id": data.peer_id,
                 "peer_ip": data.peer_ip,
                 "port": data.port,

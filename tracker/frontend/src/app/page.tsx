@@ -17,6 +17,7 @@ import {
   Layers2,
   LoaderCircle,
   Router,
+  WaypointsIcon,
 } from "lucide-react";
 import RedisIcon from "@/icons/redis.svg";
 

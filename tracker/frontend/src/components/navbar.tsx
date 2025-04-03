@@ -49,9 +49,6 @@ export function Navbar() {
           }
         })}
       </div>
-
-      {/* Right section */}
-      <div className="flex flex-col items-end justify-center" />
     </div>
   );
 }
