@@ -1,3 +1,4 @@
+import logging
 import platform
 from http import HTTPStatus
 from importlib.metadata import version
@@ -127,6 +128,9 @@ async def http_endpoint():
         "complete": seeders,
         "incomplete": leechers,
     }
+    logging.info(
+        f"Sent HTTP response for {data.info_hash}. Event: {data.event_name}. Peers: {len(peers)}. Peers6: {len(peers6)}."
+    )
     return bencodepy.bencode(output)
 
 
