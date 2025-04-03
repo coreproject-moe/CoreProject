@@ -91,6 +91,7 @@ async def ws():
                 data.addr,
                 json.dumps(
                     {
+                        "type": "websocket",
                         "peer_id": data.peer_id.hex(),
                         "peer_ip": data.ip,
                         "port": data.port,

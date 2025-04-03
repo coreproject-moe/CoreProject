@@ -114,6 +114,7 @@ async def run_udp_server(server_host: str, server_port: int):
                     f"{data.ip}:{data.port}",
                     json.dumps(
                         {
+                            "type": "udp",
                             "peer_id": data.peer_id,
                             "peer_ip": data.ip,
                             "port": data.port,

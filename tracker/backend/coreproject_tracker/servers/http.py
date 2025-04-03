@@ -1,3 +1,4 @@
+import platform
 from http import HTTPStatus
 from importlib.metadata import version
 
@@ -11,6 +12,8 @@ from coreproject_tracker.enums import EVENT_NAMES, IP
 from coreproject_tracker.functions import (
     check_ip_type,
     convert_event_name_to_event_enum,
+    decode_dictionary,
+    get_all_hash_keys,
     get_n_random_items,
     hdel,
     hex_str_to_bin_str,
@@ -55,6 +58,7 @@ async def http_endpoint():
         f"{data.peer_ip}:{data.port}",
         json.dumps(
             {
+                "type": "http",
                 "peer_id": data.peer_id,
                 "peer_ip": data.peer_ip,
                 "port": data.port,
@@ -133,9 +137,19 @@ async def api_endpoint():
     redis_information = await r.info()
     redis_server_version = redis_information["redis_version"]
     redis_client_version = version("redis")
-    database_size = await r.dbsize()
 
     quart_version = version("quart")
+
+    python_version = platform.python_version()
+
+    hash_keys = await get_all_hash_keys()  # Get all hash keys dynamically
+    pipe = await r.pipeline()
+    for hash_key in hash_keys:
+        await pipe.hgetall(hash_key)  # Fetch all values for each hash key
+    hash_data = await pipe.execute()
+
+    result = dict(zip(hash_keys, hash_data))
+    result = await decode_dictionary(result)
 
     data = {
         "quart_version": quart_version,
@@ -143,8 +157,7 @@ async def api_endpoint():
             "client": redis_client_version,
             "server": redis_server_version,
         },
-        "total": {
-            "torrents": database_size,
-        },
+        "python_version": python_version,
+        "redis_data": result,
     }
     return jsonify(data), HTTPStatus.OK

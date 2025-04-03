@@ -11,11 +11,14 @@ dependencies = [
     "flask-orjson>=2.0.0; platform.python_implementation == 'CPython'",
     "hypercorn>=0.17.3",
     "quart>=0.20.0",
+    "quart-cors>=0.8.0",
     "quart-redis>=3.0.0",
     "redis[hiredis]>=5.2.1",
     "uvloop>=0.21.0; sys_platform == 'linux'",
 ]
 
+[tool.setuptools]
+packages = ["coreproject_tracker"]
 
 [project.scripts]
 coreproject_tracker = "coreproject_tracker.cli:main"
