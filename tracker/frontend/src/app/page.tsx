@@ -289,7 +289,7 @@ export default function Page() {
               {/* Stack version */}
               <div className="mb-5 flex flex-col gap-5">
                 <div className="flex items-center gap-3">
-                  <Layers2 />
+                  <Layers2 className="text-amber-600" />
                   <h1 className="text-3xl">Stack version:</h1>
                 </div>
               </div>
@@ -300,7 +300,7 @@ export default function Page() {
               {/* Tracker information */}
               <div className="my-10 flex flex-col gap-5">
                 <div className="flex items-center gap-3">
-                  <AudioLines />
+                  <AudioLines className="text-orange-600" />
                   <h1 className="text-3xl">Tracker information:</h1>
                 </div>
               </div>
