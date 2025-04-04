@@ -18,6 +18,7 @@ import {
   LoaderCircle,
   Router,
   WaypointsIcon,
+  X,
 } from "lucide-react";
 import RedisIcon from "@/icons/redis.svg";
 
@@ -183,14 +184,14 @@ function TorrentCardComponent({ data }: { data: any }) {
               <File className="text-green-400" />
 
               <p className="text-primary/90 text-sm">
-                Total Torrents: {totalTorrent}
+                Total Torrents: <code>{totalTorrent}</code>
               </p>
             </div>
             <div className="flex flex-col items-center justify-center gap-3">
               <Router className="text-green-600" />
 
               <p className="text-primary/90 text-sm">
-                Total Clients: {totalClientLength}
+                Total Clients: <code>{totalClientLength}</code>
               </p>
             </div>
           </div>
@@ -210,14 +211,14 @@ function TorrentCardComponent({ data }: { data: any }) {
               <GlobeLock className="text-green-400" />
 
               <p className="text-primary/90 text-sm">
-                Total UDP Clients: {udpClients}
+                Total UDP Clients: <code>{udpClients}</code>
               </p>
             </div>
             <div className="flex flex-col items-center justify-center gap-3">
               <EarthLock className="text-green-400" />
 
               <p className="text-primary/90 text-sm">
-                Total HTTP Clients: {httpClients}
+                Total HTTP Clients: <code>{httpClients}</code>
               </p>
             </div>
 
@@ -225,7 +226,7 @@ function TorrentCardComponent({ data }: { data: any }) {
               <WaypointsIcon className="text-green-400" />
 
               <p className="text-primary/90 text-sm">
-                Total Websocket Clients: {websocketClients}
+                Total Websocket Clients: <code>{websocketClients}</code>
               </p>
             </div>
           </div>
@@ -245,14 +246,14 @@ function TorrentCardComponent({ data }: { data: any }) {
               <HardDriveUpload className="text-green-400" />
 
               <p className="text-primary/90 text-sm">
-                Total Seeders: {seeders}
+                Total Seeders: <code>{seeders}</code>
               </p>
             </div>
             <div className="flex flex-col items-center justify-center gap-3">
               <HardDriveDownload className="text-red-400" />
 
               <p className="text-primary/90 text-sm">
-                Total Leechers: {leechers}
+                Total Leechers: <code>{leechers}</code>
               </p>
             </div>
           </div>
@@ -279,8 +280,9 @@ export default function Page() {
       ) : (
         <>
           {backendIsError ? (
-            <div className="flex items-center justify-center">
-              Error occured while fetching data from backend
+            <div className="flex h-96 flex-col items-center justify-center">
+              <X className="text-red-500" />
+              <p className="text-red-300"> {backendIsError.toString()}</p>
             </div>
           ) : (
             <>
