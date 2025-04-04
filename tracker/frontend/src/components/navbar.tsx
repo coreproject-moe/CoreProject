@@ -1,12 +1,18 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { usePathname } from "next/navigation";
 import CoreProjectIcon from "@/icons/CoreProject.svg";
 import CoreIcon from "@/icons/CoreIcon.svg";
-
+import { Moon, Sun } from "lucide-react";
 import Link from "next/link";
-
+import { useTheme } from "next-themes";
 const buttonMapping = {
   dashboard: "/",
   health: "/health",
@@ -14,6 +20,8 @@ const buttonMapping = {
 
 export function Navbar() {
   const pathname = usePathname();
+  const { setTheme } = useTheme();
+
   return (
     <div className="mx-2 my-5 grid h-12 grid-cols-3 md:mx-10">
       {/* Left section */}
@@ -51,6 +59,30 @@ export function Navbar() {
             );
           }
         })}
+      </div>
+
+      {/*Right section*/}
+      <div className="flex items-center justify-end">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="icon">
+              <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+              <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => setTheme("light")}>
+              Light
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme("dark")}>
+              Dark
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme("system")}>
+              System
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   );

@@ -88,7 +88,7 @@ function VersionCardComponent({ data }: { data: any }) {
                   />
                 )}
 
-                <div className="bg-primary absolute z-10 h-[45px] w-[125px] rounded-lg"></div>
+                <div className="dark:bg-primary absolute z-10 h-[45px] w-[125px] rounded-lg"></div>
               </div>
             </CardContent>
             <CardFooter className="justify-center gap-2">
@@ -183,15 +183,15 @@ function TorrentCardComponent({ data }: { data: any }) {
             <div className="flex flex-col items-center justify-center gap-3">
               <File className="text-green-400" />
 
-              <p className="text-primary/90 text-sm">
-                Total Torrents: <code>{totalTorrent}</code>
+              <p className="text-primary/90 text-sm whitespace-nowrap">
+                Torrents: <code>{totalTorrent}</code>
               </p>
             </div>
             <div className="flex flex-col items-center justify-center gap-3">
               <Router className="text-green-600" />
 
-              <p className="text-primary/90 text-sm">
-                Total Clients: <code>{totalClientLength}</code>
+              <p className="text-primary/90 text-sm whitespace-nowrap">
+                Clients: <code>{totalClientLength}</code>
               </p>
             </div>
           </div>
@@ -210,23 +210,23 @@ function TorrentCardComponent({ data }: { data: any }) {
             <div className="flex flex-col items-center justify-center gap-3">
               <GlobeLock className="text-green-400" />
 
-              <p className="text-primary/90 text-sm">
-                Total UDP Clients: <code>{udpClients}</code>
+              <p className="text-primary/90 text-sm whitespace-nowrap">
+                UDP: <code>{udpClients}</code>
               </p>
             </div>
             <div className="flex flex-col items-center justify-center gap-3">
               <EarthLock className="text-green-400" />
 
-              <p className="text-primary/90 text-sm">
-                Total HTTP Clients: <code>{httpClients}</code>
+              <p className="text-primary/90 text-sm whitespace-nowrap">
+                HTTP: <code>{httpClients}</code>
               </p>
             </div>
 
             <div className="flex flex-col items-center justify-center gap-3">
               <WaypointsIcon className="text-green-400" />
 
-              <p className="text-primary/90 text-sm">
-                Total Websocket Clients: <code>{websocketClients}</code>
+              <p className="text-primary/90 text-sm whitespace-nowrap">
+                Websocket: <code>{websocketClients}</code>
               </p>
             </div>
           </div>
@@ -245,15 +245,15 @@ function TorrentCardComponent({ data }: { data: any }) {
             <div className="flex flex-col items-center justify-center gap-3">
               <HardDriveUpload className="text-green-400" />
 
-              <p className="text-primary/90 text-sm">
-                Total Seeders: <code>{seeders}</code>
+              <p className="text-primary/90 text-sm whitespace-nowrap">
+                Seeders: <code>{seeders}</code>
               </p>
             </div>
             <div className="flex flex-col items-center justify-center gap-3">
               <HardDriveDownload className="text-red-400" />
 
-              <p className="text-primary/90 text-sm">
-                Total Leechers: <code>{leechers}</code>
+              <p className="text-primary/90 text-sm whitespace-nowrap">
+                Leechers: <code>{leechers}</code>
               </p>
             </div>
           </div>
