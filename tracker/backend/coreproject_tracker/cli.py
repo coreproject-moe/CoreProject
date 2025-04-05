@@ -1,6 +1,5 @@
 import asyncio
 import logging
-import multiprocessing
 import sys
 from concurrent.futures import ProcessPoolExecutor
 
@@ -11,6 +10,7 @@ from hypercorn.config import Config
 
 from coreproject_tracker.app import make_app
 from coreproject_tracker.enums import IP
+from coreproject_tracker.envs import WORKERS_COUNT
 from coreproject_tracker.functions import check_ip_type
 from coreproject_tracker.servers import run_udp_server as _run_udp_server
 
@@ -44,7 +44,7 @@ async def _main_async_wrapper(host: str, port: int) -> None:
         # Run one instance of UDP server in the main process
         loop.run_in_executor(executor, run_udp_server, host, port)
 
-        for _ in range(max(2, multiprocessing.cpu_count() - 2)):
+        for _ in range(WORKERS_COUNT):
             loop.run_in_executor(executor, run_http_websocket_server, host, port)
 
 
