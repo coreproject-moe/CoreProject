@@ -1,4 +1,5 @@
 import asyncio
+import contextlib
 import logging
 
 from quart import Blueprint, copy_current_websocket_context, json, websocket
@@ -162,11 +163,11 @@ async def ws():
         # Cleanup
         if task:
             task.cancel()
-            try:
+            with contextlib.suppress(asyncio.CancelledError):
                 await task
-            except asyncio.CancelledError:
-                pass
+
         if pubsub:
             await pubsub.unsubscribe(f"peer:{data.peer_id.hex()}")
             await pubsub.close()
+
         await hdel(data.info_hash, data.addr)
