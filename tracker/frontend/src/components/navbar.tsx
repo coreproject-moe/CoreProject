@@ -13,14 +13,15 @@ import CoreIcon from "@/icons/CoreIcon.svg";
 import { Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-const buttonMapping = {
-  dashboard: "/",
-  health: "/health",
-};
 
 export function Navbar() {
   const pathname = usePathname();
   const { setTheme } = useTheme();
+
+  const buttonMapping = {
+    dashboard: "/",
+    health: "/health",
+  };
 
   return (
     <div className="mx-2 my-5 grid h-12 grid-cols-3 md:mx-10">
@@ -75,13 +76,25 @@ export function Navbar() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => setTheme("light")}>
+            <DropdownMenuItem
+              onClick={() => {
+                setTheme("light");
+              }}
+            >
               Light
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme("dark")}>
+            <DropdownMenuItem
+              onClick={() => {
+                setTheme("dark");
+              }}
+            >
               Dark
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme("system")}>
+            <DropdownMenuItem
+              onClick={() => {
+                setTheme("system");
+              }}
+            >
               System
             </DropdownMenuItem>
           </DropdownMenuContent>
