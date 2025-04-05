@@ -1,8 +1,7 @@
 from quart import Quart
-from quart_redis import RedisHandler
 from quart_cors import cors
+from quart_redis import RedisHandler
 
-# Use orjson
 try:
     from flask_orjson import OrjsonProvider  # type: ignore[import]
 
