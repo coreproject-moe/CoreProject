@@ -31,7 +31,11 @@ export function Navbar() {
           <div className="hidden h-3 w-40 md:block">
             <div className="relative flex h-10 w-[180px] items-center justify-center">
               <div className="dark:bg-background bg-primary absolute inset-0 rounded-md p-2"></div>
-              <CoreProjectIcon className="absolute inset-0 m-2" />
+              <CoreProjectIcon
+                width="150"
+                height="25"
+                className="absolute inset-0 m-2 inline-grid justify-self-center"
+              />
             </div>
           </div>
         </div>
