@@ -13,14 +13,15 @@ import CoreIcon from "@/icons/CoreIcon.svg";
 import { Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-const buttonMapping = {
-  dashboard: "/",
-  health: "/health",
-};
 
 export function Navbar() {
   const pathname = usePathname();
   const { setTheme } = useTheme();
+
+  const buttonMapping = {
+    dashboard: "/",
+    health: "/health",
+  };
 
   return (
     <div className="mx-2 my-5 grid h-12 grid-cols-3 md:mx-10">
@@ -28,7 +29,10 @@ export function Navbar() {
       <div>
         <div className="flex flex-col items-start justify-center">
           <div className="hidden h-3 w-40 md:block">
-            <CoreProjectIcon />
+            <div className="relative flex h-10 w-[180px] items-center justify-center">
+              <div className="dark:bg-background bg-primary absolute inset-0 rounded-md p-2"></div>
+              <CoreProjectIcon className="absolute inset-0 m-2" />
+            </div>
           </div>
         </div>
         <div className="flex">
@@ -72,13 +76,25 @@ export function Navbar() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => setTheme("light")}>
+            <DropdownMenuItem
+              onClick={() => {
+                setTheme("light");
+              }}
+            >
               Light
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme("dark")}>
+            <DropdownMenuItem
+              onClick={() => {
+                setTheme("dark");
+              }}
+            >
               Dark
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme("system")}>
+            <DropdownMenuItem
+              onClick={() => {
+                setTheme("system");
+              }}
+            >
               System
             </DropdownMenuItem>
           </DropdownMenuContent>
