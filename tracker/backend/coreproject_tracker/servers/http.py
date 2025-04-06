@@ -115,7 +115,8 @@ async def http_endpoint():
                 case _:
                     raise ValueError("Malformed data in redis")
 
-        except (ValueError, KeyError):
+        except KeyError as e:
+            raise e
             continue
 
         peers.extend(_peers)
