@@ -24,8 +24,8 @@ class HttpDatastructure:
         validator=[validate_20_length],
     )
     port: int = field(converter=int, validator=[validate_port])
-    left: str = field(converter=int)
-    numwant: str = field(converter=int)
+    left: int = field(converter=int)
+    numwant: int = field(converter=int)
     peer_id: str = field(validator=validators.instance_of(str))
     peer_ip: str = field(converter=convert_ip, validator=[validate_ip])
 
