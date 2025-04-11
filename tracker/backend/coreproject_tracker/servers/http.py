@@ -3,9 +3,9 @@ import platform
 from http import HTTPStatus
 from importlib.metadata import version
 
-import bencodepy
+import bencodepy  # type: ignore
 from quart import Blueprint, json, jsonify, request
-from quart_redis import get_redis
+from quart_redis import get_redis  # type: ignore
 
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
 from coreproject_tracker.datastructures import HttpDatastructure

@@ -36,4 +36,4 @@ ENV PORT=5000
 EXPOSE 5000/udp 5000/tcp
 
 # Run the FastAPI application by default
-CMD ["sh", "-c", "coreproject_tracker --host ${HOST} --port ${PORT}"]
+CMD ["sh", "-c", "coreproject_tracker --host ${HOST} --port ${PORT} --worker ${WORKERS}"]
