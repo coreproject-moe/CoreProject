@@ -17,8 +17,11 @@ async def convert_event_id_to_event_enum(event_id: int) -> EVENT_NAMES:
             raise ValueError("`event_id` is not supported")
 
 
-async def convert_event_name_to_event_enum(event_name: str) -> EVENT_NAMES:
-    match event_name.lower():
+async def convert_event_name_to_event_enum(event_name: str | None) -> EVENT_NAMES:
+    if event_name:
+        event_name = event_name.lower()
+
+    match event_name:
         case "update":
             return EVENT_NAMES.UPDATE
         case "completed":
@@ -29,5 +32,7 @@ async def convert_event_name_to_event_enum(event_name: str) -> EVENT_NAMES:
             return EVENT_NAMES.STOP
         case "paused":
             return EVENT_NAMES.PAUSE
+        case None:
+            raise ValueError("`event_name` is None")
         case _:
             raise ValueError("`event_name` not supported")

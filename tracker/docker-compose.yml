@@ -28,7 +28,7 @@ services:
       REDIS_PORT: 16379
       HOST: "0.0.0.0"
       PORT: 5000
-      WORKERS: 4
+      WORKERS_COUNT: 4
     ports:
       - "5000:5000"
 

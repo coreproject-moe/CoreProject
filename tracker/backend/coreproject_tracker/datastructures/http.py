@@ -25,14 +25,14 @@ class HttpDatastructure:
     )
     port: int = field(converter=int, validator=[validate_port])
     left: str = field(converter=int)
-    numwant: str = field(converter=int)
+    numwant: int = field(converter=int)
     peer_id: str = field(validator=validators.instance_of(str))
     peer_ip: str = field(converter=convert_ip, validator=[validate_ip])
 
     event_name: EVENT_NAMES = field(default=None)
 
     # Derived
-    info_hash: bytes = field(init=False)
+    info_hash: str = field(init=False)
 
     def __attrs_post_init__(self) -> NoReturn:
         self.numwant = min(self.numwant or DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS)

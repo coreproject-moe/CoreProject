@@ -5,8 +5,8 @@ from concurrent.futures import ProcessPoolExecutor
 
 import anyio
 import click
-from hypercorn.asyncio import serve
-from hypercorn.config import Config
+from hypercorn import Config
+from hypercorn.asyncio import serve  # type: ignore
 
 from coreproject_tracker.app import make_app
 from coreproject_tracker.enums import IP
@@ -31,13 +31,14 @@ def run_http_websocket_server(host: str, port: int) -> None:
 
 async def _main_async_wrapper(host: str, port: int) -> None:
     """Async context for server management"""
-    match await check_ip_type(host):
-        case IP.IPV6:
-            if sys.platform == "win32":
-                raise ValueError(
-                    "IPv6 not supported on Windows under AnyIO. "
-                    + "See:https://github.com/agronholm/anyio/discussions/872"
-                )
+    ip_type = await check_ip_type(host)
+    if ip_type == IP.IPV6:
+        if sys.platform == "win32":
+            raise ValueError(
+                "IPv6 not supported on Windows under AnyIO. "
+                + "See:https://github.com/agronholm/anyio/discussions/872"
+            )
+
     loop = asyncio.get_event_loop()
 
     with ProcessPoolExecutor() as executor:

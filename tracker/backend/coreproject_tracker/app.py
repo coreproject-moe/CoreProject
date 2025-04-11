@@ -18,7 +18,7 @@ def make_app() -> Quart:
     app = cors(app, allow_origin="*")
 
     if HAS_FLASK_ORJSON:
-        app.json = OrjsonProvider(app)
+        app.json = OrjsonProvider(app)  # type: ignore
 
     # Config
     app.config["REDIS_URI"] = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DATABASE}"
