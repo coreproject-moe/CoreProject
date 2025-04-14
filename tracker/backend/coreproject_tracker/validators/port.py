@@ -1,14 +1,13 @@
-from typing import Any, NoReturn
+from typing import Any, Optional
+
+from attrs import Attribute
 
 __all__ = ["validate_port"]
 
 
-def validate_port(ins: Any, attr: str, value: int | str | None) -> NoReturn:
+def validate_port(inst: Any, attr: Attribute[int], value: Optional[int]) -> None:
     if value:
-        if isinstance(value, str):
-            value = int(value)
-
         if value <= 0 and value >= 65535:
             raise ValueError(
-                f"`{attr}` of `{ins}` is {value} which is not in range(0, 65535)"
+                f"`{attr}` of `{inst}` is {value} which is not in range(0, 65535)"
             )

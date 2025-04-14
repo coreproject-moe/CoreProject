@@ -15,7 +15,7 @@ __all__ = ["WebsocketDatastructure"]
 
 @define
 class WebsocketDatastructure:
-    info_hash_raw: bytes = field(
+    info_hash_raw: bytes | None = field(
         converter=convert_binary_string_to_bytes,
         validator=[validate_20_length],
     )
