@@ -28,7 +28,7 @@
     "@types/webtorrent": "^0.110.0",
     "bencode": "^4.0.0",
     "eslint": "^9",
-    "eslint-config-next": "15.2.4",
+    "eslint-config-next": "15.3.0",
     "lucide-react": "^0.487.0",
     "next-themes": "^0.4.6",
     "prettier": "^3.5.3",
