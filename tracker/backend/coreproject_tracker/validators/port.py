@@ -5,7 +5,7 @@ from attrs import Attribute
 __all__ = ["validate_port"]
 
 
-def validate_port(inst: Any, attr: Attribute[int], value: Optional[int]) -> None:
+def validate_port(inst: Any, attr: Attribute, value: Optional[int]) -> None:
     if value:
         if value <= 0 and value >= 65535:
             raise ValueError(

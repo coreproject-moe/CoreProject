@@ -5,6 +5,6 @@ from attrs import Attribute
 from coreproject_tracker.functions import convert_str_to_ip_object
 
 
-def validate_ip(inst: Any, attr: Attribute[str], value: Optional[str]) -> None:
+def validate_ip(inst: Any, attr: Attribute, value: Optional[str]) -> None:
     if value and not convert_str_to_ip_object(value):
         raise ValueError(f"`{value}` is not a valid ip.")

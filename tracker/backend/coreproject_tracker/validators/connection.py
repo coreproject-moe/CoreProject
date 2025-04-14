@@ -9,7 +9,7 @@ __all__ = ["validate_connection_id"]
 
 
 def validate_connection_id(
-    inst: Any, attr: Attribute[bytes], value: Optional[bytes]
+    inst: Any, attr: Attribute, value: Optional[bytes]
 ) -> None:
     if value:
         connection_id_unpacked = from_uint64(value)

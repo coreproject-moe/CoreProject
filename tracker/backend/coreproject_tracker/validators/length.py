@@ -6,7 +6,7 @@ __all__ = ["validate_20_length"]
 
 
 def validate_20_length(
-    inst: Any, attr: Attribute[bytes], value: Optional[bytes]
+    inst: Any, attr: Attribute, value: Optional[bytes]
 ) -> None:
     if length := value:
         if len(length) != 20:
