@@ -17,7 +17,6 @@ from coreproject_tracker.functions import (
     get_all_hash_keys,
     get_n_random_items,
     hdel,
-    hex_str_to_bin_str,
     hget,
     hset,
 )
@@ -97,7 +96,7 @@ async def http_endpoint():
                 case IP.IPV4:
                     _peers.append(
                         {
-                            "peer id": await hex_str_to_bin_str(peer_data["peer_id"]),
+                            "peer id": peer_data["peer_id"],
                             "ip": peer_data["peer_ip"],
                             "port": peer_data["port"],
                         }
@@ -105,13 +104,13 @@ async def http_endpoint():
                 case IP.IPV6:
                     _peers6.append(
                         {
-                            "peer id": await hex_str_to_bin_str(peer_data["peer_id"]),
+                            "peer id": peer_data["peer_id"],
                             "ip": peer_data["peer_ip"],
                             "port": peer_data["port"],
                         }
                     )
 
-        except (ValueError, KeyError):
+        except KeyError:
             continue
 
         peers.extend(_peers)

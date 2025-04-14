@@ -1,6 +1,8 @@
-from typing import Any, NoReturn
+from typing import Any, Optional
+
+from attrs import Attribute
 
 
-def validate_peer_length(ins: Any, attr: str, value: str) -> NoReturn:
+def validate_peer_length(inst: Any, attr: Attribute[str], value: Optional[str]) -> None:
     if value and len(value) != 20:
-        raise ValueError(f"`{attr}` of `{ins}` is {value} which not 20 bytes")
+        raise ValueError(f"`{attr}` of `{inst}` is {value} which not 20 bytes")

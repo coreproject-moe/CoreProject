@@ -1,5 +1,3 @@
-from typing import NoReturn
-
 from attrs import define, field, validators
 
 from coreproject_tracker.constants import DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS
@@ -24,7 +22,7 @@ class HttpDatastructure:
         validator=[validate_20_length],
     )
     port: int = field(converter=int, validator=[validate_port])
-    left: str = field(converter=int)
+    left: int = field(converter=int)
     numwant: int = field(converter=int)
     peer_id: str = field(validator=validators.instance_of(str))
     peer_ip: str = field(converter=convert_ip, validator=[validate_ip])
@@ -34,7 +32,7 @@ class HttpDatastructure:
     # Derived
     info_hash: str = field(init=False)
 
-    def __attrs_post_init__(self) -> NoReturn:
+    def __attrs_post_init__(self) -> None:
         self.numwant = min(self.numwant or DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS)
 
         # Derived Data
