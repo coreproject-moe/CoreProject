@@ -3,14 +3,12 @@ import platform
 from http import HTTPStatus
 from importlib.metadata import version
 
-import attrs
-import bencodepy
+import bencodepy  # type: ignore
 from quart import Blueprint, json, jsonify, request
-from quart_redis import get_redis
+from quart_redis import get_redis  # type: ignore
 
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
 from coreproject_tracker.datastructures import HttpDatastructure
-from coreproject_tracker.datastructures.redis import RedisDatastructure
 from coreproject_tracker.enums import EVENT_NAMES, IP
 from coreproject_tracker.functions import (
     check_ip_type,
@@ -19,7 +17,6 @@ from coreproject_tracker.functions import (
     get_all_hash_keys,
     get_n_random_items,
     hdel,
-    hex_str_to_bin_str,
     hget,
     hset,
 )
@@ -56,18 +53,18 @@ async def http_endpoint():
         await hdel(data.info_hash, f"{data.peer_ip}:{data.port}")
         return ""
 
-    redis_stroage = RedisDatastructure(
-        type="http",
-        peer_id=data.peer_id,
-        peer_ip=data.peer_ip,
-        port=data.port,
-        left=data.left,
-    )
-
     await hset(
         data.info_hash,
         f"{data.peer_ip}:{data.port}",
-        json.dumps(attrs.asdict(redis_stroage, recurse=True)),
+        json.dumps(
+            {
+                "type": "http",
+                "peer_id": data.peer_id,
+                "peer_ip": data.peer_ip,
+                "port": data.port,
+                "left": data.left,
+            }
+        ),
     )
 
     peers = []
@@ -77,7 +74,7 @@ async def http_endpoint():
 
     redis_data = await hget(data.info_hash) or {}
     peers_list = await get_n_random_items(redis_data.values(), data.numwant)
-    print(peers_list)
+
     for peer in peers_list:
         # Local variables to make undo possible
         _peers = []
@@ -99,7 +96,7 @@ async def http_endpoint():
                 case IP.IPV4:
                     _peers.append(
                         {
-                            "peer id": await hex_str_to_bin_str(peer_data["peer_id"]),
+                            "peer id": peer_data["peer_id"],
                             "ip": peer_data["peer_ip"],
                             "port": peer_data["port"],
                         }
@@ -107,16 +104,13 @@ async def http_endpoint():
                 case IP.IPV6:
                     _peers6.append(
                         {
-                            "peer id": await hex_str_to_bin_str(peer_data["peer_id"]),
+                            "peer id": peer_data["peer_id"],
                             "ip": peer_data["peer_ip"],
                             "port": peer_data["port"],
                         }
                     )
-                case _:
-                    raise ValueError("Malformed data in redis")
 
-        except KeyError as e:
-            raise e
+        except KeyError:
             continue
 
         peers.extend(_peers)

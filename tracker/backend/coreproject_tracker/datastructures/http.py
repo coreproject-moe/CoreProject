@@ -1,5 +1,3 @@
-from typing import NoReturn
-
 from attrs import define, field, validators
 
 from coreproject_tracker.constants import DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS
@@ -32,9 +30,9 @@ class HttpDatastructure:
     event_name: EVENT_NAMES = field(default=None)
 
     # Derived
-    info_hash: bytes = field(init=False)
+    info_hash: str = field(init=False)
 
-    def __attrs_post_init__(self) -> NoReturn:
+    def __attrs_post_init__(self) -> None:
         self.numwant = min(self.numwant or DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS)
 
         # Derived Data
