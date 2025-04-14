@@ -6,7 +6,10 @@ from quart import Blueprint, copy_current_websocket_context, json, websocket
 from quart_redis import get_redis
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
-from coreproject_tracker.datastructures import WebsocketDatastructure
+from coreproject_tracker.datastructures import (
+    WebsocketDatastructure,
+    RedisDatastructure,
+)
 from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
     bytes_to_bin_str,
@@ -88,19 +91,15 @@ async def ws():
 
             response = {"action": data.action}
 
-            await hset(
-                data.info_hash,
-                data.addr,
-                json.dumps(
-                    {
-                        "type": "websocket",
-                        "peer_id": data.peer_id.hex(),
-                        "peer_ip": data.ip,
-                        "port": data.port,
-                        "left": data.left,
-                    }
-                ),
+            redis_storage = RedisDatastructure(
+                info_hash=data.info_hash,
+                type="websocket",
+                peer_id=data.peer_id,
+                peer_ip=data.ip,
+                port=data.port,
+                left=data.left,
             )
+            await redis_storage.save()
 
             seeders = 0
             leechers = 0
