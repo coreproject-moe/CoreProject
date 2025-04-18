@@ -30,9 +30,12 @@ class RedisDatastructure:
         Save the object to Redis.
         """
 
+        # CONSTANT
+        expire_time = 60 if self.type == "websocket" else PEER_TTL
+
         await hset(
             self.info_hash,
             f"{self.peer_ip}:{self.port}",
             json.dumps(asdict(self, recurse=True)),
-            expire_time=60 if self.type == "websocket" else PEER_TTL,
+            expire_time=expire_time,
         )
