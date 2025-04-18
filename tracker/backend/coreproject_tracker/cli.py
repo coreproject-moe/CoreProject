@@ -1,7 +1,9 @@
 import asyncio
+import functools
 import logging
 import sys
 from concurrent.futures import ProcessPoolExecutor
+from typing import Any
 
 import anyio
 import click
@@ -19,14 +21,28 @@ logging.basicConfig(
 )
 
 
+async def run_udp_server_async(host: str, port: int) -> None:
+    # There has to be one Web Server on same port as udp server to avoid redis re-initialization
+    async with anyio.create_task_group() as tg:
+        tg.start_soon(functools.partial(create_servable_app, host, port))
+        tg.start_soon(functools.partial(_run_udp_server, host, port))
+
+
+async def create_servable_app(host: str, port: int) -> Any:
+    """Create a servable app for the HTTP server"""
+    config = Config()
+    config.bind = [f"{host}:{port}"]
+    return await serve(make_app(), config)
+
+
 def run_udp_server(host: str, port: int) -> None:
-    anyio.run(_run_udp_server, host, port, backend="asyncio")
+    anyio.run(run_udp_server_async, host, port, backend="asyncio")
 
 
 def run_http_websocket_server(host: str, port: int) -> None:
     config = Config()
     config.bind = [f"{host}:{port}"]
-    anyio.run(serve, make_app(), config, backend="asyncio")
+    anyio.run(create_servable_app, host, port, backend="asyncio")
 
 
 async def _main_async_wrapper(host: str, port: int) -> None:
@@ -45,7 +61,7 @@ async def _main_async_wrapper(host: str, port: int) -> None:
         # Run one instance of UDP server in the main process
         loop.run_in_executor(executor, run_udp_server, host, port)
 
-        for _ in range(WORKERS_COUNT):
+        for _ in range(WORKERS_COUNT - 1):
             loop.run_in_executor(executor, run_http_websocket_server, host, port)
 
 
