@@ -4,7 +4,7 @@ import sys
 import anyio
 from quart import json
 
-from coreproject_tracker.datastructures import UdpDatastructure
+from coreproject_tracker.datastructures import RedisDatastructure, UdpDatastructure
 from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
     addrs_to_compact,
@@ -15,7 +15,6 @@ from coreproject_tracker.functions import (
     get_n_random_items,
     hdel,
     hget,
-    hset,
     to_uint32,
 )
 
@@ -109,19 +108,16 @@ async def run_udp_server(server_host: str, server_port: int):
                     "port": await from_uint16(packet[96:98]) or port,
                 }
                 data = UdpDatastructure(**_data)
-                await hset(
-                    data.info_hash.hex(),
-                    f"{data.ip}:{data.port}",
-                    json.dumps(
-                        {
-                            "type": "udp",
-                            "peer_id": data.peer_id,
-                            "peer_ip": data.ip,
-                            "port": data.port,
-                            "left": data.left,
-                        }
-                    ),
+                redis_stroage = RedisDatastructure(
+                    info_hash=data.info_hash.hex(),
+                    type="udp",
+                    peer_id=data.peer_id,
+                    peer_ip=data.ip,
+                    port=data.port,
+                    left=data.left,
                 )
+                await redis_stroage.save()
+
                 redis_data = await hget(data.info_hash.hex()) or {}
                 peers_list = await get_n_random_items(redis_data.values(), data.numwant)
 

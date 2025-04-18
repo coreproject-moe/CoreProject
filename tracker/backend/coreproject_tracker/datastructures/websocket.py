@@ -49,7 +49,8 @@ class WebsocketDatastructure:
 
     def __attrs_post_init__(self):
         # Derived Data
-        self.info_hash = self.info_hash_raw.hex()
+        if self.info_hash_raw:
+            self.info_hash = self.info_hash_raw.hex()
 
         if offers := self.offers:
             self.numwant = min(

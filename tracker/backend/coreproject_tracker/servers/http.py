@@ -8,7 +8,7 @@ from quart import Blueprint, json, jsonify, request
 from quart_redis import get_redis  # type: ignore
 
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
-from coreproject_tracker.datastructures import HttpDatastructure
+from coreproject_tracker.datastructures import HttpDatastructure, RedisDatastructure
 from coreproject_tracker.enums import EVENT_NAMES, IP
 from coreproject_tracker.functions import (
     check_ip_type,
@@ -18,7 +18,6 @@ from coreproject_tracker.functions import (
     get_n_random_items,
     hdel,
     hget,
-    hset,
 )
 
 http_blueprint = Blueprint("http", __name__)
@@ -53,19 +52,16 @@ async def http_endpoint():
         await hdel(data.info_hash, f"{data.peer_ip}:{data.port}")
         return ""
 
-    await hset(
-        data.info_hash,
-        f"{data.peer_ip}:{data.port}",
-        json.dumps(
-            {
-                "type": "http",
-                "peer_id": data.peer_id,
-                "peer_ip": data.peer_ip,
-                "port": data.port,
-                "left": data.left,
-            }
-        ),
+    redis_stroage = RedisDatastructure(
+        info_hash=data.info_hash,
+        type="http",
+        peer_id=data.peer_id,
+        peer_ip=data.peer_ip,
+        port=data.port,
+        left=data.left,
     )
+
+    await redis_stroage.save()
 
     peers = []
     peers6 = []
