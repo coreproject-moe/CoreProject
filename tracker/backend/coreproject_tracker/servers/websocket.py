@@ -7,8 +7,8 @@ from quart_redis import get_redis
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import (
-    WebsocketDatastructure,
     RedisDatastructure,
+    WebsocketDatastructure,
 )
 from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
@@ -17,7 +17,6 @@ from coreproject_tracker.functions import (
     hdel,
     hex_str_to_bin_str,
     hget,
-    hset,
 )
 
 ws_blueprint = Blueprint("websocket", __name__)
@@ -86,7 +85,7 @@ async def ws():
 
         while True:
             if data.event == EVENT_NAMES.STOP:
-                await websocket.close()
+                await websocket.close(1000, "Server is received `stop` event")
                 break
 
             response = {"action": data.action}
