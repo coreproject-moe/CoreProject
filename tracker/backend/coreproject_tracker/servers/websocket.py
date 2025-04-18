@@ -32,7 +32,7 @@ async def ws():
     @copy_current_websocket_context
     async def parse_websocket():
         initial_message = await websocket.receive_json()
-        client_ip, client_port = websocket.scope.get("client")
+        client_ip, client_port = websocket.scope.get("client")  # type: ignore
 
         _data = {
             "ip": client_ip,
@@ -151,6 +151,11 @@ async def ws():
                     }
                 )
                 await redis.publish(f"peer:{data.to_peer_id.hex()}", message)
+
+            # Log the event
+            logging.info(
+                f"Sent `Websocket` response for {data.info_hash}. Event: {data.event}."
+            )
 
             # Wait for next message from client
             data: WebsocketDatastructure = await parse_websocket()
