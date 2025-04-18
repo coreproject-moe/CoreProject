@@ -13,10 +13,10 @@
     <!-- magnet:?xt=urn:btih:59a42642ac8d10810fe62a039479aebc7a9c54c3&dn=2025-01-07_07-30-34.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337 -->
     <script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script>
     <script>
-      const trackerURLs = ["ws://localhost:5000"];
       const client = new WebTorrent();
 
       const status = document.getElementById("status");
+      // const trackerURLs = ["ws://localhost:5000"];
 
       window.addEventListener("message", (event) => {
         const message = JSON.parse(event.data.message);
@@ -26,7 +26,7 @@
 
         // SEED FILE
         if (message.type === "seeder") {
-          // const trackerURLs = message.data;
+          const trackerURLs = message.data;
 
           const file = new File(["Hello Torrent!"], "test-torrent.txt");
           client.seed(file, { announce: trackerURLs }, (torrent) => {
@@ -54,9 +54,8 @@
           const magnetURI = message.data;
           // const trackerURLs = ["ws://localhost:5000"];
 
-          // let trackerURLs = message.trackerURI;
-          // trackerURLs = JSON.parse(trackerURLs.replace(/'/g, '"'));
-          // console.log(typeof trackerURLs);
+          let trackerURLs = message.trackerURI;
+          console.log(typeof trackerURLs);
 
           console.log(`Magnet URI: ${magnetURI}`);
           console.log(`Tracker URLs: ${trackerURLs}`);
@@ -69,18 +68,26 @@
             return;
           }
 
-          const x = client.add(
-            magnetURI,
-            { announce: trackerURLs },
-            (torrent) => {
-              console.log("Downloading:", torrent.infoHash);
+          client.add(magnetURI, { announce: trackerURLs }, (torrent) => {
+            console.log("Downloading:", torrent.infoHash);
 
-              torrent.on("done", () => {
-                window.parent.postMessage("Download Complete", "*");
-              });
-            },
-          );
-          console.log(x);
+            torrent.on("done", () => {
+              console.log("Download Complete");
+              window.parent.postMessage(
+                { from: "client-iframe", message: "Download Complete" },
+                "*",
+              );
+            });
+          });
+          setInterval(() => {
+            console.log("=== Currently Added Torrents ===");
+            client.torrents.forEach((t) => {
+              console.log(
+                `- ${t.name} | Progress: ${(t.progress * 100).toFixed(1)}%`,
+              );
+            });
+          }, 5000);
+          // console.log(x);
         }
       });
     </script>

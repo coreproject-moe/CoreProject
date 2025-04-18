@@ -33,4 +33,5 @@ class RedisDatastructure:
             self.info_hash,
             f"{self.peer_ip}:{self.port}",
             json.dumps(asdict(self, recurse=True)),
+            expire_time=60,
         )

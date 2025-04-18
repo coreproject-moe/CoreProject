@@ -93,7 +93,7 @@ async def ws():
             redis_storage = RedisDatastructure(
                 info_hash=data.info_hash,
                 type="websocket",
-                peer_id=await bytes_to_bin_str(data.peer_id),
+                peer_id=data.peer_id.hex(),
                 peer_ip=data.ip,
                 port=data.port,
                 left=data.left,
