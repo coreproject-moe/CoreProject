@@ -97,7 +97,10 @@ function WebsocketCard() {
           <CardTitle>Websocket Check</CardTitle>
           <CardDescription>
             {loading ? (
-              <p>Checking if the tracker is responding with http</p>
+              <p>
+                Checking if the connection to the tracker is possible with
+                websocket
+              </p>
             ) : (
               !wsError && <p>There is no error</p>
             )}
