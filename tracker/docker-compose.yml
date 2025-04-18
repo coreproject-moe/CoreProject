@@ -49,18 +49,18 @@ services:
     depends_on:
       - backend
 
-  haproxy:
+  nginx:
     # build instead of pull
     build:
-      context: ./haproxy
+      context: ./nginx
       dockerfile: Dockerfile
 
-    container_name: haproxy
+    container_name: nginx
     restart: unless-stopped
 
     # mount the entire config directory into a named volume
     volumes:
-      - haproxy-config:/usr/local/etc/haproxy
+      - nginx-config:/etc/nginx
 
     ports:
       - "80:80"
@@ -72,4 +72,4 @@ services:
 
 volumes:
   redis_data:
-  haproxy-config:
+  nginx-config:

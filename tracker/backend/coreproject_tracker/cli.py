@@ -45,8 +45,8 @@ async def _main_async_wrapper(host: str, port: int) -> None:
         # Run one instance of UDP server in the main process
         loop.run_in_executor(executor, run_udp_server, host, port)
 
-        for _ in range(WORKERS_COUNT):
-            loop.run_in_executor(executor, run_http_websocket_server, host, port)
+        for i in range(WORKERS_COUNT):
+            loop.run_in_executor(executor, run_http_websocket_server, host, port+i)
 
 
 @click.command()

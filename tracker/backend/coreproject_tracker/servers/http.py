@@ -24,7 +24,7 @@ from coreproject_tracker.functions import (
 http_blueprint = Blueprint("http", __name__)
 
 
-@http_blueprint.route("/")
+@http_blueprint.route("/announce")
 async def http_endpoint():
     if len(request.args) == 0:
         return "🐟🐈 ⸜(｡˃ ᵕ ˂ )⸝♡"

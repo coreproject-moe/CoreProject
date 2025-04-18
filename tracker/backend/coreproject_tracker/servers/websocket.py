@@ -20,7 +20,7 @@ from coreproject_tracker.functions import (
 ws_blueprint = Blueprint("websocket", __name__)
 
 
-@ws_blueprint.websocket("/")
+@ws_blueprint.websocket("/announce")
 async def ws():
     """
     WebSocket endpoint that uses Redis Pub/Sub for message dissemination.
