@@ -67,6 +67,7 @@ async def ws():
                 ignore_subscribe_messages=True, timeout=1.0
             )
             if message and message["type"] == "message":
+                print("Sending message to websocket")
                 await websocket.send_json(json.loads(message["data"]))
 
     # Explicitly define the `WebsocketDatastructure` cause the decorator fucks with type
@@ -161,7 +162,7 @@ async def ws():
 
     except asyncio.CancelledError:
         logging.info(f"WebSocket disconneted for `{data.ip}:{data.port}`")
-
+        raise
     finally:
         # Cleanup
         if task:
@@ -172,5 +173,4 @@ async def ws():
         if pubsub:
             await pubsub.unsubscribe(f"peer:{data.peer_id.hex()}")
             await pubsub.close()
-
         await hdel(data.info_hash, data.addr)
