@@ -2,12 +2,10 @@ import time
 
 from quart_redis import get_redis
 
-from coreproject_tracker.constants import HASH_EXPIRE_TIME, PEER_TTL
+from coreproject_tracker.constants import HASH_EXPIRE_TIME
 
 
-async def hset(
-    hash_key: str, field: str, value: str, expire_time: int = PEER_TTL
-) -> None:
+async def hset(hash_key: str, field: str, value: str, expire_time: int) -> None:
     r = get_redis()
 
     expiration = int(time.time() + expire_time)

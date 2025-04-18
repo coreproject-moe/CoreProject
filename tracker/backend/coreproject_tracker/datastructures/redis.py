@@ -1,6 +1,7 @@
 from attrs import asdict, define, field, validators
 from quart import json
 
+from coreproject_tracker.constants import PEER_TTL
 from coreproject_tracker.converters import (
     convert_str_int_to_float,
 )
@@ -29,9 +30,12 @@ class RedisDatastructure:
         Save the object to Redis.
         """
 
+        # CONSTANT
+        expire_time = 60 if self.type == "websocket" else PEER_TTL
+
         await hset(
             self.info_hash,
             f"{self.peer_ip}:{self.port}",
             json.dumps(asdict(self, recurse=True)),
-            expire_time=60,
+            expire_time=expire_time,
         )
