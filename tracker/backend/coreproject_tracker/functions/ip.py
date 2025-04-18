@@ -51,6 +51,8 @@ def convert_ipv4_coded_ipv6_to_ipv4(ip: str) -> bool | str:
     if isinstance(ip_obj, ipaddress.IPv6Address) and ip_obj.ipv4_mapped:
         return str(ip_obj.ipv4_mapped)
 
+    raise ValueError("Cannot convert IP to IPv4: Not an IPv4-mapped IPv6 address")
+
 
 async def check_ip_type(ip: str) -> bool | IP:
     if not (ip_obj := convert_str_to_ip_object(ip)):
@@ -60,3 +62,4 @@ async def check_ip_type(ip: str) -> bool | IP:
         return IP.IPV4
     elif isinstance(ip_obj, ipaddress.IPv6Address):
         return IP.IPV6
+    raise ValueError("`check_ip_type`: Invalid IP address type")
