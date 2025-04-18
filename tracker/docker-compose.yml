@@ -59,8 +59,8 @@ services:
     restart: unless-stopped
 
     # mount the entire config directory into a named volume
-    volumes:
-      - nginx-config:/etc/nginx
+    # volumes:
+    #   - nginx-config:/etc/nginx
 
     ports:
       - "80:80"
@@ -72,4 +72,4 @@ services:
 
 volumes:
   redis_data:
-  nginx-config:
+  # nginx-config:

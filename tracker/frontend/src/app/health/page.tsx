@@ -12,7 +12,7 @@ import { WS_ENDPOINT } from "@/constants/url";
 import { isDataBencoded } from "@/functions/bencode";
 import { useHttpData } from "@/hooks/useHttpData";
 import { CheckCheck, HeartPulse, LoaderCircle, X } from "lucide-react";
-import { useState, useRef, useEffect, RefObject, use } from "react";
+import { useState, useRef, useEffect, RefObject } from "react";
 
 function HttpCard() {
   const {
@@ -40,7 +40,7 @@ function HttpCard() {
         <CardTitle>Http Tracker Check</CardTitle>
         <CardDescription>
           {httpIsLoading ? (
-            <p>Checking if the tracker is responding with http</p>
+            <p>Checking if the tracker is responding w  ith http</p>
           ) : (
             !httpIsError && <p>There is no error</p>
           )}

@@ -12,16 +12,14 @@ const nextConfig: NextConfig = {
 
     return config;
   },
-  experimental: {
-    turbo: {
+  turbopack:{
       rules: {
         "*.svg": {
           loaders: ["@svgr/webpack"],
           as: "*.js",
         },
       },
-    },
-  },
+  }
 };
 
 export default nextConfig;

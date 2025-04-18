@@ -25,8 +25,10 @@ http_blueprint = Blueprint("http", __name__)
 
 @http_blueprint.route("/announce")
 async def http_endpoint():
+    ip = request.headers.get('X-Real-IP', request.remote_addr)
+
     if len(request.args) == 0:
-        return "🐟🐈 ⸜(｡˃ ᵕ ˂ )⸝♡"
+        return f"🐟🐈 ⸜(｡˃ ᵕ ˂ )⸝♡ {ip}"
 
     try:
         _data = {
@@ -34,7 +36,7 @@ async def http_endpoint():
             "port": request.args.get("port"),
             "left": request.args.get("left"),
             "numwant": request.args.get("numwant"),
-            "peer_ip": request.remote_addr,
+            "peer_ip": ip,
             "peer_id": request.args.get("peer_id"),
         }
         if request.args.get("event"):
