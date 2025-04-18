@@ -43,15 +43,13 @@ async def addrs_to_compact(addrs: str | list[str]) -> bytes:
     return bytes(compact)
 
 
-def convert_ipv4_coded_ipv6_to_ipv4(ip: str) -> bool | str:
+def convert_ipv4_coded_ipv6_to_ipv4(ip: str) -> bool | str | None:
     if not (ip_obj := convert_str_to_ip_object(ip)):
         return False
 
     # Check if it's an IPv6 address and IPv4-mapped
     if isinstance(ip_obj, ipaddress.IPv6Address) and ip_obj.ipv4_mapped:
         return str(ip_obj.ipv4_mapped)
-
-    raise ValueError("Cannot convert IP to IPv4: Not an IPv4-mapped IPv6 address")
 
 
 async def check_ip_type(ip: str) -> bool | IP:

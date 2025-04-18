@@ -116,6 +116,8 @@ async def run_udp_server(server_host: str, server_port: int):
                     port=data.port,
                     left=data.left,
                 )
+                print(redis_stroage)
+
                 await redis_stroage.save()
 
                 redis_data = await hget(data.info_hash.hex()) or {}

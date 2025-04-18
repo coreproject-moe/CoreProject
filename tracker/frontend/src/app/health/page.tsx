@@ -143,7 +143,14 @@ function WebsocketTrackerCard() {
 
   // Post a message to `seeder-iframe`
   useEffect(() => {
-    if (seederIframeLoaded) {
+    if (
+      seederIframeLoaded &&
+      seederIframeRef.current &&
+      seederIframeRef.current.contentWindow
+    ) {
+      // @ts-expect-error: There is console at runtime
+      seederIframeRef.current.contentWindow.console!.log = function () {};
+
       const msgToSeederIframe: IframeMessage = {
         from: "parent",
         message: JSON.stringify({
@@ -151,10 +158,7 @@ function WebsocketTrackerCard() {
           data: TRACKER_URI,
         }),
       };
-      seederIframeRef.current?.contentWindow?.postMessage(
-        msgToSeederIframe,
-        "*",
-      );
+      seederIframeRef.current.contentWindow.postMessage(msgToSeederIframe, "*");
 
       setClientMessageSent(true);
     }
