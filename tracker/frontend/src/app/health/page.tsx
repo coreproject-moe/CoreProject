@@ -193,11 +193,12 @@ function WebsocketTrackerCard() {
               trackerURI: WS_ENDPOINT,
             }),
           };
-
-          clientIframeRef.current?.contentWindow?.postMessage(
-            msgToClientIframe,
-            "*",
-          );
+          setTimeout(() => {
+            clientIframeRef.current?.contentWindow?.postMessage(
+              msgToClientIframe,
+              "*",
+            );
+          }, 5000);
         }
       } else if (data.from === "client-iframe") {
         if (data.message === "Download Complete") {

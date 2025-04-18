@@ -67,7 +67,6 @@ async def ws():
                 ignore_subscribe_messages=True, timeout=1.0
             )
             if message and message["type"] == "message":
-                print("Sending message to websocket")
                 await websocket.send_json(json.loads(message["data"]))
 
     # Explicitly define the `WebsocketDatastructure` cause the decorator fucks with type
