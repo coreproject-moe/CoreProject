@@ -130,48 +130,63 @@ function WebsocketCard() {
   );
 }
 function WebsocketTrackerCard() {
+  const TRACKER_URI = "['ws://localhost:5000']";
+
   const seederIframeRef = useRef<HTMLIFrameElement>(null);
   const clientIframeRef = useRef<HTMLIFrameElement>(null);
 
   const [websocketClientWorking, setWebsocketClientWorking] = useState(false);
   const [clientMessageSent, setClientMessageSent] = useState(false);
-  const [magnetURI, setMagnetURI] = useState<string | null>(null);
+
+  // Iframe states
+  const [seederIframeLoaded, setSeederIframeLoaded] = useState(false);
 
   // Post a message to `seeder-iframe`
   useEffect(() => {
-    const msgToSeederIframe: IframeMessage = {
-      from: "parent",
-      type: "seeder",
-      message: "['ws://localhost:8080']",
-    };
-    seederIframeRef.current?.contentWindow?.postMessage(msgToSeederIframe, "*");
+    if (seederIframeLoaded) {
+      const msgToSeederIframe: IframeMessage = {
+        from: "parent",
+        message: JSON.stringify({
+          type: "seeder",
+          data: TRACKER_URI,
+        }),
+      };
+      seederIframeRef.current?.contentWindow?.postMessage(
+        msgToSeederIframe,
+        "*",
+      );
 
-    setClientMessageSent(true);
-  }, []);
-
-  useEffect(() => {
-    if (!magnetURI) return;
-
-    const msgToClientIframe: IframeMessage = {
-      type: "client",
-      from: "parent",
-      message: magnetURI,
-    };
-
-    console.log("Sending message to client from seeder");
-    clientIframeRef.current?.contentWindow?.postMessage(msgToClientIframe, "*");
-  }, [magnetURI, seederIframeRef]);
+      setClientMessageSent(true);
+    }
+  }, [seederIframeLoaded]);
 
   // Receive message
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const data = event.data as IframeMessage;
-      if (!data?.from || !data.message) return;
+      if (!data.message) return;
+      console.log("REACT: Got message from iframe", data);
 
       if (data.from === "seeder-iframe") {
         console.log("Got message from seeder");
         // Check if message here is valid
-        setMagnetURI(data.message);
+        if (typeof data.message === "string") {
+          const magnetURI = data.message;
+          const msgToClientIframe: IframeMessage = {
+            from: "parent",
+            message: JSON.stringify({
+              type: "client",
+              data: magnetURI,
+              trackerURI: TRACKER_URI,
+            }),
+          };
+
+          console.log("Sending message to client from seeder");
+          clientIframeRef.current?.contentWindow?.postMessage(
+            msgToClientIframe,
+            "*",
+          );
+        }
       } else if (data.from === "client-iframe") {
         if (data.message === "Download Complete") {
           setWebsocketClientWorking(true);
@@ -194,6 +209,9 @@ function WebsocketTrackerCard() {
       <div>
         <iframe
           ref={seederIframeRef}
+          onLoad={() => {
+            setSeederIframeLoaded(true);
+          }}
           src="/torrent-tester.html"
           name="seeder-iframe"
           width="400"
