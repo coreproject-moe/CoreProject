@@ -132,7 +132,7 @@ async def ws():
                                 "action": "announce",
                                 "offer": offer["offer"],
                                 "offer_id": offer["offer_id"],
-                                "peer_id": data.peer_id.decode("latin-1"),
+                                "peer_id": await bytes_to_bin_str(data.peer_id),
                                 "info_hash": await hex_str_to_bin_str(data.info_hash),
                             }
                         )
@@ -145,7 +145,7 @@ async def ws():
                         "action": "announce",
                         "answer": data.answer,
                         "offer_id": data.offer_id,
-                        "peer_id": data.peer_id.decode("latin-1"),
+                        "peer_id": await bytes_to_bin_str(data.peer_id),
                         "info_hash": await hex_str_to_bin_str(data.info_hash),
                     }
                 )
