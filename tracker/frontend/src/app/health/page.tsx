@@ -136,7 +136,7 @@ function WebsocketCard() {
 }
 
 function WebsocketTrackerCard() {
-  const SHOW_CONSOLE = true;
+  const SHOW_CONSOLE = false;
 
   const seederIframeRef = useRef<HTMLIFrameElement>(null);
   const clientIframeRef = useRef<HTMLIFrameElement>(null);
@@ -193,11 +193,12 @@ function WebsocketTrackerCard() {
               trackerURI: WS_ENDPOINT,
             }),
           };
-
-          clientIframeRef.current?.contentWindow?.postMessage(
-            msgToClientIframe,
-            "*",
-          );
+          setTimeout(() => {
+            clientIframeRef.current?.contentWindow?.postMessage(
+              msgToClientIframe,
+              "*",
+            );
+          }, 5000);
         }
       } else if (data.from === "client-iframe") {
         if (data.message === "Download Complete") {
@@ -214,35 +215,37 @@ function WebsocketTrackerCard() {
   return (
     <>
       {/* Iframes  */}
-      <div className="hidden">
-        <iframe
-          ref={seederIframeRef}
-          onLoad={() => {
-            setSeederIframeLoaded(true);
-            if (!SHOW_CONSOLE) {
-              disableConsole(seederIframeRef);
-            }
-          }}
-          src="/torrent-tester.html"
-          name="seeder-iframe"
-          width="400"
-          height="200"
-          title="Seeder Iframe"
-        />
-        <iframe
-          ref={clientIframeRef}
-          onLoad={() => {
-            if (!SHOW_CONSOLE) {
-              disableConsole(clientIframeRef);
-            }
-          }}
-          src="/torrent-tester.html"
-          name="client-iframe"
-          width="400"
-          height="200"
-          title="Client Iframe"
-        />
-      </div>
+      {websocketClientChecking && (
+        <div className="hidden">
+          <iframe
+            ref={seederIframeRef}
+            onLoad={() => {
+              setSeederIframeLoaded(true);
+              if (!SHOW_CONSOLE) {
+                disableConsole(seederIframeRef);
+              }
+            }}
+            src="/torrent-tester.html"
+            name="seeder-iframe"
+            width="400"
+            height="200"
+            title="Seeder Iframe"
+          />
+          <iframe
+            ref={clientIframeRef}
+            onLoad={() => {
+              if (!SHOW_CONSOLE) {
+                disableConsole(clientIframeRef);
+              }
+            }}
+            src="/torrent-tester.html"
+            name="client-iframe"
+            width="400"
+            height="200"
+            title="Client Iframe"
+          />
+        </div>
+      )}
       {/* Show the cards  */}
       <Card className="md:h-[22vh] lg:h-[17vh]">
         <CardHeader>

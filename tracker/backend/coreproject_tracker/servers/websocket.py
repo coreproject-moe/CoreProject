@@ -161,7 +161,7 @@ async def ws():
 
     except asyncio.CancelledError:
         logging.info(f"WebSocket disconneted for `{data.ip}:{data.port}`")
-
+        raise
     finally:
         # Cleanup
         if task:
@@ -172,5 +172,4 @@ async def ws():
         if pubsub:
             await pubsub.unsubscribe(f"peer:{data.peer_id.hex()}")
             await pubsub.close()
-
         await hdel(data.info_hash, data.addr)
