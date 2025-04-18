@@ -49,6 +49,27 @@ services:
     depends_on:
       - backend
 
+  haproxy:
+    # build instead of pull
+    build:
+      context: ./haproxy
+      dockerfile: Dockerfile
+
+    container_name: haproxy
+    restart: unless-stopped
+
+    # mount the entire config directory into a named volume
+    volumes:
+      - haproxy-config:/usr/local/etc/haproxy
+
+    ports:
+      - "80:80"
+      - "5000:5000/udp"
+
+    depends_on:
+      - backend
+      - frontend
 
 volumes:
   redis_data:
+  haproxy-config:
