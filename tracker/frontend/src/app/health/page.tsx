@@ -136,7 +136,7 @@ function WebsocketCard() {
 }
 
 function WebsocketTrackerCard() {
-  const SHOW_CONSOLE = false;
+  const SHOW_CONSOLE = true;
 
   const seederIframeRef = useRef<HTMLIFrameElement>(null);
   const clientIframeRef = useRef<HTMLIFrameElement>(null);
