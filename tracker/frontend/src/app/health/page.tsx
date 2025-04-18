@@ -141,10 +141,10 @@ function WebsocketTrackerCard() {
   useEffect(() => {
     const msgToSeederIframe: IframeMessage = {
       from: "parent",
-      message: "seed",
+      type: "seeder",
+      message: "['ws://localhost:8080']",
     };
     seederIframeRef.current?.contentWindow?.postMessage(msgToSeederIframe, "*");
-    console.log("Sending message to seeder");
 
     setClientMessageSent(true);
   }, []);
@@ -153,6 +153,7 @@ function WebsocketTrackerCard() {
     if (!magnetURI) return;
 
     const msgToClientIframe: IframeMessage = {
+      type: "client",
       from: "parent",
       message: magnetURI,
     };
@@ -190,7 +191,7 @@ function WebsocketTrackerCard() {
   return (
     <>
       {/* Iframes  */}
-      <div className="hidden">
+      <div>
         <iframe
           ref={seederIframeRef}
           src="/torrent-tester.html"
