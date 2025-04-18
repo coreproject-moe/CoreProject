@@ -60,7 +60,6 @@ async def http_endpoint():
         port=data.port,
         left=data.left,
     )
-    print(redis_stroage)
 
     await redis_stroage.save()
 

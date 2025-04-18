@@ -73,62 +73,63 @@ function HttpCard() {
   );
 }
 
-function WebsocketCard() {
-  const ws = new WebSocket(WS_ENDPOINT);
+// function WebsocketCard() {
+//   const ws = new WebSocket(WS_ENDPOINT);
 
-  const [loading, setLoading] = useState(true);
-  const [wsLoaded, setWsLoaded] = useState(false);
-  const [wsError, setWsError] = useState<Error>();
+//   const [loading, setLoading] = useState(true);
+//   const [wsLoaded, setWsLoaded] = useState(false);
+//   const [wsError, setWsError] = useState<Error>();
 
-  ws.onopen = () => {
-    setWsLoaded(true);
-    setLoading(false);
-  };
+//   ws.onopen = () => {
+//     setWsLoaded(true);
+//     setLoading(false);
+//   };
 
-  ws.onerror = () => {
-    setLoading(false);
-    setWsError(new Error("WebSocket connection error"));
-  };
+//   ws.onerror = () => {
+//     setLoading(false);
+//     setWsError(new Error("WebSocket connection error"));
+//   };
 
-  return (
-    <>
-      <Card className="md:h-[22vh] lg:h-[17vh]">
-        <CardHeader>
-          <CardTitle>Websocket Check</CardTitle>
-          <CardDescription>
-            {loading ? (
-              <p>Checking if the tracker is responding with http</p>
-            ) : (
-              !wsError && <p>There is no error</p>
-            )}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex h-full flex-col items-center justify-center gap-2">
-            {loading ? (
-              <>
-                <LoaderCircle className="animate-spin" />
-                Checking
-              </>
-            ) : wsError ? (
-              <>
-                <X className="text-red-500" />
-                <p className="text-red-300"> {wsError.toString()}</p>
-              </>
-            ) : (
-              wsLoaded && (
-                <>
-                  <CheckCheck className="text-green-400" />
-                  <p className="text-primary/90">Tracker is working</p>
-                </>
-              )
-            )}
-          </div>
-        </CardContent>
-      </Card>
-    </>
-  );
-}
+//   return (
+//     <>
+//       <Card className="md:h-[22vh] lg:h-[17vh]">
+//         <CardHeader>
+//           <CardTitle>Websocket Check</CardTitle>
+//           <CardDescription>
+//             {loading ? (
+//               <p>Checking if the tracker is responding with http</p>
+//             ) : (
+//               !wsError && <p>There is no error</p>
+//             )}
+//           </CardDescription>
+//         </CardHeader>
+//         <CardContent>
+//           <div className="flex h-full flex-col items-center justify-center gap-2">
+//             {loading ? (
+//               <>
+//                 <LoaderCircle className="animate-spin" />
+//                 Checking
+//               </>
+//             ) : wsError ? (
+//               <>
+//                 <X className="text-red-500" />
+//                 <p className="text-red-300"> {wsError.toString()}</p>
+//               </>
+//             ) : (
+//               wsLoaded && (
+//                 <>
+//                   <CheckCheck className="text-green-400" />
+//                   <p className="text-primary/90">Tracker is working</p>
+//                 </>
+//               )
+//             )}
+//           </div>
+//         </CardContent>
+//       </Card>
+//     </>
+//   );
+// }
+
 function WebsocketTrackerCard() {
   const TRACKER_URI = "['ws://localhost:5000']";
 
@@ -259,7 +260,7 @@ export default function Page() {
 
       <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
         <HttpCard />
-        <WebsocketCard />
+        {/* <WebsocketCard /> */}
         <WebsocketTrackerCard />
       </div>
     </div>
