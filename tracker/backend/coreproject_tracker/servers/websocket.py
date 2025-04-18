@@ -7,8 +7,8 @@ from quart_redis import get_redis
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import (
-    WebsocketDatastructure,
     RedisDatastructure,
+    WebsocketDatastructure,
 )
 from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
@@ -17,7 +17,6 @@ from coreproject_tracker.functions import (
     hdel,
     hex_str_to_bin_str,
     hget,
-    hset,
 )
 
 ws_blueprint = Blueprint("websocket", __name__)
@@ -32,7 +31,7 @@ async def ws():
     @copy_current_websocket_context
     async def parse_websocket():
         initial_message = await websocket.receive_json()
-        client_ip, client_port = websocket.scope.get("client")
+        client_ip, client_port = websocket.scope.get("client")  # type: ignore
 
         _data = {
             "ip": client_ip,
@@ -86,7 +85,7 @@ async def ws():
 
         while True:
             if data.event == EVENT_NAMES.STOP:
-                await websocket.close()
+                await websocket.close(1000, "Server is received `stop` event")
                 break
 
             response = {"action": data.action}
@@ -94,7 +93,7 @@ async def ws():
             redis_storage = RedisDatastructure(
                 info_hash=data.info_hash,
                 type="websocket",
-                peer_id=data.peer_id,
+                peer_id=data.peer_id.hex(),
                 peer_ip=data.ip,
                 port=data.port,
                 left=data.left,
@@ -151,6 +150,11 @@ async def ws():
                     }
                 )
                 await redis.publish(f"peer:{data.to_peer_id.hex()}", message)
+
+            # Log the event
+            logging.info(
+                f"Sent `Websocket` response for {data.info_hash}. Event: {data.event}."
+            )
 
             # Wait for next message from client
             data: WebsocketDatastructure = await parse_websocket()
