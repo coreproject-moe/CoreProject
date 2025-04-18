@@ -20,7 +20,7 @@ class WebsocketDatastructure:
         validator=[validate_20_length],
     )
     action: str = field(validator=[validators.instance_of(str)])
-    peer_id: bytes = field(
+    peer_id: bytes | None = field(
         converter=convert_binary_string_to_bytes,
         validator=[validate_peer_length],
     )
@@ -36,8 +36,8 @@ class WebsocketDatastructure:
     # Optional
     event: EVENT_NAMES = field(default=None)
     uploaded: int = field(default=None)
-    answer = field(default=None)
-    to_peer_id: bytes = field(
+    answer: str = field(default=None)
+    to_peer_id: bytes | None = field(
         default=None,
         converter=convert_binary_string_to_bytes,
         validator=[validate_peer_length],
@@ -49,7 +49,8 @@ class WebsocketDatastructure:
 
     def __attrs_post_init__(self):
         # Derived Data
-        self.info_hash = self.info_hash_raw.hex()
+        if self.info_hash_raw:
+            self.info_hash = self.info_hash_raw.hex()
 
         if offers := self.offers:
             self.numwant = min(

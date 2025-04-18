@@ -43,7 +43,7 @@ async def addrs_to_compact(addrs: str | list[str]) -> bytes:
     return bytes(compact)
 
 
-def convert_ipv4_coded_ipv6_to_ipv4(ip: str) -> bool | str:
+def convert_ipv4_coded_ipv6_to_ipv4(ip: str) -> bool | str | None:
     if not (ip_obj := convert_str_to_ip_object(ip)):
         return False
 
@@ -60,3 +60,4 @@ async def check_ip_type(ip: str) -> bool | IP:
         return IP.IPV4
     elif isinstance(ip_obj, ipaddress.IPv6Address):
         return IP.IPV6
+    raise ValueError("`check_ip_type`: Invalid IP address type")
