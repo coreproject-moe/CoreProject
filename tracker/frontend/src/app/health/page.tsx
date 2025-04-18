@@ -12,7 +12,7 @@ import { WS_ENDPOINT } from "@/constants/url";
 import { isDataBencoded } from "@/functions/bencode";
 import { useHttpData } from "@/hooks/useHttpData";
 import { CheckCheck, HeartPulse, LoaderCircle, X } from "lucide-react";
-import { useState, useRef, useEffect, RefObject } from "react";
+import { useState, useRef, useEffect, RefObject, use } from "react";
 
 function HttpCard() {
   const {
@@ -37,7 +37,7 @@ function HttpCard() {
   return (
     <Card className="md:h-[22vh] lg:h-[17vh]">
       <CardHeader>
-        <CardTitle>Http Check</CardTitle>
+        <CardTitle>Http Tracker Check</CardTitle>
         <CardDescription>
           {httpIsLoading ? (
             <p>Checking if the tracker is responding with http</p>
@@ -119,7 +119,9 @@ function WebsocketCard() {
               wsLoaded && (
                 <>
                   <CheckCheck className="text-green-400" />
-                  <p className="text-primary/90">Tracker is working</p>
+                  <p className="text-primary/90 whitespace-nowrap">
+                    Websocket Connection Established
+                  </p>
                 </>
               )
             )}
@@ -136,7 +138,11 @@ function WebsocketTrackerCard() {
   const seederIframeRef = useRef<HTMLIFrameElement>(null);
   const clientIframeRef = useRef<HTMLIFrameElement>(null);
 
+  // Main state
   const [websocketClientWorking, setWebsocketClientWorking] = useState(false);
+
+  // Checking state
+  const [websocketClientChecking, setWebsocketClientChecking] = useState(true);
 
   // Iframe states
   const [seederIframeLoaded, setSeederIframeLoaded] = useState(false);
@@ -193,6 +199,7 @@ function WebsocketTrackerCard() {
       } else if (data.from === "client-iframe") {
         if (data.message === "Download Complete") {
           setWebsocketClientWorking(true);
+          setWebsocketClientChecking(false);
         }
       }
     };
@@ -236,8 +243,14 @@ function WebsocketTrackerCard() {
       {/* Show the cards  */}
       <Card className="md:h-[22vh] lg:h-[17vh]">
         <CardHeader>
-          <CardTitle>Http Check</CardTitle>
-          <CardDescription>pass1</CardDescription>
+          <CardTitle>Websocket Tracker Check</CardTitle>
+          <CardDescription>
+            {websocketClientChecking ? (
+              <p>Checking if the tracker is responding with websocket</p>
+            ) : (
+              websocketClientWorking && <p>There is no error</p>
+            )}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex h-full flex-col items-center justify-center gap-2">
