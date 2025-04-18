@@ -1,7 +1,7 @@
 from attrs import asdict, define, field, validators
 from quart import json
 
-from coreproject_tracker.constants import PEER_TTL
+from coreproject_tracker.constants import PEER_TTL, WEBSOCKET_PEER_TTL
 from coreproject_tracker.converters import (
     convert_str_int_to_float,
 )
@@ -31,7 +31,13 @@ class RedisDatastructure:
         """
 
         # CONSTANT
-        expire_time = 60 if self.type == "websocket" else PEER_TTL
+        match self.type:
+            case "websocket":
+                expire_time = WEBSOCKET_PEER_TTL
+            case "http" | "udp":
+                expire_time = PEER_TTL
+            case _:
+                raise ValueError(f"{self.type} is not a valid type")
 
         await hset(
             self.info_hash,
