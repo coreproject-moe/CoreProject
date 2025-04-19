@@ -9,7 +9,7 @@ services:
       - redis_data:/data
     command: redis-server --port 16379
     healthcheck:
-      test: ["CMD", "redis-cli", "-p", "16379", "ping"]
+      test: [ "CMD", "redis-cli", "-p", "16379", "ping" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -31,7 +31,6 @@ services:
       WORKERS_COUNT: 4
     ports:
       - "5000:5000"
-
 
   frontend:
     build:
@@ -58,10 +57,6 @@ services:
     container_name: nginx
     restart: unless-stopped
 
-    # mount the entire config directory into a named volume
-    # volumes:
-    #   - nginx-config:/etc/nginx
-
     ports:
       - "80:80"
       - "5000:5000/udp"
@@ -72,4 +67,3 @@ services:
 
 volumes:
   redis_data:
-  # nginx-config:

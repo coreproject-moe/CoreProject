@@ -25,7 +25,7 @@ http_blueprint = Blueprint("http", __name__)
 
 @http_blueprint.route("/announce")
 async def http_endpoint():
-    ip = request.headers.get('X-Real-IP', request.remote_addr)
+    ip = request.headers.get("X-Real-IP", request.remote_addr)
 
     if len(request.args) == 0:
         return f"🐟🐈 ⸜(｡˃ ᵕ ˂ )⸝♡ {ip}"
