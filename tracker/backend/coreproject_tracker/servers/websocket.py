@@ -22,7 +22,7 @@ from coreproject_tracker.functions import (
 ws_blueprint = Blueprint("websocket", __name__)
 
 
-@ws_blueprint.websocket("/")
+@ws_blueprint.websocket("/announce")
 async def ws():
     """
     WebSocket endpoint that uses Redis Pub/Sub for message dissemination.
@@ -31,7 +31,10 @@ async def ws():
     @copy_current_websocket_context
     async def parse_websocket():
         initial_message = await websocket.receive_json()
-        client_ip, client_port = websocket.scope.get("client")  # type: ignore
+        scoped_client_ip, client_port = websocket.scope.get("client")  # type: ignore
+
+        # Change the client IP to the one from the headers if available
+        client_ip = websocket.headers.get("X-Real-IP", scoped_client_ip)
 
         _data = {
             "ip": client_ip,

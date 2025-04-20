@@ -13,11 +13,13 @@ WORKDIR /app
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --frozen --no-install-project --no-dev
-ADD . /app
+    uv sync --frozen --no-install-project --no-default-groups
+COPY . /app
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --frozen --no-dev
-
+    uv sync --frozen --no-default-groups
+    
+# Remove the .egg-info file that are created from setuptools
+RUN find /app -type d -name '*.egg-info' -exec rm -rf {} +
 
 # Then, use a final image without uv
 FROM python:3.13-alpine

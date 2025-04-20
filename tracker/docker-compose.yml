@@ -9,7 +9,7 @@ services:
       - redis_data:/data
     command: redis-server --port 16379
     healthcheck:
-      test: ["CMD", "redis-cli", "-p", "16379", "ping"]
+      test: [ "CMD", "redis-cli", "-p", "16379", "ping" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -32,7 +32,6 @@ services:
     ports:
       - "5000:5000"
 
-
   frontend:
     build:
       context: ./frontend
@@ -49,6 +48,22 @@ services:
     depends_on:
       - backend
 
+  nginx:
+    # build instead of pull
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+
+    container_name: nginx
+    restart: unless-stopped
+
+    ports:
+      - "80:80"
+      - "5000:5000/udp"
+
+    depends_on:
+      - backend
+      - frontend
 
 volumes:
   redis_data:

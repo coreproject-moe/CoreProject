@@ -31,7 +31,7 @@ async def run_udp_server_async(host: str, port: int) -> None:
 async def create_servable_app(host: str, port: int) -> Any:
     """Create a servable app for the HTTP server"""
     config = Config()
-    config.bind = [f"{host}:{port}"]
+    config.bind = config.insecure_bind = [f"{host}:{port}"]
     return await serve(make_app(), config)
 
 
