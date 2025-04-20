@@ -1,24 +1,41 @@
-*.egg-info
-__pycache__
-*.pyc
-*.pyo
-*.pyd
-.Python
-env
-.venv
-ENV
-env.bak
-venv.bak
-pip-log.txt
-pip-delete-this-directory.txt
-.tox
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.log
-.git
+**/*.egg-info/
+tests/
+
+
+# Exclude version control and IDE files
+.git/
 .gitignore
-tests
+.idea/
+.vscode/
+
+# Ignore local virtual environments
+.venv/
+venv/
+env/
+
+# Exclude build, cache, and test artifacts
+__pycache__/
+**.py[cod]
+.pytest_cache/
+.coverage
+dist/
+build/
+
+# Logs and local environment files
+*.log
+logs/
+.env
+.env.local
+
+# Documentation and project files
+docs/
+README.md
+LICENSE
+
+# Exclude Docker-related files to prevent them from being copied into the image
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# OS-specific files
+.DS_Store
