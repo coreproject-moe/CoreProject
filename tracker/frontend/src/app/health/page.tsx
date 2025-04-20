@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { IframeMessage } from "@/types/iframe";
-import { WS_ENDPOINT } from "@/constants/url";
+import { WS_TRACKER_ENDPOINT } from "@/constants/url";
 import { isDataBencoded } from "@/functions/bencode";
 import { useHttpData } from "@/hooks/useHttpData";
 import { CheckCheck, HeartPulse, LoaderCircle, X } from "lucide-react";
@@ -17,6 +17,7 @@ import { useState, useRef, useEffect, RefObject } from "react";
 function HttpCard() {
   const {
     data: httpData,
+    status: httpStatus,
     isLoading: httpIsLoading,
     isError: httpIsError,
   } = useHttpData();
@@ -33,6 +34,11 @@ function HttpCard() {
     }
   }, [httpIsLoading, httpData, httpIsError]);
   */
+  useEffect(() => {
+    console.log(httpIsLoading);
+    console.log(httpData);
+    console.log(httpIsError);
+  }, [httpIsError, httpData, httpIsLoading]);
 
   return (
     <Card className="md:h-[22vh] lg:h-[17vh]">
@@ -40,9 +46,11 @@ function HttpCard() {
         <CardTitle>Http Tracker Check</CardTitle>
         <CardDescription>
           {httpIsLoading ? (
-            <p>Checking if the tracker is responding w  ith http</p>
+            <p>Checking if the tracker is responding w ith http</p>
+          ) : !httpIsError && httpStatus === 200 ? (
+            <p>There is no error</p>
           ) : (
-            !httpIsError && <p>There is no error</p>
+            <p>Failed to communicate with the tracker.</p>
           )}
         </CardDescription>
       </CardHeader>
@@ -53,10 +61,15 @@ function HttpCard() {
               <LoaderCircle className="animate-spin" />
               Checking
             </>
-          ) : httpIsError ? (
+          ) : httpIsError || httpStatus !== 200 ? (
             <>
               <X className="text-red-500" />
-              <p className="text-red-300"> {httpIsError.toString()}</p>
+              <p className="text-red-300">
+                {" "}
+                {(
+                  httpIsError ?? new Error(`Http Status code is ${httpStatus}`)
+                ).toString()}
+              </p>
             </>
           ) : (
             httpData &&
@@ -74,7 +87,7 @@ function HttpCard() {
 }
 
 function WebsocketCard() {
-  const ws = new WebSocket(WS_ENDPOINT);
+  const ws = new WebSocket(WS_TRACKER_ENDPOINT);
 
   const [loading, setLoading] = useState(true);
   const [wsLoaded, setWsLoaded] = useState(false);
@@ -168,7 +181,7 @@ function WebsocketTrackerCard() {
         from: "parent",
         message: JSON.stringify({
           type: "seeder",
-          data: WS_ENDPOINT,
+          data: WS_TRACKER_ENDPOINT,
         }),
       };
       seederIframeRef.current.contentWindow.postMessage(msgToSeederIframe, "*");
@@ -190,7 +203,7 @@ function WebsocketTrackerCard() {
             message: JSON.stringify({
               type: "client",
               data: magnetURI,
-              trackerURI: WS_ENDPOINT,
+              trackerURI: WS_TRACKER_ENDPOINT,
             }),
           };
           setTimeout(() => {
