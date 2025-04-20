@@ -38,6 +38,6 @@
     "tailwindcss": "^4",
     "tw-animate-css": "^1.2.5",
     "typescript": "^5",
-    "webtorrent": "^2.6.0"
+    "webtorrent": "^2.6.3"
   }
 }
