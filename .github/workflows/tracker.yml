@@ -9,7 +9,7 @@ on:
         paths: ['tracker/**']
 
 jobs:
-    build:
+    build-frontend:
         runs-on: ${{ matrix.os }}
         strategy:
             fail-fast: false
