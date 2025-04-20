@@ -34,11 +34,6 @@ function HttpCard() {
     }
   }, [httpIsLoading, httpData, httpIsError]);
   */
-  useEffect(() => {
-    console.log(httpIsLoading);
-    console.log(httpData);
-    console.log(httpIsError);
-  }, [httpIsError, httpData, httpIsLoading]);
 
   return (
     <Card className="md:h-[22vh] lg:h-[17vh]">
