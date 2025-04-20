@@ -32,7 +32,6 @@ jobs:
                   cache: 'npm'
                   cache-dependency-path: tracker/frontend/package-lock.json
             - name: Change directory
-
               run: cd ./tracker/frontend
 
             - name: Install Dependencies
