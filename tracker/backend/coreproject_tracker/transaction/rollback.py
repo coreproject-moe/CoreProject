@@ -9,7 +9,7 @@ __all__ = ["rollback_on_exception"]
 
 
 @contextmanager
-def rollback_on_exception(*boxes: MutableBox[Any]) -> Iterator[None]:
+def rollback_on_exception(*boxes: "MutableBox[Any]") -> Iterator[None]:
     """
     Context manager that restores Box values if an exception is raised inside the block.
     """

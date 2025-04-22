@@ -4,7 +4,11 @@ import sys
 import anyio
 from quart import json
 
-from coreproject_tracker.datastructures import RedisDatastructure, UdpDatastructure
+from coreproject_tracker.datastructures import (
+    MutableBox,
+    RedisDatastructure,
+    UdpDatastructure,
+)
 from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
     addrs_to_compact,
@@ -17,6 +21,7 @@ from coreproject_tracker.functions import (
     hget,
     to_uint32,
 )
+from coreproject_tracker.transaction import rollback_on_exception
 
 
 async def make_udp_packet(params: UdpDatastructure) -> bytes:
@@ -122,37 +127,29 @@ async def run_udp_server(server_host: str, server_port: int):
                 redis_data = await hget(data.info_hash.hex()) or {}
                 peers_list = await get_n_random_items(redis_data.values(), data.numwant)
 
-                peers = []
-                seeders = 0
-                leechers = 0
+                peers = MutableBox[list[str]]([])
+                seeders = leechers = MutableBox[int](0)
 
                 for peer in peers_list:
-                    _peers = []
-                    _seeders = 0
-                    _leechers = 0
-
                     try:
-                        peer_data = json.loads(peer)
+                        with rollback_on_exception(peers, seeders, leechers):
+                            peer_data = json.loads(peer)
+                            if peer_data["left"] == 0:
+                                seeders.value += 1
+                            else:
+                                leechers.value += 1
 
-                        if peer_data["left"] == 0:
-                            _seeders += 1
-                        else:
-                            _leechers += 1
-
-                        _peers.append(f"{peer_data['peer_ip']}:{peer_data['port']}")
+                            peers.value.append(
+                                f"{peer_data['peer_ip']}:{peer_data['port']}"
+                            )
 
                     except (ValueError, KeyError):
                         continue
 
-                    # This is here to make undo possible
-                    peers.extend(_peers)
-                    seeders += _seeders
-                    leechers += _leechers
-
                 _data |= {
-                    "peers": await addrs_to_compact(peers),
-                    "complete": seeders,
-                    "incomplete": leechers,
+                    "peers": await addrs_to_compact(peers.value),
+                    "complete": seeders.value,
+                    "incomplete": leechers.value,
                 }
                 data = UdpDatastructure(**_data)
 

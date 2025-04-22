@@ -7,6 +7,7 @@ from quart_redis import get_redis
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import (
+    MutableBox,
     RedisDatastructure,
     WebsocketDatastructure,
 )
@@ -18,6 +19,7 @@ from coreproject_tracker.functions import (
     hex_str_to_bin_str,
     hget,
 )
+from coreproject_tracker.transaction import rollback_on_exception
 
 ws_blueprint = Blueprint("websocket", __name__)
 
@@ -103,17 +105,17 @@ async def ws():
             )
             await redis_storage.save()
 
-            seeders = 0
-            leechers = 0
+            seeders = leechers = MutableBox[int](0)
             redis_data = await hget(data.info_hash) or {}
             for peer in redis_data.values():
-                peer_info = json.loads(peer)
-                if peer_info["left"] == 0:
-                    seeders += 1
-                else:
-                    leechers += 1
+                with rollback_on_exception(seeders, leechers):
+                    peer_info = json.loads(peer)
+                    if peer_info["left"] == 0:
+                        seeders.value += 1
+                    else:
+                        leechers.value += 1
 
-            response |= {"completed": seeders, "incompleted": leechers}
+            response |= {"completed": seeders.value, "incompleted": leechers.value}
 
             if data.action == ACTIONS.ANNOUNCE:
                 response |= {
