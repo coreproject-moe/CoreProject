@@ -109,7 +109,8 @@ async def http_endpoint():
                     )
 
         except KeyError:
-            continue
+            # Error in the peer data, delete the peer
+            await hdel(data.info_hash, f"{data.peer_ip}:{data.port}")
 
         peers.extend(_peers)
         peers6.extend(_peers6)
