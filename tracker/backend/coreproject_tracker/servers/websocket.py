@@ -47,7 +47,7 @@ async def ws():
             "peer_id": initial_message["peer_id"],
             "numwant": initial_message.get("numwant"),
             "uploaded": initial_message.get("uploaded"),
-            "offers": initial_message.get("offers"),
+            "offers": initial_message.get("offers", []),
             "left": initial_message.get("left"),
         }
 
