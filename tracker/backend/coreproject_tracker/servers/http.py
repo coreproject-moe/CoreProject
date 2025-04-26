@@ -8,7 +8,11 @@ from quart import Blueprint, json, jsonify, request
 from quart_redis import get_redis  # type: ignore
 
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
-from coreproject_tracker.datastructures import HttpDatastructure, RedisDatastructure
+from coreproject_tracker.datastructures import (
+    HttpDatastructure,
+    MutableBox,
+    RedisDatastructure,
+)
 from coreproject_tracker.enums import EVENT_NAMES, IP
 from coreproject_tracker.functions import (
     check_ip_type,
@@ -19,6 +23,7 @@ from coreproject_tracker.functions import (
     hdel,
     hget,
 )
+from coreproject_tracker.transaction import rollback_on_exception
 
 http_blueprint = Blueprint("http", __name__)
 
@@ -65,67 +70,46 @@ async def http_endpoint():
 
     await redis_stroage.save()
 
-    peers = []
-    peers6 = []
-    seeders = 0
-    leechers = 0
+    peers = peers6 = MutableBox[list[dict[str, str]]]([])
+    seeders = leechers = MutableBox[int](0)
 
     redis_data = await hget(data.info_hash) or {}
-    peers_list = await get_n_random_items(redis_data.values(), data.numwant)
 
-    for peer in peers_list:
-        # Local variables to make undo possible
-        _peers = []
-        _peers6 = []
-        _seeders = 0
-        _leechers = 0
-
+    for peer in await get_n_random_items(redis_data.values(), data.numwant):
         try:
-            peer_data = json.loads(peer)
+            with rollback_on_exception(peers, peers6, seeders, leechers):
+                peer_data = json.loads(peer)
 
-            if peer_data["left"] == 0:
-                _seeders += 1
-            else:
-                _leechers += 1
+                if peer_data["left"] == 0:
+                    seeders.value += 1
+                else:
+                    leechers.value += 1
 
-            peer_ip = peer_data["peer_ip"]
-            peer_ip_type = await check_ip_type(peer_ip)
-            match peer_ip_type:
-                case IP.IPV4:
-                    _peers.append(
-                        {
-                            "peer id": peer_data["peer_id"],
-                            "ip": peer_data["peer_ip"],
-                            "port": peer_data["port"],
-                        }
-                    )
-                case IP.IPV6:
-                    _peers6.append(
-                        {
-                            "peer id": peer_data["peer_id"],
-                            "ip": peer_data["peer_ip"],
-                            "port": peer_data["port"],
-                        }
-                    )
+                peer_data = {
+                    "peer id": peer_data["peer_id"],
+                    "ip": peer_data["peer_ip"],
+                    "port": peer_data["port"],
+                }
+                peer_ip = peer_data["peer_ip"]
+                match await check_ip_type(peer_ip):
+                    case IP.IPV4:
+                        peers.value.append(peer_data)
+                    case IP.IPV6:
+                        peers6.value.append(peer_data)
 
         except KeyError:
             # Error in the peer data, delete the peer
             await hdel(data.info_hash, f"{data.peer_ip}:{data.port}")
 
-        peers.extend(_peers)
-        peers6.extend(_peers6)
-        seeders += _seeders
-        leechers += _leechers
-
     output = {
-        "peers": peers,
-        "peers6": peers6,
+        "peers": peers.value,
+        "peers6": peers6.value,
         "min interval": ANNOUNCE_INTERVAL,
-        "complete": seeders,
-        "incomplete": leechers,
+        "complete": seeders.value,
+        "incomplete": leechers.value,
     }
     logging.info(
-        f"Sent HTTP response for {data.info_hash}. Event: {data.event_name}. Peers: {len(peers)}. Peers6: {len(peers6)}."
+        f"Sent HTTP response for {data.info_hash}. Event: {data.event_name}. Peers: {len(peers.value)}. Peers6: {len(peers6.value)}."
     )
     return bencodepy.bencode(output)
 

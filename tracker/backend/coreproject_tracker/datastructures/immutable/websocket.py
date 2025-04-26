@@ -20,7 +20,7 @@ class WebsocketDatastructure:
         validator=[validate_20_length],
     )
     action: str = field(validator=[validators.instance_of(str)])
-    peer_id: bytes | None = field(
+    peer_id: bytes = field(
         converter=convert_binary_string_to_bytes,
         validator=[validate_peer_length],
     )
