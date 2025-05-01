@@ -20,14 +20,22 @@ import {
   WaypointsIcon,
   X,
 } from "lucide-react";
-import RedisIcon from "@/icons/redis.svg";
+import dynamic from "next/dynamic";
 
 import Image from "next/image";
 import { useBackendData } from "@/hooks/useBackendData";
 import React from "react";
+import { BackendData, RedisData } from "@/types/api";
 
-/* eslint-disable  @typescript-eslint/no-explicit-any */
-function VersionCardComponent({ data }: { data: any }) {
+const RedisIcon = dynamic(() => import("@/icons/logos/redis.svg"), {
+  loading: () => <LoaderCircle className="animate-spin" />,
+});
+
+const PythonLogo = dynamic(() => import("@/icons/logos/python.svg"), {
+  loading: () => <LoaderCircle className="animate-spin" />,
+});
+
+function VersionCardComponent({ data }: { data: BackendData }) {
   const mapping = [
     {
       title: "Quart",
@@ -40,7 +48,7 @@ function VersionCardComponent({ data }: { data: any }) {
       title: "Python",
       description:
         "Python is a programming language that lets you work quickly and integrate systems more effectively.",
-      icon: "/python.svg",
+      icon: PythonLogo,
       version: data.python_version,
     },
     {
@@ -119,11 +127,10 @@ function VersionCardComponent({ data }: { data: any }) {
   );
 }
 
-/* eslint-disable  @typescript-eslint/no-explicit-any */
-function TorrentCardComponent({ data }: { data: any }) {
+function TorrentCardComponent({ data }: { data: BackendData }) {
   const totalTorrent = Object.keys(data.redis_data).length;
   const totalClientValueLengths = Object.values(data.redis_data).map(
-    (value) => Object.keys(value as Record<string, unknown>).length,
+    (value) => Object.keys(value).length,
   );
   const totalClientLength = totalClientValueLengths.reduce(
     (acc, length) => acc + length,
@@ -143,7 +150,7 @@ function TorrentCardComponent({ data }: { data: any }) {
     for (const peer in value) {
       const peerData = value[peer];
       try {
-        const peerInfo = JSON.parse(peerData);
+        const peerInfo = JSON.parse(peerData) satisfies RedisData;
 
         // Seeder and Leechers
         if (peerInfo.left === 0) {
@@ -285,29 +292,31 @@ export default function Page() {
               <p className="text-red-300"> {backendIsError.toString()}</p>
             </div>
           ) : (
-            <>
-              {/* Stack version */}
-              <div className="mb-5 flex flex-col gap-5">
-                <div className="flex items-center gap-3">
-                  <Layers2 className="text-amber-600" />
-                  <h1 className="text-3xl">Stack version:</h1>
+            backendData && (
+              <>
+                {/* Stack version */}
+                <div className="mb-5 flex flex-col gap-5">
+                  <div className="flex items-center gap-3">
+                    <Layers2 className="text-amber-600" />
+                    <h1 className="text-3xl">Stack version:</h1>
+                  </div>
                 </div>
-              </div>
 
-              {/* Grid to show version  */}
-              <VersionCardComponent data={backendData} />
+                {/* Grid to show version  */}
+                <VersionCardComponent data={backendData} />
 
-              {/* Tracker information */}
-              <div className="my-10 flex flex-col gap-5">
-                <div className="flex items-center gap-3">
-                  <AudioLines className="text-orange-600" />
-                  <h1 className="text-3xl">Tracker information:</h1>
+                {/* Tracker information */}
+                <div className="my-10 flex flex-col gap-5">
+                  <div className="flex items-center gap-3">
+                    <AudioLines className="text-orange-600" />
+                    <h1 className="text-3xl">Tracker information:</h1>
+                  </div>
                 </div>
-              </div>
 
-              {/* Grid to show tracker information  */}
-              <TorrentCardComponent data={backendData} />
-            </>
+                {/* Grid to show tracker information  */}
+                <TorrentCardComponent data={backendData} />
+              </>
+            )
           )}
         </>
       )}

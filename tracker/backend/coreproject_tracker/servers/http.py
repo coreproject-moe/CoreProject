@@ -2,6 +2,7 @@ import logging
 import platform
 from http import HTTPStatus
 from importlib.metadata import version
+from typing import cast
 
 import bencodepy  # type: ignore
 from quart import Blueprint, json, jsonify, request
@@ -45,12 +46,12 @@ async def http_endpoint():
             "peer_id": request.args.get("peer_id"),
         }
         if request.args.get("event"):
-            _data |= {
-                "event_name": await convert_event_name_to_event_enum(
-                    request.args.get("event")
-                ),
-            }
-        data = HttpDatastructure(**_data)
+            event_enum = await convert_event_name_to_event_enum(
+                request.args.get("event")
+            )
+            _data |= {"event_name": event_enum}
+        data = HttpDatastructure(**_data)  # type: ignore[call-arg]
+
     except Exception as e:
         print(e)
         return str(e), HTTPStatus.BAD_REQUEST
@@ -77,28 +78,30 @@ async def http_endpoint():
 
     for peer in await get_n_random_items(redis_data.values(), data.numwant):
         try:
+            peer = cast(str, peer)
             with rollback_on_exception(peers, peers6, seeders, leechers):
-                peer_data = json.loads(peer)
+                peer_data = RedisDatastructure(**json.loads(peer))
 
-                if peer_data["left"] == 0:
+                if peer_data.left == 0:
                     seeders.value += 1
                 else:
                     leechers.value += 1
 
-                peer_data = {
-                    "peer id": peer_data["peer_id"],
-                    "ip": peer_data["peer_ip"],
-                    "port": peer_data["port"],
+                appendable_data = {
+                    "peer id": peer_data.peer_id,
+                    "ip": peer_data.peer_ip,
+                    "port": peer_data.port,
                 }
-                peer_ip = peer_data["peer_ip"]
-                match await check_ip_type(peer_ip):
-                    case IP.IPV4:
-                        peers.value.append(peer_data)
-                    case IP.IPV6:
-                        peers6.value.append(peer_data)
 
-        except KeyError:
+                match await check_ip_type(peer_data.peer_ip):
+                    case IP.IPV4:
+                        peers.value.append(appendable_data)
+                    case IP.IPV6:
+                        peers6.value.append(appendable_data)
+
+        except TypeError:
             # Error in the peer data, delete the peer
+            logging.error(f"Error in peer data, deleting the peer: {data.peer_id}")
             await hdel(data.info_hash, f"{data.peer_ip}:{data.port}")
 
     output = {
@@ -126,10 +129,10 @@ async def api_endpoint():
 
     python_version = platform.python_version()
 
-    hash_keys = await get_all_hash_keys()  # Get all hash keys dynamically
+    hash_keys = await get_all_hash_keys()
     pipe = await r.pipeline()
     for hash_key in hash_keys:
-        await pipe.hgetall(hash_key)  # Fetch all values for each hash key
+        await pipe.hgetall(hash_key)  # type: ignore[no-untyped-call]
     hash_data = await pipe.execute()
 
     result = dict(zip(hash_keys, hash_data))
