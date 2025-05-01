@@ -9,7 +9,7 @@ export function useBackendData() {
   const { data, error, isLoading } = useSWR<BackendData>(API_URL, fetcher);
 
   return {
-    data: data || null,
+    data: data ?? null,
     isLoading,
     isError: error,
   };

@@ -24,18 +24,18 @@ import dynamic from "next/dynamic";
 
 import Image from "next/image";
 import { useBackendData } from "@/hooks/useBackendData";
-import React from "react";
+import React, { useEffect } from "react";
 import { BackendData, RedisData } from "@/types/api";
 
-const RedisIcon = dynamic(() => import("@/icons/logos/redis.svg"), {
-  loading: () => <LoaderCircle className="animate-spin" />,
-});
-
-const PythonLogo = dynamic(() => import("@/icons/logos/python.svg"), {
-  loading: () => <LoaderCircle className="animate-spin" />,
-});
-
 function VersionCardComponent({ data }: { data: BackendData }) {
+  const RedisIcon = dynamic(() => import("@/icons/logos/redis.svg"), {
+    loading: () => <LoaderCircle className="animate-spin" />,
+  });
+
+  const PythonLogo = dynamic(() => import("@/icons/logos/python.svg"), {
+    loading: () => <LoaderCircle className="animate-spin" />,
+  });
+
   const mapping = [
     {
       title: "Quart",
@@ -176,34 +176,62 @@ function TorrentCardComponent({ data }: { data: BackendData }) {
     }
   }
 
+  const mapping = [
+    {
+      title: "Total Torrents and Clients",
+      description: "The amount of torrents and clients",
+      information: [
+        {
+          icon: { component: File, class: "text-green-400" },
+          name: "Torrents",
+          value: totalTorrent,
+        },
+        {
+          icon: { component: Router, class: "text-green-600" },
+          name: "Clients",
+          value: totalClientLength,
+        },
+      ],
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
-      <Card className="md:h-[22vh] lg:h-[17vh]">
-        <CardHeader>
-          <CardTitle>Total Torrents and Clients</CardTitle>
-          <CardDescription>
-            <p>The amount of torrents and clients</p>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid h-full grid-cols-2">
-            <div className="flex flex-col items-center justify-center gap-3">
-              <File className="text-green-400" />
+      {mapping.map((value, index) => {
+        return (
+          <Card
+            key={`torrent-card-component-${index}`}
+            className="md:h-[22vh] lg:h-[17vh]"
+          >
+            <CardHeader>
+              <CardTitle>{value.title}</CardTitle>
+              <CardDescription>
+                <p>{value.description}</p>
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid h-full grid-cols-2">
+                {value.information.map((info, index) => {
+                  const IconComponent = info.icon.component;
 
-              <p className="text-primary/90 text-sm whitespace-nowrap">
-                Torrents: <code>{totalTorrent}</code>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center gap-3">
-              <Router className="text-green-600" />
+                  return (
+                    <div
+                      key={`torrent-card-component-info-${index}`}
+                      className="flex flex-col items-center justify-center gap-3"
+                    >
+                      <IconComponent className={info.icon.class} />
 
-              <p className="text-primary/90 text-sm whitespace-nowrap">
-                Clients: <code>{totalClientLength}</code>
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+                      <p className="text-primary/90 text-sm whitespace-nowrap">
+                        {info.name}: <code>{info.value}</code>
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        );
+      })}
 
       <Card className="md:h-[22vh] lg:h-[17vh]">
         <CardHeader>
@@ -276,6 +304,10 @@ export default function Page() {
     isLoading: backendIsLoading,
     isError: backendIsError,
   } = useBackendData();
+
+  useEffect(() => {
+    console.log(backendData);
+  });
 
   return (
     <div className="mx-10">
