@@ -21,7 +21,7 @@ async def hget(hash_key: str) -> None | dict[str, str | int]:
     # Retrieve all fields and their values from the hash
     data = await r.hgetall(hash_key)  # type: ignore[no-untyped-call]
     if not data:
-        return None  # Return None if the hash doesn't exist or is empty
+        return None
 
     # Update the ttl again
     await r.expire(hash_key, HASH_EXPIRE_TIME)

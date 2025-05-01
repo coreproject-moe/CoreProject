@@ -144,8 +144,12 @@ async def run_udp_server(server_host: str, server_port: int):
 
                             peers.value.append(f"{peer_data.peer_ip}:{peer_data.port}")
 
-                    except (ValueError, KeyError):
-                        continue
+                    except TypeError:
+                        # Error in the peer data, delete the peer
+                        logging.error(
+                            f"Error in peer data, deleting the peer: {data.peer_id}"
+                        )
+                        await hdel(data.info_hash, f"{data.ip}:{data.port}")
 
                 _data |= {
                     "peers": await addrs_to_compact(peers.value),

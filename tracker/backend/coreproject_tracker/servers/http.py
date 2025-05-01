@@ -99,7 +99,7 @@ async def http_endpoint():
                     case IP.IPV6:
                         peers6.value.append(appendable_data)
 
-        except KeyError:
+        except TypeError:
             # Error in the peer data, delete the peer
             logging.error(f"Error in peer data, deleting the peer: {data.peer_id}")
             await hdel(data.info_hash, f"{data.peer_ip}:{data.port}")

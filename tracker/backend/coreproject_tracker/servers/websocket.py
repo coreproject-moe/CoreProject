@@ -1,6 +1,7 @@
 import asyncio
 import contextlib
 import logging
+from typing import cast
 
 from quart import Blueprint, copy_current_websocket_context, json, websocket
 from quart_redis import get_redis
@@ -83,6 +84,10 @@ async def ws():
 
     # Not using `peer:data.peer_id.hex()`
     # because using `peer:data.peer_id.hex()` causes phantom errors
+    # There will always be a `peer_id` in data
+    if not data.peer_id:
+        raise ValueError("WEBSOCKET: `peer_id` is required for subscription to redis")
+
     await pubsub.subscribe(f"peer:{data.peer_id.hex()}")
 
     try:
@@ -94,6 +99,8 @@ async def ws():
                 break
 
             response = {"action": data.action}
+            if not data.peer_id:
+                raise ValueError("WEBSOCKET: `peer_id` is required for saving to redis")
 
             redis_storage = RedisDatastructure(
                 info_hash=data.info_hash,
@@ -101,19 +108,24 @@ async def ws():
                 peer_id=data.peer_id.hex(),
                 peer_ip=data.ip,
                 port=data.port,
-                left=data.left,
+                left=int(data.left) if data.left is not None else None,
             )
             await redis_storage.save()
 
             seeders = leechers = MutableBox[int](0)
             redis_data = await hget(data.info_hash) or {}
             for peer in redis_data.values():
-                with rollback_on_exception(seeders, leechers):
-                    peer_info = json.loads(peer)
-                    if peer_info["left"] == 0:
-                        seeders.value += 1
-                    else:
-                        leechers.value += 1
+                peer = cast(str, peer)
+
+                try:
+                    with rollback_on_exception(seeders, leechers):
+                        peer_info = RedisDatastructure(**json.loads(peer))
+                        if peer_info.left == 0:
+                            seeders.value += 1
+                        else:
+                            leechers.value += 1
+                except TypeError:
+                    pass
 
             response |= {"completed": seeders.value, "incompleted": leechers.value}
 
@@ -130,7 +142,9 @@ async def ws():
             # Handle offers by publishing to respective peers
             if offers := data.offers:
                 for value in redis_data.values():
-                    peer_info = json.loads(value)
+                    value = cast(str, value)
+
+                    peer_info = RedisDatastructure(**json.loads(value))
                     for offer in offers:
                         message = json.dumps(
                             {
@@ -141,10 +155,13 @@ async def ws():
                                 "info_hash": await hex_str_to_bin_str(data.info_hash),
                             }
                         )
-                        await redis.publish(f"peer:{peer_info['peer_id']}", message)
+                        await redis.publish(f"peer:{peer_info.peer_id}", message)
 
             # Handle answers by publishing to the target peer
             if data.answer:
+                if not data.to_peer_id:
+                    raise ValueError("WEBSOCKET: `to_peer_id` is required for answer")
+
                 message = json.dumps(
                     {
                         "action": "announce",
@@ -175,6 +192,11 @@ async def ws():
                 await task
 
         if pubsub:
+            if not data.peer_id:
+                raise ValueError(
+                    "WEBSOCKET: `peer_id` is required for unsubscription from redis"
+                )
+
             await pubsub.unsubscribe(f"peer:{data.peer_id.hex()}")
             await pubsub.close()
         await hdel(data.info_hash, data.addr)
