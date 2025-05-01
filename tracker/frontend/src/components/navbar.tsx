@@ -8,8 +8,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { usePathname } from "next/navigation";
-import CoreProjectIcon from "@/icons/CoreProject.svg";
-import CoreIcon from "@/icons/CoreIcon.svg";
+import CoreProjectIcon from "@/icons/coreproject/CoreProject.svg";
+import CoreIcon from "@/icons/coreproject/CoreIcon.svg";
 import { Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";

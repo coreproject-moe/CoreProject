@@ -1,5 +1,6 @@
 import logging
 import sys
+from typing import cast
 
 import anyio
 from quart import json
@@ -131,17 +132,17 @@ async def run_udp_server(server_host: str, server_port: int):
                 seeders = leechers = MutableBox[int](0)
 
                 for peer in peers_list:
+                    peer = cast(str, peer)
+
                     try:
                         with rollback_on_exception(peers, seeders, leechers):
-                            peer_data = json.loads(peer)
-                            if peer_data["left"] == 0:
+                            peer_data = RedisDatastructure(**json.loads(peer))
+                            if peer_data.left == 0:
                                 seeders.value += 1
                             else:
                                 leechers.value += 1
 
-                            peers.value.append(
-                                f"{peer_data['peer_ip']}:{peer_data['port']}"
-                            )
+                            peers.value.append(f"{peer_data.peer_ip}:{peer_data.port}")
 
                     except (ValueError, KeyError):
                         continue
