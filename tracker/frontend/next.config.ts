@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
     rules: {
       "*.svg": {
         loaders: ["@svgr/webpack"],
-        as: "*.js",
+        as: "*.ts",
       },
     },
   },
