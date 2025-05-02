@@ -27,6 +27,7 @@ import React, { useEffect } from "react";
 import { BackendData, RedisData } from "@/types/api";
 import RedisLogo from "@/icons/logos/redis.svg";
 import PythonLogo from "@/icons/logos/python.svg";
+import QuartLogo from "@/icons/logos/quart.svg";
 
 function VersionCardComponent({ data }: { data: BackendData }) {
   const mapping = [
@@ -34,7 +35,7 @@ function VersionCardComponent({ data }: { data: BackendData }) {
       title: "Quart",
       description:
         "An async Python micro framework for building web applications.",
-      icon: "/quart.png",
+      icon: QuartLogo,
       version: data.quart_version,
     },
     {
@@ -58,6 +59,10 @@ function VersionCardComponent({ data }: { data: BackendData }) {
   return (
     <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
       {mapping.map((value, index) => {
+        const IconComponent = value.icon as React.FunctionComponent<
+          React.SVGProps<SVGSVGElement>
+        >;
+
         return (
           <Card
             key={`version-card-component-${index}`}
@@ -71,23 +76,11 @@ function VersionCardComponent({ data }: { data: BackendData }) {
             </CardHeader>
             <CardContent>
               <div className="relative inset-0 flex h-[50px] items-center justify-center">
-                {typeof value.icon === "string" && (
-                  <Image
-                    src={value.icon}
-                    width="120"
-                    height="250"
-                    alt="quart"
-                    className="absolute z-20 h-[40px] object-fill"
-                  />
-                )}
-
-                {typeof value.icon === "function" && (
-                  <value.icon
-                    width="120"
-                    height="250"
-                    className="absolute z-20 h-[40px]"
-                  />
-                )}
+                <IconComponent
+                  width="120"
+                  height="250"
+                  className="absolute z-20 h-[40px]"
+                />
 
                 <div className="dark:bg-primary absolute z-10 h-[45px] w-[125px] rounded-lg"></div>
               </div>
@@ -230,7 +223,7 @@ function TorrentCardComponent({ data }: { data: BackendData }) {
       {mapping.map((value, index) => {
         return (
           <Card
-            key={`torrent-card-component-${index}`}
+            key={`torrent-card-component-item-${index}`}
             className="md:h-[22vh] lg:h-[17vh]"
           >
             <CardHeader>
@@ -251,7 +244,7 @@ function TorrentCardComponent({ data }: { data: BackendData }) {
 
                   return (
                     <div
-                      key={`torrent-card-component-info-${index}`}
+                      key={`torrent-card-component-information-item-${index}`}
                       className="flex flex-col items-center justify-center gap-3"
                     >
                       <IconComponent className={info.icon.class} />
