@@ -38,7 +38,9 @@ function HttpCard() {
   return (
     <Card className="md:h-[22vh] lg:h-[17vh]">
       <CardHeader>
-        <CardTitle>Http Tracker Check</CardTitle>
+        <CardTitle>
+          <p>HTTP Tracker</p>
+        </CardTitle>
         <CardDescription>
           {httpIsLoading ? (
             <p>Checking if the tracker is responding w ith http</p>
@@ -102,7 +104,7 @@ function WebsocketCard() {
     <>
       <Card className="md:h-[22vh] lg:h-[17vh]">
         <CardHeader>
-          <CardTitle>Websocket Check</CardTitle>
+          <CardTitle>Websocket </CardTitle>
           <CardDescription>
             {loading ? (
               <p>
@@ -257,7 +259,7 @@ function WebsocketTrackerCard() {
       {/* Show the cards  */}
       <Card className="md:h-[22vh] lg:h-[17vh]">
         <CardHeader>
-          <CardTitle>Websocket Tracker Check</CardTitle>
+          <CardTitle>Websocket Tracker</CardTitle>
           <CardDescription>
             {websocketClientChecking ? (
               <p>Checking if the tracker is responding with websocket</p>
@@ -297,8 +299,8 @@ export default function Page() {
       </div>
 
       <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
-        <HttpCard />
         <WebsocketCard />
+        <HttpCard />
         <WebsocketTrackerCard />
       </div>
     </div>
