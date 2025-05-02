@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 
 import { useBackendData } from "@/hooks/useBackendData";
-import React from "react";
+import React, { useMemo } from "react";
 import { BackendData, RedisData } from "@/types/api";
 import RedisLogo from "@/icons/logos/redis.svg";
 import PythonLogo from "@/icons/logos/python.svg";
@@ -111,154 +111,161 @@ function VersionCardComponent({ data }: { data: BackendData }) {
     </div>
   );
 }
-
 function TorrentCardComponent({ data }: { data: BackendData }) {
-  const totalTorrent = Object.keys(data.redis_data).length;
-  const totalClientValueLengths = Object.values(data.redis_data).map(
-    (value) => Object.keys(value).length,
-  );
-  const totalClientLength = totalClientValueLengths.reduce(
-    (acc, length) => acc + length,
-    0,
-  );
+  const metrics = useMemo(() => {
+    let seeders = 0,
+      leechers = 0,
+      udpClients = 0,
+      websocketClients = 0,
+      httpClients = 0;
 
-  // Counting seeders and leechers
-  let seeders = 0;
-  let leechers = 0;
-  let udpClients = 0;
-  let websocketClients = 0;
-  let httpClients = 0;
+    // Process redis data
+    Object.values(data.redis_data).forEach((torrent) => {
+      Object.values(torrent).forEach((peerData) => {
+        try {
+          const peerInfo = JSON.parse(peerData) satisfies RedisData;
 
-  // Iterate through redis_data
-  for (const key in data.redis_data) {
-    const value = data.redis_data[key];
-    for (const peer in value) {
-      const peerData = value[peer];
-      try {
-        const peerInfo = JSON.parse(peerData) satisfies RedisData;
+          // Update seeder/leecher counts
+          if (peerInfo.left === 0) {
+            seeders++;
+          } else {
+            leechers++;
+          }
 
-        // Seeder and Leechers
-        if (peerInfo.left === 0) {
-          seeders++;
-        } else {
-          leechers++;
+          // Update protocol counts
+          switch (peerInfo.type) {
+            case "http":
+              httpClients++;
+              break;
+            case "udp":
+              udpClients++;
+              break;
+            case "websocket":
+              websocketClients++;
+              break;
+            default:
+              console.error(`Unknown client type: ${peerInfo.type}`);
+          }
+        } catch {
+          console.warn("Invalid peer data format:", peerData);
         }
+      });
+    });
 
-        // Client type
-        if (peerInfo.type === "http") {
-          httpClients++;
-        } else if (peerInfo.type === "udp") {
-          udpClients++;
-        } else if (peerInfo.type === "websocket") {
-          websocketClients++;
-        } else {
-          console.error(`Unknown client type: ${peerInfo.type}`);
-        }
-      } catch {
-        // If the data is invalid or can't be parsed, skip it
-        continue;
-      }
-    }
-  }
+    return {
+      totalTorrents: Object.keys(data.redis_data).length,
+      totalClients: Object.values(data.redis_data).reduce(
+        (acc, torrent) => acc + Object.keys(torrent).length,
+        0,
+      ),
+      seeders,
+      leechers,
+      udpClients,
+      httpClients,
+      websocketClients,
+    };
+  }, [data]);
 
-  const mapping = [
+  // Card configuration
+  const cardConfigs = [
     {
       title: "Total Torrents and Clients",
       description: "The amount of torrents and clients",
-      information: [
+      metrics: [
         {
-          icon: { component: File, class: "text-green-400" },
           name: "Torrents",
-          value: totalTorrent,
+          value: metrics.totalTorrents,
+          icon: File,
+          iconClass: "text-green-400",
         },
         {
-          icon: { component: Router, class: "text-green-600" },
           name: "Clients",
-          value: totalClientLength,
+          value: metrics.totalClients,
+          icon: Router,
+          iconClass: "text-green-600",
         },
       ],
     },
     {
       title: "Client Distribution",
-      description: "The amount of client in udp or http/websocket",
-      information: [
+      description: "The amount of clients by protocol",
+      metrics: [
         {
-          icon: { component: GlobeLock, class: "text-green-400" },
           name: "UDP",
-          value: udpClients,
+          value: metrics.udpClients,
+          icon: GlobeLock,
+          iconClass: "text-green-400",
         },
         {
-          icon: { component: EarthLock, class: "text-green-600" },
           name: "HTTP",
-          value: httpClients,
+          value: metrics.httpClients,
+          icon: EarthLock,
+          iconClass: "text-green-600",
         },
         {
-          icon: { component: WaypointsIcon, class: "text-green-400" },
           name: "Websocket",
-          value: websocketClients,
+          value: metrics.websocketClients,
+          icon: WaypointsIcon,
+          iconClass: "text-green-400",
         },
       ],
     },
     {
       title: "Total Seeders/Leechers",
       description: "The amount of seeders or leechers",
-      information: [
+      metrics: [
         {
-          icon: { component: HardDriveUpload, class: "text-green-400" },
           name: "Seeders",
-          value: seeders,
+          value: metrics.seeders,
+          icon: HardDriveUpload,
+          iconClass: "text-green-400",
         },
         {
-          icon: { component: HardDriveDownload, class: "text-red-400" },
           name: "Leechers",
-          value: leechers,
+          value: metrics.leechers,
+          icon: HardDriveDownload,
+          iconClass: "text-red-400",
         },
       ],
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
-      {mapping.map((value, index) => {
-        return (
-          <Card
-            key={`torrent-card-component-item-${index}`}
-            className="md:h-[22vh] lg:h-[17vh]"
-          >
-            <CardHeader>
-              <CardTitle>{value.title}</CardTitle>
-              <CardDescription>
-                <p>{value.description}</p>
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div
-                className="grid h-full"
-                style={{
-                  gridTemplateColumns: `repeat(${value.information.length}, minmax(0, 1fr))`,
-                }}
-              >
-                {value.information.map((info, index) => {
-                  const IconComponent = info.icon.component;
-
-                  return (
-                    <div
-                      key={`torrent-card-component-information-item-${index}`}
-                      className="flex flex-col items-center justify-center gap-3"
-                    >
-                      <IconComponent className={info.icon.class} />
-
-                      <p className="text-primary/90 text-sm whitespace-nowrap">
-                        {info.name}: <code>{info.value}</code>
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </CardContent>
-          </Card>
-        );
-      })}
+    <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+      {cardConfigs.map((card) => (
+        <Card key={card.title} className="md:h-[22vh] lg:h-[17vh]">
+          <CardHeader>
+            <CardTitle>{card.title}</CardTitle>
+            <CardDescription>{card.description}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div
+              className="grid h-full gap-4"
+              style={{
+                gridTemplateColumns: `repeat(${Number(card.metrics.length ?? 0)}, minmax(0, 1fr))`,
+              }}
+            >
+              {card.metrics.map((metric) => {
+                const IconComponent = metric.icon;
+                return (
+                  <div
+                    key={metric.name}
+                    className="flex flex-col items-center justify-center gap-2"
+                  >
+                    <IconComponent
+                      className={metric.iconClass}
+                      aria-label={metric.name}
+                    />
+                    <p className="text-primary/90 text-sm whitespace-nowrap">
+                      {metric.name}: <code>{metric.value}</code>
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 }
