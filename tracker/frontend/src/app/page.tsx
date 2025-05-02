@@ -20,20 +20,13 @@ import {
   WaypointsIcon,
   X,
 } from "lucide-react";
-import dynamic from "next/dynamic";
 
 import Image from "next/image";
 import { useBackendData } from "@/hooks/useBackendData";
 import React, { useEffect } from "react";
 import { BackendData, RedisData } from "@/types/api";
-
-const RedisIcon = dynamic(() => import("@/icons/logos/redis.svg"), {
-  loading: () => <LoaderCircle className="animate-spin" />,
-});
-
-const PythonLogo = dynamic(() => import("@/icons/logos/python.svg"), {
-  loading: () => <LoaderCircle className="animate-spin" />,
-});
+import RedisLogo from "@/icons/logos/redis.svg";
+import PythonLogo from "@/icons/logos/python.svg";
 
 function VersionCardComponent({ data }: { data: BackendData }) {
   const mapping = [
@@ -54,7 +47,7 @@ function VersionCardComponent({ data }: { data: BackendData }) {
     {
       title: "Redis",
       description: "Redis is an in-memory database that persists on disk.",
-      icon: RedisIcon,
+      icon: RedisLogo,
       version: {
         client: data.redis_version.client,
         server: data.redis_version.server,
