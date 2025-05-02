@@ -21,9 +21,8 @@ import {
   X,
 } from "lucide-react";
 
-import Image from "next/image";
 import { useBackendData } from "@/hooks/useBackendData";
-import React, { useEffect } from "react";
+import React from "react";
 import { BackendData, RedisData } from "@/types/api";
 import RedisLogo from "@/icons/logos/redis.svg";
 import PythonLogo from "@/icons/logos/python.svg";
