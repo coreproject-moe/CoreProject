@@ -271,10 +271,6 @@ export default function Page() {
     isError: backendIsError,
   } = useBackendData();
 
-  useEffect(() => {
-    console.log(backendData);
-  });
-
   return (
     <div className="mx-10">
       {backendIsLoading ? (
