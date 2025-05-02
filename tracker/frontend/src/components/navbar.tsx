@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,11 +7,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { usePathname } from "next/navigation";
-import CoreProjectIcon from "@/icons/coreproject/CoreProject.svg";
-import CoreIcon from "@/icons/coreproject/CoreIcon.svg";
+
 import { Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
+import CoreProjectIcon from "@/icons/coreproject/CoreProject.svg";
+import CoreIcon from "@/icons/coreproject/CoreIcon.svg";
 
 export function Navbar() {
   const pathname = usePathname();

@@ -20,20 +20,13 @@ import {
   WaypointsIcon,
   X,
 } from "lucide-react";
-import dynamic from "next/dynamic";
 
-import Image from "next/image";
 import { useBackendData } from "@/hooks/useBackendData";
 import React from "react";
 import { BackendData, RedisData } from "@/types/api";
-
-const RedisIcon = dynamic(() => import("@/icons/logos/redis.svg"), {
-  loading: () => <LoaderCircle className="animate-spin" />,
-});
-
-const PythonLogo = dynamic(() => import("@/icons/logos/python.svg"), {
-  loading: () => <LoaderCircle className="animate-spin" />,
-});
+import RedisLogo from "@/icons/logos/redis.svg";
+import PythonLogo from "@/icons/logos/python.svg";
+import QuartLogo from "@/icons/logos/quart.svg";
 
 function VersionCardComponent({ data }: { data: BackendData }) {
   const mapping = [
@@ -41,7 +34,7 @@ function VersionCardComponent({ data }: { data: BackendData }) {
       title: "Quart",
       description:
         "An async Python micro framework for building web applications.",
-      icon: "/quart.png",
+      icon: QuartLogo,
       version: data.quart_version,
     },
     {
@@ -54,7 +47,7 @@ function VersionCardComponent({ data }: { data: BackendData }) {
     {
       title: "Redis",
       description: "Redis is an in-memory database that persists on disk.",
-      icon: RedisIcon,
+      icon: RedisLogo,
       version: {
         client: data.redis_version.client,
         server: data.redis_version.server,
@@ -65,6 +58,10 @@ function VersionCardComponent({ data }: { data: BackendData }) {
   return (
     <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
       {mapping.map((value, index) => {
+        const IconComponent = value.icon as React.FunctionComponent<
+          React.SVGProps<SVGSVGElement>
+        >;
+
         return (
           <Card
             key={`version-card-component-${index}`}
@@ -78,23 +75,11 @@ function VersionCardComponent({ data }: { data: BackendData }) {
             </CardHeader>
             <CardContent>
               <div className="relative inset-0 flex h-[50px] items-center justify-center">
-                {typeof value.icon === "string" && (
-                  <Image
-                    src={value.icon}
-                    width="120"
-                    height="250"
-                    alt="quart"
-                    className="absolute z-20 h-[40px] object-fill"
-                  />
-                )}
-
-                {typeof value.icon === "function" && (
-                  <value.icon
-                    width="120"
-                    height="250"
-                    className="absolute z-20 h-[40px]"
-                  />
-                )}
+                <IconComponent
+                  width="120"
+                  height="250"
+                  className="absolute z-20 h-[40px]"
+                />
 
                 <div className="dark:bg-primary absolute z-10 h-[45px] w-[125px] rounded-lg"></div>
               </div>
@@ -176,96 +161,104 @@ function TorrentCardComponent({ data }: { data: BackendData }) {
     }
   }
 
+  const mapping = [
+    {
+      title: "Total Torrents and Clients",
+      description: "The amount of torrents and clients",
+      information: [
+        {
+          icon: { component: File, class: "text-green-400" },
+          name: "Torrents",
+          value: totalTorrent,
+        },
+        {
+          icon: { component: Router, class: "text-green-600" },
+          name: "Clients",
+          value: totalClientLength,
+        },
+      ],
+    },
+    {
+      title: "Client Distribution",
+      description: "The amount of client in udp or http/websocket",
+      information: [
+        {
+          icon: { component: GlobeLock, class: "text-green-400" },
+          name: "UDP",
+          value: udpClients,
+        },
+        {
+          icon: { component: EarthLock, class: "text-green-600" },
+          name: "HTTP",
+          value: httpClients,
+        },
+        {
+          icon: { component: WaypointsIcon, class: "text-green-400" },
+          name: "Websocket",
+          value: websocketClients,
+        },
+      ],
+    },
+    {
+      title: "Total Seeders/Leechers",
+      description: "The amount of seeders or leechers",
+      information: [
+        {
+          icon: { component: HardDriveUpload, class: "text-green-400" },
+          name: "Seeders",
+          value: seeders,
+        },
+        {
+          icon: { component: HardDriveDownload, class: "text-red-400" },
+          name: "Leechers",
+          value: leechers,
+        },
+      ],
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
-      <Card className="md:h-[22vh] lg:h-[17vh]">
-        <CardHeader>
-          <CardTitle>Total Torrents and Clients</CardTitle>
-          <CardDescription>
-            <p>The amount of torrents and clients</p>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid h-full grid-cols-2">
-            <div className="flex flex-col items-center justify-center gap-3">
-              <File className="text-green-400" />
+      {mapping.map((value, index) => {
+        return (
+          <Card
+            key={`torrent-card-component-item-${index}`}
+            className="md:h-[22vh] lg:h-[17vh]"
+          >
+            <CardHeader>
+              <CardTitle>{value.title}</CardTitle>
+              <CardDescription>
+                <p>{value.description}</p>
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div
+                className="grid h-full"
+                style={{
+                  gridTemplateColumns: `repeat(${value.information.length}, minmax(0, 1fr))`,
+                }}
+              >
+                {value.information.map((info, index) => {
+                  const IconComponent = info.icon.component;
 
-              <p className="text-primary/90 text-sm whitespace-nowrap">
-                Torrents: <code>{totalTorrent}</code>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center gap-3">
-              <Router className="text-green-600" />
+                  return (
+                    <div
+                      key={`torrent-card-component-information-item-${index}`}
+                      className="flex flex-col items-center justify-center gap-3"
+                    >
+                      <IconComponent className={info.icon.class} />
 
-              <p className="text-primary/90 text-sm whitespace-nowrap">
-                Clients: <code>{totalClientLength}</code>
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="md:h-[22vh] lg:h-[17vh]">
-        <CardHeader>
-          <CardTitle>Client Distribution</CardTitle>
-          <CardDescription>
-            <p>The amount of client in udp or http/websocket</p>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid h-full grid-cols-3">
-            <div className="flex flex-col items-center justify-center gap-3">
-              <GlobeLock className="text-green-400" />
-
-              <p className="text-primary/90 text-sm whitespace-nowrap">
-                UDP: <code>{udpClients}</code>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center gap-3">
-              <EarthLock className="text-green-400" />
-
-              <p className="text-primary/90 text-sm whitespace-nowrap">
-                HTTP: <code>{httpClients}</code>
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center justify-center gap-3">
-              <WaypointsIcon className="text-green-400" />
-
-              <p className="text-primary/90 text-sm whitespace-nowrap">
-                Websocket: <code>{websocketClients}</code>
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="md:h-[22vh] lg:h-[17vh]">
-        <CardHeader>
-          <CardTitle>Total Seeders/Leechers</CardTitle>
-          <CardDescription>
-            <p>The amount of seeders or leechers</p>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid h-full grid-cols-2">
-            <div className="flex flex-col items-center justify-center gap-3">
-              <HardDriveUpload className="text-green-400" />
-
-              <p className="text-primary/90 text-sm whitespace-nowrap">
-                Seeders: <code>{seeders}</code>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center gap-3">
-              <HardDriveDownload className="text-red-400" />
-
-              <p className="text-primary/90 text-sm whitespace-nowrap">
-                Leechers: <code>{leechers}</code>
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+                      <p className="text-primary/90 text-sm whitespace-nowrap">
+                        {info.name}: <code>{info.value}</code>
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        );
+      })}
     </div>
   );
 }
