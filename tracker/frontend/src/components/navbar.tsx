@@ -12,6 +12,12 @@ import { usePathname } from "next/navigation";
 import { Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
+// Dynamically import the icons to avoid server-side rendering issues
+const CoreProjectIcon = dynamic(
+  () => import("@/icons/coreproject/CoreProject.svg"),
+  {},
+);
+const CoreIcon = dynamic(() => import("@/icons/coreproject/CoreIcon.svg"), {});
 
 export function Navbar() {
   const pathname = usePathname();
@@ -21,16 +27,6 @@ export function Navbar() {
     dashboard: "/",
     health: "/health",
   };
-
-  // Dynamically import the icons to avoid server-side rendering issues
-  const CoreProjectIcon = dynamic(
-    () => import("@/icons/coreproject/CoreProject.svg"),
-    {},
-  );
-  const CoreIcon = dynamic(
-    () => import("@/icons/coreproject/CoreIcon.svg"),
-    {},
-  );
 
   return (
     <div className="mx-2 my-5 grid h-12 grid-cols-3 md:mx-10">

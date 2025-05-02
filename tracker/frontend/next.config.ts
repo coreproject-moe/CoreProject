@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   output: "standalone",
   productionBrowserSourceMaps: true,
   experimental: {
-    // reactCompiler: true,
+    reactCompiler: true,
   },
   webpack(config) {
     config.module.rules.push({
