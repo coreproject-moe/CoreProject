@@ -82,12 +82,13 @@ async def ws():
     redis = get_redis()
     pubsub = redis.pubsub()
 
+
+    if not data.peer_id:
+        raise ValueError("WEBSOCKET: `peer_id` is required for subscription to redis")
+        
     # Not using `peer:data.peer_id.hex()`
     # because using `peer:data.peer_id.hex()` causes phantom errors
     # There will always be a `peer_id` in data
-    if not data.peer_id:
-        raise ValueError("WEBSOCKET: `peer_id` is required for subscription to redis")
-
     await pubsub.subscribe(f"peer:{data.peer_id.hex()}")
 
     try:
