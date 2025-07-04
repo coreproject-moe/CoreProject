@@ -85,7 +85,7 @@ async def ws():
     # There will always be a `peer_id` in data
     if not data.peer_id:
         raise ValueError("WEBSOCKET: `peer_id` is required for subscription to redis")
-        
+
     # Not using `peer:data.peer_id.hex()`
     # because using `peer:data.peer_id.hex()` causes phantom errors
     await pubsub.subscribe(f"peer:{data.peer_id.hex()}")
@@ -113,7 +113,7 @@ async def ws():
             await redis_storage.save()
 
             seeders = leechers = MutableBox[int](0)
-            redis_data = await hget(data.info_hash) or {}
+            redis_data = await hget(data.info_hash, peer_type=["websocket"]) or {}
             for peer in redis_data.values():
                 peer = cast(str, peer)
 

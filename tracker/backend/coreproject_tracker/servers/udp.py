@@ -125,7 +125,9 @@ async def run_udp_server(server_host: str, server_port: int):
 
                 await redis_stroage.save()
 
-                redis_data = await hget(data.info_hash.hex()) or {}
+                redis_data = (
+                    await hget(data.info_hash.hex(), peer_type=["http", "udp"]) or {}
+                )
                 peers_list = await get_n_random_items(redis_data.values(), data.numwant)
 
                 peers = MutableBox[list[str]]([])
