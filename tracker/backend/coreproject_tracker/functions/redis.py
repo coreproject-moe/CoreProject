@@ -1,5 +1,7 @@
 import time
+from typing import Iterable
 
+from quart import json
 from quart_redis import get_redis
 
 from coreproject_tracker.constants import HASH_EXPIRE_TIME
@@ -15,7 +17,9 @@ async def hset(hash_key: str, field: str, value: str, expire_time: int) -> None:
     await r.expire(hash_key, HASH_EXPIRE_TIME)
 
 
-async def hget(hash_key: str) -> None | dict[str, str | int]:
+async def hget(
+    hash_key: str, peer_type: str | Iterable[str] | None = None
+) -> None | dict[str, str]:
     r = get_redis()
 
     # Retrieve all fields and their values from the hash
@@ -23,15 +27,29 @@ async def hget(hash_key: str) -> None | dict[str, str | int]:
     if not data:
         return None
 
-    # Update the ttl again
+    # Update the TTL
     await r.expire(hash_key, HASH_EXPIRE_TIME)
+
     valid_fields = {}
 
-    # Iterate over each field-value pair in the hash
-    for field, value in data.items():
-        valid_fields[field] = value
+    # Normalize peer_type into a set for fast lookup (if not None)
+    if peer_type is not None:
+        if isinstance(peer_type, str):
+            peer_type = {peer_type}
+        else:
+            peer_type = set(peer_type)
 
-    return valid_fields
+    for field, value in data.items():
+        try:
+            decoded = json.loads(value)
+        except json.JSONDecodeError:
+            continue
+
+        if not isinstance(decoded, dict):
+            continue
+
+        if peer_type is None or decoded.get("type") in peer_type:
+            valid_fields[field] = value
 
 
 async def hdel(hash_key, field_name) -> None:

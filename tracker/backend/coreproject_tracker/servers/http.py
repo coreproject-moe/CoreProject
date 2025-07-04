@@ -29,13 +29,32 @@ from coreproject_tracker.transaction import rollback_on_exception
 http_blueprint = Blueprint("http", __name__)
 
 
+async def get_ip():
+    return request.headers.get("X-Real-IP", request.remote_addr)
+
+
+# Endpoints start here
+
+
+@http_blueprint.route("/")
+async def home_endpoint(extra: str = "") -> str:
+    ip = await get_ip()
+
+    return f"""
+🐟🐈 ⸜(｡˃ ᵕ ˂ )⸝♡
+<br/>
+{ip}
+<br/>
+{extra}
+"""
+
+
 @http_blueprint.route("/announce")
 async def http_endpoint():
-    ip = request.headers.get("X-Real-IP", request.remote_addr)
-
     if len(request.args) == 0:
-        return f"🐟🐈 ⸜(｡˃ ᵕ ˂ )⸝♡ {ip}"
+        return await home_endpoint("hello from announce")
 
+    ip = await get_ip()
     try:
         _data = {
             "info_hash_raw": request.args.get("info_hash"),
@@ -74,7 +93,7 @@ async def http_endpoint():
     peers = peers6 = MutableBox[list[dict[str, str]]]([])
     seeders = leechers = MutableBox[int](0)
 
-    redis_data = await hget(data.info_hash) or {}
+    redis_data = await hget(data.info_hash, peer_type=["http", "udp"]) or {}
 
     for peer in await get_n_random_items(redis_data.values(), data.numwant):
         try:
