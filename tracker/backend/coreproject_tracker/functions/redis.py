@@ -51,6 +51,8 @@ async def hget(
         if peer_type is None or decoded.get("type") in peer_type:
             valid_fields[field] = value
 
+    return valid_fields
+
 
 async def hdel(hash_key, field_name) -> None:
     r = get_redis()
