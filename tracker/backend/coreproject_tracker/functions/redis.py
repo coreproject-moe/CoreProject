@@ -1,14 +1,15 @@
 import time
-from typing import Iterable
+from typing import Iterable, cast
 
 from quart import json
-from quart_redis import get_redis
+from quart_redis import get_redis  # type:ignore
+from redis.asyncio import Redis
 
 from coreproject_tracker.constants import HASH_EXPIRE_TIME
 
 
 async def hset(hash_key: str, field: str, value: str, expire_time: int) -> None:
-    r = get_redis()
+    r = cast(Redis, get_redis())
 
     expiration = int(time.time() + expire_time)
     await r.hset(hash_key, field, value)  # type: ignore[no-untyped-call]
@@ -20,10 +21,10 @@ async def hset(hash_key: str, field: str, value: str, expire_time: int) -> None:
 async def hget(
     hash_key: str, peer_type: str | Iterable[str] | None = None
 ) -> None | dict[str, str]:
-    r = get_redis()
+    r = cast(Redis, get_redis())
 
     # Retrieve all fields and their values from the hash
-    data = await r.hgetall(hash_key)  # type: ignore[no-untyped-call]
+    data: dict[str, str] = await r.hgetall(hash_key)  # type: ignore[no-untyped-call]
     if not data:
         return None
 
@@ -54,20 +55,20 @@ async def hget(
     return valid_fields
 
 
-async def hdel(hash_key, field_name) -> None:
-    r = get_redis()
+async def hdel(hash_key: str, field_name: str) -> None:
+    r = cast(Redis, get_redis())
 
     await r.hdel(hash_key, field_name)  # type: ignore[no-untyped-call]
 
 
-async def get_all_hash_keys():
-    r = get_redis()
+async def get_all_hash_keys() -> list[bytes]:
+    r = cast(Redis, get_redis())
 
     cursor = 0
-    hash_keys = []
+    hash_keys: list[bytes] = []
 
     while True:
-        cursor, keys = await r.scan(cursor, match="*", count=100_000)
+        cursor, keys = await r.scan(cursor, match="*", count=100_000)  # type: ignore[no-untyped-call]
         for key in keys:
             if await r.type(key) == b"hash":
                 hash_keys.append(key)
