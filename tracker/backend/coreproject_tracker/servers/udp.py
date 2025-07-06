@@ -10,9 +10,8 @@ from coreproject_tracker.datastructures import (
     RedisDatastructure,
     UdpDatastructure,
 )
+from coreproject_tracker.enums import ACTIONS, EVENT_NAMES, REDIS_NAMESPACE_ENUM
 from coreproject_tracker.envs import REDIS_URI
-from coreproject_tracker.singletons import RedisHandler
-from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
     addrs_to_compact,
     convert_event_id_to_event_enum,
@@ -24,6 +23,7 @@ from coreproject_tracker.functions import (
     hget,
     to_uint32,
 )
+from coreproject_tracker.singletons import RedisHandler
 from coreproject_tracker.transaction import rollback_on_exception
 
 
@@ -131,7 +131,10 @@ async def run_udp_server(server_host: str, server_port: int):
                 await redis_stroage.save()
 
                 redis_data = (
-                    await hget(data.info_hash.hex(), peer_type=["http", "udp"]) or {}
+                    await hget(
+                        data.info_hash.hex(), namespace=REDIS_NAMESPACE_ENUM.HTTP_UDP
+                    )
+                    or {}
                 )
                 peers_list = await get_n_random_items(redis_data.values(), data.numwant)
 
@@ -156,7 +159,11 @@ async def run_udp_server(server_host: str, server_port: int):
                         logging.error(
                             f"Error in peer data, deleting the peer: {data.peer_id}"
                         )
-                        await hdel(data.info_hash, f"{data.ip}:{data.port}")
+                        await hdel(
+                            data.info_hash,
+                            f"{data.ip}:{data.port}",
+                            namespace=REDIS_NAMESPACE_ENUM.HTTP_UDP,
+                        )
 
                 _data |= {
                     "peers": await addrs_to_compact(peers.value),
@@ -166,7 +173,11 @@ async def run_udp_server(server_host: str, server_port: int):
                 data = UdpDatastructure(**_data)
 
             if data.event_name == EVENT_NAMES.STOP:
-                await hdel(data.info_hash, f"{data.ip}:{data.port}")
+                await hdel(
+                    data.info_hash,
+                    f"{data.ip}:{data.port}",
+                    namespace=REDIS_NAMESPACE_ENUM.HTTP_UDP,
+                )
 
             packet = await make_udp_packet(data)
             logging.info(f"Sent UDP packet for {host}:{port}")

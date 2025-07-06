@@ -11,7 +11,7 @@ from coreproject_tracker.datastructures import (
     RedisDatastructure,
     WebsocketDatastructure,
 )
-from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
+from coreproject_tracker.enums import ACTIONS, EVENT_NAMES, REDIS_NAMESPACE_ENUM
 from coreproject_tracker.functions import (
     bytes_to_bin_str,
     convert_event_name_to_event_enum,
@@ -113,7 +113,10 @@ async def ws():
             await redis_storage.save()
 
             seeders = leechers = MutableBox[int](0)
-            redis_data = await hget(data.info_hash, peer_type=["websocket"]) or {}
+            redis_data = (
+                await hget(data.info_hash, namespace=REDIS_NAMESPACE_ENUM.WEBSOCKET)
+                or {}
+            )
             for peer in redis_data.values():
                 peer = cast(str, peer)
 
@@ -199,4 +202,4 @@ async def ws():
 
             await pubsub.unsubscribe(f"peer:{data.peer_id.hex()}")
             await pubsub.close()
-        await hdel(data.info_hash, data.addr)
+        await hdel(data.info_hash, data.addr, namespace=REDIS_NAMESPACE_ENUM.WEBSOCKET)
