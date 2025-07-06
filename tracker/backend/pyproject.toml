@@ -20,7 +20,7 @@ dependencies = [
 packages = ["coreproject_tracker"]
 
 [project.scripts]
-coreproject_tracker = "coreproject_tracker.cli:main"
+coreproject_tracker = "coreproject_tracker.__main__:main"
 
 [dependency-groups]
 dev = [
