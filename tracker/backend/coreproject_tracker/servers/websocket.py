@@ -4,7 +4,6 @@ import logging
 from typing import cast
 
 from quart import Blueprint, copy_current_websocket_context, json, websocket
-from coreproject_tracker.singletons import get_redis
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import (
@@ -20,6 +19,7 @@ from coreproject_tracker.functions import (
     hex_str_to_bin_str,
     hget,
 )
+from coreproject_tracker.singletons import get_redis
 from coreproject_tracker.transaction import rollback_on_exception
 
 ws_blueprint = Blueprint("websocket", __name__)
