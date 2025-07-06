@@ -70,7 +70,7 @@ async def make_udp_packet(params: UdpDatastructure) -> bytes:
 
 async def run_udp_server(server_host: str, server_port: int):
     logging.info(f"Running UDP server on udp://{server_host}:{server_port}")
-    opts = {
+    opts: dict[str, str | int | bool] = {
         "local_host": server_host,
         "local_port": server_port,
     }
