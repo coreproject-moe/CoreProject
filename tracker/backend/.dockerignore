@@ -1,5 +1,5 @@
 **/*.egg-info/
-tests/
+tests_primitive/
 
 
 # Exclude version control and IDE files
