@@ -6,7 +6,6 @@ from typing import cast
 
 import bencodepy  # type: ignore
 from quart import Blueprint, json, jsonify, request
-from quart_redis import get_redis  # type: ignore
 
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
 from coreproject_tracker.datastructures import (
@@ -24,6 +23,7 @@ from coreproject_tracker.functions import (
     hdel,
     hget,
 )
+from coreproject_tracker.singletons import get_redis
 from coreproject_tracker.transaction import rollback_on_exception
 
 http_blueprint = Blueprint("http", __name__)

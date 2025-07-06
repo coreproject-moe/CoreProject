@@ -4,7 +4,7 @@ import logging
 from typing import cast
 
 from quart import Blueprint, copy_current_websocket_context, json, websocket
-from quart_redis import get_redis
+from coreproject_tracker.singletons import get_redis
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import (

@@ -24,7 +24,6 @@ logging.basicConfig(
 async def run_udp_server_async(host: str, port: int) -> None:
     # There has to be one Web Server on same port as udp server to avoid redis re-initialization
     async with anyio.create_task_group() as tg:
-        tg.start_soon(functools.partial(create_servable_app, host, port))
         tg.start_soon(functools.partial(_run_udp_server, host, port))
 
 

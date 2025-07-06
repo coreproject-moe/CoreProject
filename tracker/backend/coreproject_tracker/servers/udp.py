@@ -10,6 +10,8 @@ from coreproject_tracker.datastructures import (
     RedisDatastructure,
     UdpDatastructure,
 )
+from coreproject_tracker.envs import REDIS_URI
+from coreproject_tracker.singletons import RedisHandler
 from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
     addrs_to_compact,
@@ -76,6 +78,9 @@ async def run_udp_server(server_host: str, server_port: int):
         opts |= {
             "reuse_port": True,
         }
+
+    redis_manager = RedisHandler(REDIS_URI)
+    await redis_manager.init_redis()
 
     async with await anyio.create_udp_socket(**opts) as udp:
         async for packet, (host, port) in udp:
@@ -166,3 +171,5 @@ async def run_udp_server(server_host: str, server_port: int):
             packet = await make_udp_packet(data)
             logging.info(f"Sent UDP packet for {host}:{port}")
             await udp.sendto(packet, host, port)
+
+    await redis_manager.close_redis()

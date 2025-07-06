@@ -2,7 +2,7 @@ import time
 from typing import Iterable
 
 from quart import json
-from quart_redis import get_redis
+from coreproject_tracker.singletons import get_redis
 
 from coreproject_tracker.constants import HASH_EXPIRE_TIME
 
