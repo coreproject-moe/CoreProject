@@ -5,6 +5,7 @@ from coreproject_tracker.constants import PEER_TTL, WEBSOCKET_PEER_TTL
 from coreproject_tracker.converters import (
     convert_str_int_to_float,
 )
+from coreproject_tracker.enums import REDIS_NAMESPACE_ENUM
 from coreproject_tracker.functions import (
     hset,
 )
@@ -34,8 +35,10 @@ class RedisDatastructure:
         match self.type:
             case "websocket":
                 expire_time = WEBSOCKET_PEER_TTL
+                redis_namespace = REDIS_NAMESPACE_ENUM.WEBSOCKET
             case "http" | "udp":
                 expire_time = PEER_TTL
+                redis_namespace = REDIS_NAMESPACE_ENUM.HTTP_UDP
             case _:
                 raise ValueError(f"{self.type} is not a valid type")
 
@@ -44,4 +47,5 @@ class RedisDatastructure:
             f"{self.peer_ip}:{self.port}",
             json.dumps(asdict(self, recurse=True)),
             expire_time=expire_time,
+            namespace=redis_namespace,
         )

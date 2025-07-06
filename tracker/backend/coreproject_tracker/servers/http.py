@@ -6,7 +6,6 @@ from typing import cast
 
 import bencodepy  # type: ignore
 from quart import Blueprint, json, jsonify, request
-from quart_redis import get_redis  # type: ignore
 
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
 from coreproject_tracker.datastructures import (
@@ -14,7 +13,7 @@ from coreproject_tracker.datastructures import (
     MutableBox,
     RedisDatastructure,
 )
-from coreproject_tracker.enums import EVENT_NAMES, IP
+from coreproject_tracker.enums import EVENT_NAMES, IP, REDIS_NAMESPACE_ENUM
 from coreproject_tracker.functions import (
     check_ip_type,
     convert_event_name_to_event_enum,
@@ -24,6 +23,7 @@ from coreproject_tracker.functions import (
     hdel,
     hget,
 )
+from coreproject_tracker.singletons import get_redis
 from coreproject_tracker.transaction import rollback_on_exception
 
 http_blueprint = Blueprint("http", __name__)
@@ -76,7 +76,11 @@ async def http_endpoint():
         return str(e), HTTPStatus.BAD_REQUEST
 
     if data.event_name == EVENT_NAMES.STOP:
-        await hdel(data.info_hash, f"{data.peer_ip}:{data.port}")
+        await hdel(
+            data.info_hash,
+            f"{data.peer_ip}:{data.port}",
+            namespace=REDIS_NAMESPACE_ENUM.HTTP_UDP,
+        )
         return ""
 
     redis_stroage = RedisDatastructure(
@@ -93,7 +97,9 @@ async def http_endpoint():
     peers = peers6 = MutableBox[list[dict[str, str]]]([])
     seeders = leechers = MutableBox[int](0)
 
-    redis_data = await hget(data.info_hash, peer_type=["http", "udp"]) or {}
+    redis_data = (
+        await hget(data.info_hash, namespace=REDIS_NAMESPACE_ENUM.HTTP_UDP) or {}
+    )
 
     for peer in await get_n_random_items(redis_data.values(), data.numwant):
         try:
@@ -121,7 +127,11 @@ async def http_endpoint():
         except TypeError:
             # Error in the peer data, delete the peer
             logging.error(f"Error in peer data, deleting the peer: {data.peer_id}")
-            await hdel(data.info_hash, f"{data.peer_ip}:{data.port}")
+            await hdel(
+                data.info_hash,
+                f"{data.peer_ip}:{data.port}",
+                namespace=REDIS_NAMESPACE_ENUM.HTTP_UDP,
+            )
 
     output = {
         "peers": peers.value,
