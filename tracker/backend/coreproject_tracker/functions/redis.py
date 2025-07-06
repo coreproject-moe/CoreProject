@@ -1,17 +1,18 @@
+import json
 import time
 from typing import Iterable
 
-from quart import json
-from coreproject_tracker.singletons import get_redis
+from quart import json as quart_json
 
 from coreproject_tracker.constants import HASH_EXPIRE_TIME
+from coreproject_tracker.singletons import get_redis
 
 
 async def hset(hash_key: str, field: str, value: str, expire_time: int) -> None:
     r = get_redis()
 
     expiration = int(time.time() + expire_time)
-    await r.hset(hash_key, field, value)  # type: ignore[no-untyped-call]
+    await r.hset(hash_key, field, value)  #  type: ignore[no-untyped-call]
 
     await r.hexpireat(hash_key, expiration, field)
     await r.expire(hash_key, HASH_EXPIRE_TIME)
@@ -41,7 +42,7 @@ async def hget(
 
     for field, value in data.items():
         try:
-            decoded = json.loads(value)
+            decoded = quart_json.loads(value)
         except json.JSONDecodeError:
             continue
 
