@@ -3,10 +3,10 @@ name: tracker
 on:
     push:
         branches: ['master']
-        paths: ['tracker/**']
+        paths: ['apps/tracker/**']
     pull_request:
         branches: ['master']
-        paths: ['tracker/**']
+        paths: ['apps/tracker/**']
 
 jobs:
     build-frontend:

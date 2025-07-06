@@ -8,7 +8,7 @@ updates:
     # Backend
     # =======
     - package-ecosystem: pip
-      directory: /backend/
+      directory: /apps/backend/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
@@ -16,45 +16,39 @@ updates:
     # Tracker
     # =======
     - package-ecosystem: uv
-      directory: /tracker/backend/
+      directory: /apps/tracker/backend/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
 
     - package-ecosystem: npm
-      directory: /tracker/frontend/
+      directory: /apps/tracker/frontend/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
-
-
-
 
     # Seeder
     # =======
     - package-ecosystem: npm
-      directory: /seeder/
-      schedule:
-          interval: weekly
-      open-pull-requests-limit: 100
-   
-    
-    - package-ecosystem: uv
-      directory: /seeder/
+      directory: /guis/seeder/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
 
+    - package-ecosystem: uv
+      directory: /guis/seeder/
+      schedule:
+          interval: weekly
+      open-pull-requests-limit: 100
 
     # Bots
     # =====
     - package-ecosystem: pip
-      directory: /discord/
+      directory: /bots/discord/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
 
-    
     #Frontend
     #- package-ecosystem: 'npm'
     #  directory: '/frontend'

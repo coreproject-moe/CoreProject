@@ -3,10 +3,10 @@ name: Seeder
 on:
     push:
         branches: ['master']
-        paths: ['seeder/**']
+        paths: ['guis/seeder/**']
     pull_request:
         branches: ['master']
-        paths: ['seeder/**']
+        paths: ['guis/seeder/**']
 
 defaults:
     run:
