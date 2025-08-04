@@ -47,7 +47,7 @@ dev = [
     "types-pyyaml>=6.0.12.20241230,<7",
     "types-python-dateutil>=2.9.0.20241206,<3",
     "poethepoet>=0.32.1,<0.33",
-    "django-extensions>=3.2.3,<4",
+    "django-extensions>=3.2.3,<5",
 ]
 test = [
     "pytest>=8.3.4,<9",
