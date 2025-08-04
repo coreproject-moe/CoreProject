@@ -22,7 +22,7 @@
         "@tailwindcss/typography": "^0.5.16",
         "@types/node": "^24.0.13",
         "autoprefixer": "^10.4.21",
-        "bits-ui": "^2.8.11",
+        "bits-ui": "^2.9.1",
         "clsx": "^2.1.1",
         "eslint": "^9.31.0",
         "eslint-config-prettier": "^10.1.5",
