@@ -20,7 +20,7 @@
         "@tailwindcss/container-queries": "^0.1.1",
         "@tailwindcss/forms": "^0.5.10",
         "@tailwindcss/typography": "^0.5.16",
-        "@types/node": "^24.2.1",
+        "@types/node": "^24.3.1",
         "autoprefixer": "^10.4.21",
         "bits-ui": "^2.9.2",
         "clsx": "^2.1.1",
