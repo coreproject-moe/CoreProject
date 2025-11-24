@@ -12,7 +12,7 @@
         "test:unit": "vitest"
     },
     "devDependencies": {
-        "@eslint/compat": "^1.4.1",
+        "@eslint/compat": "^2.0.0",
         "@eslint/js": "^9.33.0",
         "@sveltejs/adapter-static": "^3.0.10",
         "@sveltejs/kit": "^2.48.4",
