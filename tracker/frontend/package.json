@@ -34,7 +34,7 @@
     "@types/webtorrent": "^0.110.0",
     "babel-plugin-react-compiler": "^19.1.0-rc.3",
     "bencode": "^4.0.0",
-    "cross-env": "^10.0.0",
+    "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.8",
     "lucide-react": "^0.539.0",
