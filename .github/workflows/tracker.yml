@@ -30,7 +30,7 @@ jobs:
                   cache-dependency-path: tracker/frontend/package-lock.json
 
             - name: Install frontend dependencies
-              run: npm ci
+              run: npm i
               working-directory: tracker/frontend
 
             - name: Build frontend
